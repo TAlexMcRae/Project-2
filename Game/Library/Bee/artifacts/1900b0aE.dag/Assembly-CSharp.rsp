@@ -355,6 +355,7 @@
 "Assets/Scripts/ButtonFunction.cs"
 "Assets/Scripts/CameraControl.cs"
 "Assets/Scripts/GameManager.cs"
+"Assets/Scripts/InterDamage.cs"
 "Assets/Scripts/PlayerController.cs"
 -langversion:9.0
 

@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] CharacterController Controller;
 
     [Header("----- Player -----")]
-
     // movement
     [Range(0, 10)] [SerializeField] float MoveSpeed;
     [Range(0, 5)] [SerializeField] float SprintMod;
@@ -20,17 +19,22 @@ public class PlayerController : MonoBehaviour
     [Range(0, 5)] [SerializeField] int MaxJumps;
     [Range(0, 100)] [SerializeField] float Gravity;
 
+    // health
+    [Range(0, 10)] [SerializeField] int HP;
+
     Vector3 move;
     private Vector3 playerVelocity;
     float originSpeed;
     bool sprinting;
     int jumpTimes;
+    int originHP;
     #endregion
 
     void Start()
     {
 
         originSpeed = MoveSpeed;
+        originHP = HP;
     }
 
     void Update()
@@ -87,8 +91,17 @@ public class PlayerController : MonoBehaviour
     {
 
         Controller.enabled = false;
-        transform.position = GameManager.instance.spawnPos.transform.position;
+        HP = originHP;
+
+        transform.position = GameManager.instance.spawnPos.position;
         GameManager.instance.deathMenu.SetActive(false);
+        
         Controller.enabled = true;
+    }
+
+    public void Damage(int dmg)
+    {
+
+        HP -= dmg;
     }
 }
