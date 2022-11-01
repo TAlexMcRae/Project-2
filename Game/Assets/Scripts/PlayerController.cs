@@ -82,4 +82,13 @@ public class PlayerController : MonoBehaviour
             sprinting = false;
         }
     }
+
+    public void Respawn()
+    {
+
+        Controller.enabled = false;
+        transform.position = GameManager.instance.spawnPos.transform.position;
+        GameManager.instance.deathMenu.SetActive(false);
+        Controller.enabled = true;
+    }
 }

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2005636145272602847}
   - component: {fileID: 2005636145272602840}
   - component: {fileID: 2005636145272602841}
+  - component: {fileID: 1880972713}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -84,6 +85,23 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2005636145272602842}
   m_Enabled: 1
+--- !u!114 &1880972713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2005636145272602842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcab2cb20f9f47a4fb1a2482500a9e37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  senseHor: 300
+  senseVer: 300
+  invertY: 0
+  vertMin: -80
+  vertMax: 80
 --- !u!1 &5161360733346487669
 GameObject:
   m_ObjectHideFlags: 0
@@ -96,9 +114,11 @@ GameObject:
   - component: {fileID: 1765102914031795760}
   - component: {fileID: 7876819227830497762}
   - component: {fileID: 3270164301870030905}
+  - component: {fileID: 1969341348}
+  - component: {fileID: 1969341347}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -183,3 +203,39 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!143 &1969341348
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5161360733346487669}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1969341347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5161360733346487669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5fcd5befab421749b879fabaeceb07b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Controller: {fileID: 1969341348}
+  MoveSpeed: 5
+  SprintMod: 3
+  JumpHeight: 10
+  MaxJumps: 1
+  Gravity: 35
