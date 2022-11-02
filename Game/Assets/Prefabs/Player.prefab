@@ -239,3 +239,4 @@ MonoBehaviour:
   JumpHeight: 10
   MaxJumps: 1
   Gravity: 35
+  HP: 10

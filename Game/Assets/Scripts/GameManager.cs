@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject deathMenu;
     public GameObject winMenu;
-    public GameObject spawnPos;
+    public Transform spawnPos;
     #endregion
 
     void Awake()
@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
         instance = this;
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
+        spawnPos.position = player.transform.position;
     }
 
     void Update()
