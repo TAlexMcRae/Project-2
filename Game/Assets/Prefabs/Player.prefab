@@ -240,3 +240,7 @@ MonoBehaviour:
   MaxJumps: 1
   Gravity: 35
   HP: 10
+  bullet: {fileID: 2879781917416445657, guid: 85cf1c3376034cf40a1752a9bd05657d, type: 3}
+  shootPos: {fileID: 0}
+  shootRate: 1
+  shootDist: 15

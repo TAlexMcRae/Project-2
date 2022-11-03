@@ -22,6 +22,14 @@ public class PlayerController : MonoBehaviour
     // health
     [Range(0, 10)] [SerializeField] int HP;
 
+    [Header("----- Gun Stats pew pew!! -----")]
+    [SerializeField] GameObject bullet;
+    [SerializeField] Transform shootPos;
+    [SerializeField] float shootRate;
+    [SerializeField] int shootDist;
+
+    bool isShooting;
+
     Vector3 move;
     private Vector3 playerVelocity;
     float originSpeed;
@@ -42,6 +50,9 @@ public class PlayerController : MonoBehaviour
 
         Movement();
         Sprint();
+
+        if (!isShooting)
+            StartCoroutine(shoot());
     }
 
     // basic moving functions
@@ -103,5 +114,21 @@ public class PlayerController : MonoBehaviour
     {
 
         HP -= dmg;
+    }
+
+    IEnumerator shoot()
+    {
+        if (!isShooting && Input.GetButton("Shoot"))
+        {
+            isShooting = true;
+
+            RaycastHit hit;
+            if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDist))
+            {
+                Instantiate(bullet, hit.point, bullet.transform.rotation);
+            }
+            yield return new WaitForSeconds(shootRate);
+            isShooting = false;
+        }
     }
 }
