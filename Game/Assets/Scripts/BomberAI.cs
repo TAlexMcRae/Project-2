@@ -26,8 +26,7 @@ public class BomberAI : MonoBehaviour, InterDamage
 
     void Start()
     {
-
-        GameManager.instance.EnemiesToKill++;
+        //GameManager.instance.EnemiesToKill++;
     }
 
     void Update()
@@ -67,8 +66,7 @@ public class BomberAI : MonoBehaviour, InterDamage
 
         if (HP <= 0)
         {
-
-            GameManager.instance.UpdateEnemies();
+            //GameManager.instance.UpdateEnemies();
             Destroy(gameObject);
         }
     }
