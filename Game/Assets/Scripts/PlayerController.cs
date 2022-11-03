@@ -22,13 +22,6 @@ public class PlayerController : MonoBehaviour
     // health
     [Range(0, 10)] [SerializeField] int HP;
 
-    [Header("----- Gun Stats pew pew!! -----")]
-    [SerializeField] float shootRate;
-    [SerializeField] int shootDist;
-    [SerializeField] int shootDMG;
-
-    bool isShooting;
-
     Vector3 move;
     private Vector3 playerVelocity;
     float originSpeed;
@@ -49,9 +42,6 @@ public class PlayerController : MonoBehaviour
 
         Movement();
         Sprint();
-
-        if (!isShooting)
-            StartCoroutine(shoot());
     }
 
     // basic moving functions
@@ -103,7 +93,7 @@ public class PlayerController : MonoBehaviour
         Controller.enabled = false;
         HP = originHP;
 
-        transform.position = GameManager.instance.spawnPos.transform.position;
+        transform.position = GameManager.instance.spawnPos.position;
         GameManager.instance.deathMenu.SetActive(false);
         
         Controller.enabled = true;
@@ -113,34 +103,5 @@ public class PlayerController : MonoBehaviour
     {
 
         HP -= dmg;
-        StartCoroutine(GameManager.instance.PlayDMGFlash());
-
-        if (HP <= 0)
-        {
-
-            GameManager.instance.deathMenu.SetActive(true);
-            GameManager.instance.StartPause();
-        }
-    }
-
-    IEnumerator shoot()
-    {
-        if (!isShooting && Input.GetButton("Shoot"))
-        {
-            isShooting = true;
-
-            RaycastHit hit;
-            if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDist))
-            {
-
-                if (hit.collider.GetComponent<InterDamage>() != null)
-                {
-
-                    hit.collider.GetComponent<InterDamage>().inflictDamage(shootDMG);
-                }
-            }
-            yield return new WaitForSeconds(shootRate);
-            isShooting = false;
-        }
     }
 }

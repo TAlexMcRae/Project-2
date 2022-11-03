@@ -4,6 +4,5 @@ using UnityEngine;
 
 public interface InterDamage
 {
-
     void inflictDamage(int dmg);
 }
