@@ -23,10 +23,9 @@ public class PlayerController : MonoBehaviour
     [Range(0, 10)] [SerializeField] int HP;
 
     [Header("----- Gun Stats pew pew!! -----")]
-    [SerializeField] GameObject bullet;
-    [SerializeField] Transform shootPos;
     [SerializeField] float shootRate;
     [SerializeField] int shootDist;
+    [SerializeField] int shootDMG;
 
     bool isShooting;
 
@@ -104,7 +103,7 @@ public class PlayerController : MonoBehaviour
         Controller.enabled = false;
         HP = originHP;
 
-        transform.position = GameManager.instance.spawnPos.position;
+        transform.position = GameManager.instance.spawnPos.transform.position;
         GameManager.instance.deathMenu.SetActive(false);
         
         Controller.enabled = true;
@@ -114,6 +113,14 @@ public class PlayerController : MonoBehaviour
     {
 
         HP -= dmg;
+        StartCoroutine(GameManager.instance.PlayDMGFlash());
+
+        if (HP <= 0)
+        {
+
+            GameManager.instance.deathMenu.SetActive(true);
+            GameManager.instance.StartPause();
+        }
     }
 
     IEnumerator shoot()
@@ -125,7 +132,12 @@ public class PlayerController : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDist))
             {
-                Instantiate(bullet, hit.point, bullet.transform.rotation);
+
+                if (hit.collider.GetComponent<InterDamage>() != null)
+                {
+
+                    hit.collider.GetComponent<InterDamage>().inflictDamage(shootDMG);
+                }
             }
             yield return new WaitForSeconds(shootRate);
             isShooting = false;

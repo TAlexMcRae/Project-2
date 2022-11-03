@@ -18,7 +18,10 @@ public class GameManager : MonoBehaviour
 
     public GameObject deathMenu;
     public GameObject winMenu;
-    public Transform spawnPos;
+    public GameObject spawnPos;
+    public GameObject playDMGScreen;
+
+    public int EnemiesToKill;
     #endregion
 
     void Awake()
@@ -27,7 +30,6 @@ public class GameManager : MonoBehaviour
         instance = this;
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
-        spawnPos.position = player.transform.position;
     }
 
     void Update()
@@ -36,7 +38,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetButtonDown("Cancel"))
         {
 
-            if (!deathMenu.activeSelf && !winMenu.activeSelf)
+            if (deathMenu.activeSelf == false && winMenu.activeSelf == false)
             {
 
                 isPaused = !isPaused;
@@ -62,6 +64,26 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    public IEnumerator PlayDMGFlash()
+    {
+
+        playDMGScreen.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        playDMGScreen.SetActive(false);
+    }
+
+    public void UpdateEnemies()
+    {
+
+        EnemiesToKill--;
+
+        if (EnemiesToKill <= 0)
+        {
+
+            WinCondition();
+        }
     }
 
     public void WinCondition()
