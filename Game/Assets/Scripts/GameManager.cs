@@ -36,18 +36,15 @@ public class GameManager : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetButtonDown("Cancel"))
+        if (Input.GetButtonDown("Cancel") && !deathMenu.activeSelf && !winMenu.activeSelf)
         {
+            isPaused = !isPaused;
+            pauseMenu.SetActive(isPaused);
 
-            if (!deathMenu.activeSelf && !winMenu.activeSelf)
-            {
-
-                isPaused = !isPaused;
-                pauseMenu.SetActive(isPaused);
-
-                if (isPaused) { StartPause(); }
-                else { StopPause(); }
-            }
+            if (isPaused)
+                StartPause();
+            else
+                StopPause();
         }
     }
 
