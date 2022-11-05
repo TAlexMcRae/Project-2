@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class enemyMeleeAI : MonoBehaviour
+public class enemyMeleeAI : MonoBehaviour, InterDamage
 {
     [Header("----- Components -----")]
     [SerializeField] Renderer model;
@@ -63,7 +63,7 @@ public class enemyMeleeAI : MonoBehaviour
     }
     #endregion
     #region Enemy Damage Handling
-    public void takeDamage(int dmg)
+    public void inflictDamage(int dmg)
     {
         HP -= dmg;
         StartCoroutine(flashdamage());

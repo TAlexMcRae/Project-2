@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class enemyShooterAI : MonoBehaviour
+public class enemyShooterAI : MonoBehaviour, InterDamage
 {
     [Header("----- Components -----")]
     [SerializeField] Renderer model;
@@ -50,7 +50,7 @@ public class enemyShooterAI : MonoBehaviour
         Quaternion rotation = Quaternion.LookRotation(playerDir);
         transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * playerFaceSpeed);
     }
-    public void takeDamage(int dmg)
+    public void inflictDamage(int dmg)
     {
         HP -= dmg;
         StartCoroutine(flashdamage());
