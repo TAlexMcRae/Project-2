@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject spawnPos;
     public GameObject playDMGScreen;
+    public GameObject reticle;
     public int enemiesToKill;
     #endregion
 
@@ -36,15 +37,18 @@ public class GameManager : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetButtonDown("Cancel") && !deathMenu.activeSelf && !winMenu.activeSelf)
+        if (Input.GetButtonDown("Cancel"))
         {
-            isPaused = !isPaused;
-            pauseMenu.SetActive(isPaused);
 
-            if (isPaused)
-                StartPause();
-            else
-                StopPause();
+            if (deathMenu.activeSelf == winMenu.activeSelf == false)
+            {
+
+                isPaused = !isPaused;
+                pauseMenu.SetActive(isPaused);
+
+                if (isPaused) { StartPause(); }
+                else { StopPause(); }
+            }
         }
     }
 
@@ -74,7 +78,7 @@ public class GameManager : MonoBehaviour
     public void UpdateEnemies()
     {
 
-        enemiesToKill++;
+        enemiesToKill--;
 
         if (enemiesToKill <= 0)
         {

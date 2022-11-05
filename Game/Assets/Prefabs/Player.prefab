@@ -55,7 +55,7 @@ MonoBehaviour:
   jumpHeight: 10
   maxJumps: 1
   gravity: 35
-  currentHP: 0
+  currentHP: 100
   shootRate: 0
   shootDist: 0
   shootDMG: 0
@@ -238,8 +238,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c85949092f8c23e489cbb9c90f70c017, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  senseHor: 300
-  senseVert: 300
+  senseHor: 1000
+  senseVert: 1000
   invertY: 0
   vertMin: -80
   vertMax: 80

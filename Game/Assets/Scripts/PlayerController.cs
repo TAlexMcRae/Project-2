@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float shootRate;
     [SerializeField] int shootDist;
     [SerializeField] int shootDMG;
-    bool shooting;
+    bool shooting = false;
     #endregion
 
     void Start()
@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator Shoot()
     {
 
-        if (!shooting && Input.GetButtonDown("Shoot"))
+        if (shooting == false && Input.GetButtonDown("Shoot"))
         {
 
             shooting = true;
