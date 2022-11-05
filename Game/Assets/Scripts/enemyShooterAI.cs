@@ -25,7 +25,7 @@ public class enemyShooterAI : MonoBehaviour, InterDamage
     // Start is called before the first frame update
     void Start()
     {
-        playerInRange = false;
+        GameManager.instance.enemiesToKill++;
     }
 
     // Update is called once per frame
@@ -57,6 +57,7 @@ public class enemyShooterAI : MonoBehaviour, InterDamage
         if (HP <= 0)
         {
             Instantiate(pickup, shootpos.position, transform.rotation);
+            GameManager.instance.UpdateEnemies();
             Destroy(gameObject);
         }
     }

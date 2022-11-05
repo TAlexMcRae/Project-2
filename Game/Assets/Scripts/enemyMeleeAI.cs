@@ -26,6 +26,7 @@ public class enemyMeleeAI : MonoBehaviour, InterDamage
     void Start()
     {
 
+        GameManager.instance.enemiesToKill++;
     }
 
     // Update is called once per frame
@@ -70,6 +71,7 @@ public class enemyMeleeAI : MonoBehaviour, InterDamage
         if (HP <= 0)
         {
             Instantiate(pickup, hit.position, transform.rotation);
+            GameManager.instance.UpdateEnemies();
             Destroy(gameObject);
         }
     }
