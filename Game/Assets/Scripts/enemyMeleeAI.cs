@@ -27,6 +27,7 @@ public class enemyMeleeAI : MonoBehaviour, InterDamage
     {
 
         GameManager.instance.enemiesToKill++;
+        GameManager.instance.UpdateUI();
     }
 
     // Update is called once per frame

@@ -56,9 +56,10 @@ MonoBehaviour:
   maxJumps: 1
   gravity: 35
   currentHP: 100
-  shootRate: 0
-  shootDist: 0
-  shootDMG: 0
+  shootRate: 0.1
+  shootDist: 100
+  shootDMG: 1
+  ammoCount: 20
 --- !u!33 &410096670886812843
 MeshFilter:
   m_ObjectHideFlags: 0

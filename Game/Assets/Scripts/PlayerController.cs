@@ -29,9 +29,10 @@ public class PlayerController : MonoBehaviour
     int startHP;
 
     [Header("----- Shooting -----")]
-    [SerializeField] float shootRate;
-    [SerializeField] int shootDist;
-    [SerializeField] int shootDMG;
+    [Range(0, 1)] [SerializeField] float shootRate;
+    [Range(0, 20)] [SerializeField] int shootDist;
+    [Range(0, 5)] [SerializeField] int shootDMG;
+    [Range(0, 20)] [SerializeField] public int ammoCount;
     bool shooting = false;
     #endregion
 
@@ -40,6 +41,7 @@ public class PlayerController : MonoBehaviour
 
         originSpeed = moveSpeed;
         startHP = currentHP;
+        GameManager.instance.UpdateUI();
     }
 
     void Update()
@@ -99,24 +101,30 @@ public class PlayerController : MonoBehaviour
     IEnumerator Shoot()
     {
 
-        if (shooting == false && Input.GetButtonDown("Shoot"))
+        if (!shooting && Input.GetButtonDown("Shoot"))
         {
 
-            shooting = true;
-            RaycastHit hit;
-
-            if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDist))
+            if (ammoCount > 0)
             {
 
-                if (hit.collider.GetComponent<InterDamage>() != null)
+                shooting = true;
+                RaycastHit hit;
+
+                if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDist))
                 {
 
-                    hit.collider.GetComponent<InterDamage>().inflictDamage(shootDMG);
-                }
-            }
+                    if (hit.collider.GetComponent<InterDamage>() != null)
+                    {
 
-            yield return new WaitForSeconds(shootRate);
-            shooting = false;
+                        hit.collider.GetComponent<InterDamage>().inflictDamage(shootDMG);
+                        ammoCount--;
+                        GameManager.instance.UpdateUI();
+                    }
+                }
+
+                yield return new WaitForSeconds(shootRate);
+                shooting = false;
+            }
         }
     }
 
@@ -144,6 +152,9 @@ public class PlayerController : MonoBehaviour
 
         transform.position = GameManager.instance.SpawnPoint().transform.position;
         GameManager.instance.deathMenu.SetActive(false);
+
+        GameManager.instance.deathCount++;
+        GameManager.instance.UpdateUI();
 
         controller.enabled = true;
     }

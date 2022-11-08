@@ -26,6 +26,7 @@ public class enemyShooterAI : MonoBehaviour, InterDamage
     void Start()
     {
         GameManager.instance.enemiesToKill++;
+        GameManager.instance.UpdateUI();
     }
 
     // Update is called once per frame

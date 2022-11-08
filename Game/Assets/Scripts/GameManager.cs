@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,6 +14,12 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     public PlayerController playerScript;
 
+    // spawn positions
+    public GameObject spawnPos1;
+    public GameObject spawnPos2;
+    public GameObject spawnPos3;
+    public GameObject spawnPos4;
+
     [Header("----- UI -----")]
     // menus
     public GameObject pauseMenu;
@@ -19,16 +27,17 @@ public class GameManager : MonoBehaviour
     public GameObject winMenu;
     public bool isPaused;
 
+    // texts
+    public TextMeshProUGUI eText;
+    public TextMeshProUGUI wText;
+    public TextMeshProUGUI dText;
+    public TextMeshProUGUI aText;
+
+    // other UI
     public GameObject playDMGScreen;
-    public GameObject reticle;
     public int enemiesToKill;
     public int waveCount;
-
-    // spawn positions
-    public GameObject spawnPos1;
-    public GameObject spawnPos2;
-    public GameObject spawnPos3;
-    public GameObject spawnPos4;
+    public int deathCount;
     #endregion
 
     void Awake()
@@ -37,6 +46,7 @@ public class GameManager : MonoBehaviour
         instance = this;
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
+        deathCount = 0;
     }
 
     void Update()
@@ -45,7 +55,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetButtonDown("Cancel"))
         {
 
-            if (deathMenu.activeSelf == winMenu.activeSelf == false)
+            if (!deathMenu.activeSelf || !winMenu.activeSelf)
             {
 
                 isPaused = !isPaused;
@@ -84,6 +94,7 @@ public class GameManager : MonoBehaviour
     {
 
         enemiesToKill--;
+        UpdateUI();
 
         if (enemiesToKill <= 0)
         {
@@ -100,6 +111,15 @@ public class GameManager : MonoBehaviour
         playDMGScreen.SetActive(false);
     }
 
+    public void UpdateUI()
+    {
+
+        eText.text = enemiesToKill.ToString("F0");
+        wText.text = waveCount.ToString("F0");
+        dText.text = deathCount.ToString("F0");
+        aText.text = playerScript.ammoCount.ToString("F0");
+    }
+    
     // returns a random spawn position (game object) when called
     public GameObject SpawnPoint()
     {
