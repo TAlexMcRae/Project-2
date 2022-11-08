@@ -19,10 +19,16 @@ public class GameManager : MonoBehaviour
     public GameObject winMenu;
     public bool isPaused;
 
-    public GameObject spawnPos;
     public GameObject playDMGScreen;
     public GameObject reticle;
     public int enemiesToKill;
+    public int waveCount;
+
+    // spawn positions
+    public GameObject spawnPos1;
+    public GameObject spawnPos2;
+    public GameObject spawnPos3;
+    public GameObject spawnPos4;
     #endregion
 
     void Awake()
@@ -31,7 +37,6 @@ public class GameManager : MonoBehaviour
         instance = this;
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
-        spawnPos = GameObject.FindGameObjectWithTag("Spawn Pos");
     }
 
     void Update()
@@ -93,5 +98,39 @@ public class GameManager : MonoBehaviour
         playDMGScreen.SetActive(true);
         yield return new WaitForSeconds(0.1f);
         playDMGScreen.SetActive(false);
+    }
+
+    // returns a random spawn position (game object) when called
+    public GameObject SpawnPoint()
+    {
+
+        GameObject temp = null;
+        int SPnum = (int)Random.Range(1, 4);
+
+        switch (SPnum)
+        {
+
+            case 1:
+                temp = spawnPos1;
+                break;
+
+            case 2:
+                temp = spawnPos2;
+                break;
+
+            case 3:
+                temp = spawnPos3;
+                break;
+
+            case 4:
+                temp = spawnPos4;
+                break;
+
+            default:
+                temp = spawnPos1;
+                break;
+        }
+
+        return temp;
     }
 }

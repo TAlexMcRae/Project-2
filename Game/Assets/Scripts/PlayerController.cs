@@ -142,7 +142,7 @@ public class PlayerController : MonoBehaviour
         controller.enabled = false;
         currentHP = startHP;
 
-        transform.position = GameManager.instance.spawnPos.transform.position;
+        transform.position = GameManager.instance.SpawnPoint().transform.position;
         GameManager.instance.deathMenu.SetActive(false);
 
         controller.enabled = true;
