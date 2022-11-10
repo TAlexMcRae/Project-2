@@ -53,7 +53,7 @@ MonoBehaviour:
   model: {fileID: 5809806679173360648}
   agent: {fileID: 6410814073806351910}
   pickup: {fileID: 7463433190454782028, guid: aa40e9b30bed4cc458aa0a87aa8d8b76, type: 3}
-  HP: 3
+  HP: 1
   playerFaceSpeed: 5
   bullet: {fileID: 5721157100876336816, guid: 408f1c4153c65df4a9d9b5c82ab23ddb, type: 3}
   shootpos: {fileID: 8859938688424295294}

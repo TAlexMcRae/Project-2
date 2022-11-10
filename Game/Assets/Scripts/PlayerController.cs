@@ -158,4 +158,9 @@ public class PlayerController : MonoBehaviour
 
         controller.enabled = true;
     }
+    public void itemPickup(itemType itemType)
+    {
+        ammoCount = ammoCount + itemType.ammoNum;
+        GameManager.instance.UpdateUI();
+    }
 }

@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
         deathCount = 0;
+        waveCount = 1;
     }
 
     void Update()
@@ -85,21 +86,22 @@ public class GameManager : MonoBehaviour
 
     public void WinCondition()
     {
-
         winMenu.SetActive(true);
         StartPause();
     }
 
     public void UpdateEnemies()
     {
-
         enemiesToKill--;
         UpdateUI();
 
         if (enemiesToKill <= 0)
         {
-
-            WinCondition();
+            waveCount++;
+            if (enemiesToKill <= 0 && waveCount == 5)
+            {
+                WinCondition();
+            }
         }
     }
 
