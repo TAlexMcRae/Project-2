@@ -109,7 +109,15 @@ public class enemyShooterAI : MonoBehaviour, InterDamage
         StartCoroutine(flashdamage());
         if (HP <= 0)
         {
-            Instantiate(pickup, shootpos.position, transform.rotation);
+
+            int chance = Random.Range(1, 3);
+
+            if (chance == 1)
+            {
+
+                Instantiate(pickup, new Vector3(transform.position.x, 1, transform.position.z), pickup.transform.rotation);
+            }
+            
             GameManager.instance.UpdateEnemies();
             Destroy(gameObject);
         }
