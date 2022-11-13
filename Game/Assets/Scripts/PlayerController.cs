@@ -41,11 +41,15 @@ public class PlayerController : MonoBehaviour
     [Header("----- Audio -----")]
     [SerializeField] AudioClip[] audiJump;
     [SerializeField] AudioClip[] audiHurt;
-    [SerializeField] AudioClip walking;
+    [SerializeField] AudioClip[] walking;
+    [SerializeField] AudioClip gunShot;
+    [SerializeField] AudioClip noAmmo;
 
     [Range(0, 1)] [SerializeField] float jumpVol;
     [Range(0, 1)] [SerializeField] float hurtVol;
     [Range(0, 1)] [SerializeField] float walkVol;
+    [Range(0, 1)] [SerializeField] float shotVol;
+    [Range(0, 1)] [SerializeField] float ammoVol;
     #endregion
 
     void Start()
@@ -85,6 +89,7 @@ public class PlayerController : MonoBehaviour
 
             ++jumpTimes;
             playerVelo.y = jumpHeight;
+            audi.PlayOneShot(audiJump[Random.Range(0, audiJump.Length - 1)], jumpVol);
         }
 
         playerVelo.y -= gravity * Time.deltaTime;
@@ -122,6 +127,8 @@ public class PlayerController : MonoBehaviour
                 shooting = true;
                 RaycastHit hit;
 
+                audi.PlayOneShot(gunShot, shotVol);
+
                 if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDist))
                 {
 
@@ -139,6 +146,13 @@ public class PlayerController : MonoBehaviour
                 yield return new WaitForSeconds(shootRate);
                 shooting = false;
             }
+
+            else if (ammoCount <= 0)
+            {
+
+                audi.PlayOneShot(noAmmo, ammoVol);
+                yield return new WaitForSeconds(shootRate);
+            }
         }
     }
 
@@ -148,6 +162,7 @@ public class PlayerController : MonoBehaviour
     {
 
         currentHP -= dmg;
+        audi.PlayOneShot(audiHurt[Random.Range(0, audiHurt.Length - 1)], hurtVol);
 
         GameManager.instance.UpdateUI();
         StartCoroutine(GameManager.instance.PlayDMGFlash());
