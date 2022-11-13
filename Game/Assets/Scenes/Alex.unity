@@ -214,6 +214,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -0.855
       objectReference: {fileID: 0}
+    - target: {fileID: 5616466300121771663, guid: eb2909530af0cbc47b4f69547d7c7949, type: 3}
+      propertyPath: pickup
+      value: 
+      objectReference: {fileID: 5051766104771009879, guid: c0775352625b8064d8dab2720ab32c26, type: 3}
+    - target: {fileID: 5616466300121771663, guid: eb2909530af0cbc47b4f69547d7c7949, type: 3}
+      propertyPath: pickup.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5616466300121771663, guid: eb2909530af0cbc47b4f69547d7c7949, type: 3}
+      propertyPath: pickup.Array.data[0]
+      value: 
+      objectReference: {fileID: 5051766104771009879, guid: c0775352625b8064d8dab2720ab32c26, type: 3}
+    - target: {fileID: 5616466300121771663, guid: eb2909530af0cbc47b4f69547d7c7949, type: 3}
+      propertyPath: pickup.Array.data[1]
+      value: 
+      objectReference: {fileID: 6139874351443757799, guid: 5eb3d81561b719046bcc93c7317ebfa4, type: 3}
     - target: {fileID: 7390218676475888499, guid: eb2909530af0cbc47b4f69547d7c7949, type: 3}
       propertyPath: m_Name
       value: ShooterSlime
