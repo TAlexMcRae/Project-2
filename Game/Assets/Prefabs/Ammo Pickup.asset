@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Ammo Pickup
   m_EditorClassIdentifier: 
   ammoNum: 5
+  healNum: 1

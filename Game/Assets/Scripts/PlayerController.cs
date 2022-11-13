@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     #region Variables
     [Header("----- Components -----")]
     [SerializeField] CharacterController controller;
+    [SerializeField] AudioSource audi;
 
     [Header("----- Stats -----")]
     // movement
@@ -32,8 +33,19 @@ public class PlayerController : MonoBehaviour
     [Range(0, 1)] [SerializeField] float shootRate;
     [Range(0, 20)] [SerializeField] int shootDist;
     [Range(0, 5)] [SerializeField] int shootDMG;
-    [Range(0, 20)] [SerializeField] public int ammoCount;
     bool shooting = false;
+
+    [Range(0, 20)] [SerializeField] public int ammoCount;
+    [SerializeField] GameObject hitEffect;
+
+    [Header("----- Audio -----")]
+    [SerializeField] AudioClip[] audiJump;
+    [SerializeField] AudioClip[] audiHurt;
+    [SerializeField] AudioClip walking;
+
+    [Range(0, 1)] [SerializeField] float jumpVol;
+    [Range(0, 1)] [SerializeField] float hurtVol;
+    [Range(0, 1)] [SerializeField] float walkVol;
     #endregion
 
     void Start()
@@ -120,6 +132,8 @@ public class PlayerController : MonoBehaviour
                         ammoCount--;
                         GameManager.instance.UpdateUI();
                     }
+
+                    Instantiate(hitEffect, hit.point, hitEffect.transform.rotation);
                 }
 
                 yield return new WaitForSeconds(shootRate);
@@ -128,7 +142,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // player damage
+    #region Damage & Respawn
+    // player takes damage
     public void Damage(int dmg)
     {
 
@@ -158,9 +173,29 @@ public class PlayerController : MonoBehaviour
 
         controller.enabled = true;
     }
+    #endregion
+
     public void itemPickup(itemType itemType)
     {
-        ammoCount = ammoCount + itemType.ammoNum;
+
+        if (itemType.ammoNum != 0)
+        {
+            ammoCount += itemType.ammoNum;
+        }
+
+        else if (itemType.healNum != 0)
+        {
+            currentHP += itemType.healNum;
+
+            if (currentHP > startHP)
+            {
+
+                currentHP = startHP;
+            }
+
+            StartCoroutine(GameManager.instance.PlayHealFlash());
+        }
+
         GameManager.instance.UpdateUI();
     }
 }

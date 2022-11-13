@@ -83,6 +83,12 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
     {
 
         exploding = true;
+
+        // stops the bomb enemy
+        agent.speed = 0;
+        agent.angularSpeed = 0;
+        agent.acceleration = 0;
+
         yield return new WaitForSeconds(3f);
         Destroy(gameObject);
         exploding = false;

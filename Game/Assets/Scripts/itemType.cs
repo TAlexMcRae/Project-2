@@ -7,4 +7,5 @@ using UnityEngine;
 public class itemType : ScriptableObject
 {
     public int ammoNum;
+    public int healNum;
 }

@@ -155,7 +155,7 @@ MonoBehaviour:
   agent: {fileID: 9150805991414001444}
   anim: {fileID: 7626070021035104316}
   pickup: {fileID: 7463433190454782028, guid: aa40e9b30bed4cc458aa0a87aa8d8b76, type: 3}
-  HP: 1
+  HP: 5
   playerFaceSpeed: 6
   roamDist: 5
   speedChase: 2

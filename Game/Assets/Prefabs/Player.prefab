@@ -50,6 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 410096670886812845}
+  audi: {fileID: 0}
   moveSpeed: 5
   sprintMod: 3
   jumpHeight: 10
@@ -60,6 +61,22 @@ MonoBehaviour:
   shootDist: 100
   shootDMG: 1
   ammoCount: 20
+  hitEffect: {fileID: 7226583673155636401, guid: a2ab56839e1c9504ea9d141e95d0b16b, type: 3}
+  audiJump:
+  - {fileID: 8300000, guid: fb90021d574b85844a22d2c6bbd32d16, type: 3}
+  - {fileID: 8300000, guid: 0d9f08309c7075942b63780fff92d835, type: 3}
+  - {fileID: 8300000, guid: 66c849bfda85f9e419c59c43393e1452, type: 3}
+  audiHurt:
+  - {fileID: 8300000, guid: 814a0890132d9574d9ef7a21f3499c7d, type: 3}
+  - {fileID: 8300000, guid: 8d7340ea5cff4574eb7b9adfce0b526d, type: 3}
+  - {fileID: 8300000, guid: 360b5bf542611b746830371db4d3ec25, type: 3}
+  - {fileID: 8300000, guid: 6028155fc36af0549848f3bb8c60a2e9, type: 3}
+  - {fileID: 8300000, guid: fc32cf268c1852645bb26a9c71794222, type: 3}
+  - {fileID: 8300000, guid: 16ec889a1326e8444882e7240f8e9ff9, type: 3}
+  walking: {fileID: 0}
+  jumpVol: 0
+  hurtVol: 0
+  walkVol: 0
 --- !u!33 &410096670886812843
 MeshFilter:
   m_ObjectHideFlags: 0

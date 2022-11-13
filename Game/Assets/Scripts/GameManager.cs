@@ -15,10 +15,7 @@ public class GameManager : MonoBehaviour
     public PlayerController playerScript;
 
     // spawn positions
-    public GameObject spawnPos1;
-    public GameObject spawnPos2;
-    public GameObject spawnPos3;
-    public GameObject spawnPos4;
+    public GameObject[] spawnPos;
 
     [Header("----- UI -----")]
     // menus
@@ -35,6 +32,7 @@ public class GameManager : MonoBehaviour
 
     // other UI
     public GameObject playDMGScreen;
+    public GameObject playHealScreen;
     public int enemiesToKill;
     public int waveCount;
     public int deathCount;
@@ -113,6 +111,14 @@ public class GameManager : MonoBehaviour
         playDMGScreen.SetActive(false);
     }
 
+    public IEnumerator PlayHealFlash()
+    {
+
+        playHealScreen.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        playHealScreen.SetActive(false);
+    }
+
     public void UpdateUI()
     {
 
@@ -126,33 +132,6 @@ public class GameManager : MonoBehaviour
     public GameObject SpawnPoint()
     {
 
-        GameObject temp = null;
-        int SPnum = (int)Random.Range(1, 4);
-
-        switch (SPnum)
-        {
-
-            case 1:
-                temp = spawnPos1;
-                break;
-
-            case 2:
-                temp = spawnPos2;
-                break;
-
-            case 3:
-                temp = spawnPos3;
-                break;
-
-            case 4:
-                temp = spawnPos4;
-                break;
-
-            default:
-                temp = spawnPos1;
-                break;
-        }
-
-        return temp;
+        return spawnPos[Random.Range(0, spawnPos.Length - 1)];
     }
 }
