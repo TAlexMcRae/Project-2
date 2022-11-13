@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c9d79fa2517bff343a857c23f7c61e8d, type: 3}
-  m_Name: Ammo Pickup
+  m_Name: Heal Pickup
   m_EditorClassIdentifier: 
-  ammoNum: 5
-  healNum: 0
+  ammoNum: 0
+  healNum: 5

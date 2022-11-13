@@ -121,12 +121,12 @@ public class PlayerController : MonoBehaviour
         if (!shooting && Input.GetButtonDown("Shoot"))
         {
 
+            shooting = true;
+
             if (ammoCount > 0)
             {
 
-                shooting = true;
                 RaycastHit hit;
-
                 audi.PlayOneShot(gunShot, shotVol);
 
                 if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDist))
@@ -136,23 +136,22 @@ public class PlayerController : MonoBehaviour
                     {
 
                         hit.collider.GetComponent<InterDamage>().inflictDamage(shootDMG);
-                        ammoCount--;
-                        GameManager.instance.UpdateUI();
                     }
 
                     Instantiate(hitEffect, hit.point, hitEffect.transform.rotation);
+                    ammoCount--;
+                    GameManager.instance.UpdateUI();
                 }
-
-                yield return new WaitForSeconds(shootRate);
-                shooting = false;
             }
 
             else if (ammoCount <= 0)
             {
 
                 audi.PlayOneShot(noAmmo, ammoVol);
-                yield return new WaitForSeconds(shootRate);
             }
+
+            yield return new WaitForSeconds(shootRate);
+            shooting = false;
         }
     }
 

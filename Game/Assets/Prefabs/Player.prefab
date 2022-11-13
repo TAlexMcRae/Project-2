@@ -76,7 +76,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: fc32cf268c1852645bb26a9c71794222, type: 3}
   - {fileID: 8300000, guid: 16ec889a1326e8444882e7240f8e9ff9, type: 3}
   walking:
-  - {fileID: 0}
   - {fileID: 8300000, guid: 636d5cae507a12e4f88b9540c20f9408, type: 3}
   - {fileID: 8300000, guid: c38470e2e565eb642b2686745191e50c, type: 3}
   - {fileID: 8300000, guid: 046639e808f8895459fe476ff8cd8898, type: 3}
@@ -87,12 +86,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ad05db93aa1b5cd41a428cec5d406a09, type: 3}
   - {fileID: 8300000, guid: 9a3fda5a70217fd4e8edcc2c0a8f6d5f, type: 3}
   gunShot: {fileID: 8300000, guid: dc0b7bfa11cbc7446ae8a3c0a04451ec, type: 3}
-  noAmmo: {fileID: 0}
+  noAmmo: {fileID: 8300000, guid: 0e812386f932d354eb44a11643c9fe98, type: 3}
   jumpVol: 0.5
   hurtVol: 0.5
   walkVol: 0.5
   shotVol: 0.7
-  ammoVol: 0
+  ammoVol: 0.7
 --- !u!33 &410096670886812843
 MeshFilter:
   m_ObjectHideFlags: 0

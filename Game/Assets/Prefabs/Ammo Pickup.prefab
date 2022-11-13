@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4850812397303344857}
   - component: {fileID: 8647617193738039449}
   m_Layer: 0
-  m_Name: Enemy Pickup
+  m_Name: Ammo Pickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

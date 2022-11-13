@@ -369,46 +369,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 410096670886812844, guid: 0ffe8fef2996ce24db41247606e3ce89, type: 3}
-      propertyPath: walking.Array.size
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 410096670886812844, guid: 0ffe8fef2996ce24db41247606e3ce89, type: 3}
-      propertyPath: walking.Array.data[0]
-      value: 
-      objectReference: {fileID: 8300000, guid: 636d5cae507a12e4f88b9540c20f9408, type: 3}
-    - target: {fileID: 410096670886812844, guid: 0ffe8fef2996ce24db41247606e3ce89, type: 3}
-      propertyPath: walking.Array.data[1]
-      value: 
-      objectReference: {fileID: 8300000, guid: c38470e2e565eb642b2686745191e50c, type: 3}
-    - target: {fileID: 410096670886812844, guid: 0ffe8fef2996ce24db41247606e3ce89, type: 3}
-      propertyPath: walking.Array.data[2]
-      value: 
-      objectReference: {fileID: 8300000, guid: 046639e808f8895459fe476ff8cd8898, type: 3}
-    - target: {fileID: 410096670886812844, guid: 0ffe8fef2996ce24db41247606e3ce89, type: 3}
-      propertyPath: walking.Array.data[3]
-      value: 
-      objectReference: {fileID: 8300000, guid: 548341aee43673c41b02c8b00cb10cd1, type: 3}
-    - target: {fileID: 410096670886812844, guid: 0ffe8fef2996ce24db41247606e3ce89, type: 3}
-      propertyPath: walking.Array.data[4]
-      value: 
-      objectReference: {fileID: 8300000, guid: da44bb4283ad5764c86632cd033b1252, type: 3}
-    - target: {fileID: 410096670886812844, guid: 0ffe8fef2996ce24db41247606e3ce89, type: 3}
-      propertyPath: walking.Array.data[5]
-      value: 
-      objectReference: {fileID: 8300000, guid: 8f2d1965587e150488e93babaa3252b4, type: 3}
-    - target: {fileID: 410096670886812844, guid: 0ffe8fef2996ce24db41247606e3ce89, type: 3}
-      propertyPath: walking.Array.data[6]
-      value: 
-      objectReference: {fileID: 8300000, guid: b7c9d86be949a554196829c900d6542c, type: 3}
-    - target: {fileID: 410096670886812844, guid: 0ffe8fef2996ce24db41247606e3ce89, type: 3}
-      propertyPath: walking.Array.data[7]
-      value: 
-      objectReference: {fileID: 8300000, guid: ad05db93aa1b5cd41a428cec5d406a09, type: 3}
-    - target: {fileID: 410096670886812844, guid: 0ffe8fef2996ce24db41247606e3ce89, type: 3}
-      propertyPath: walking.Array.data[8]
-      value: 
-      objectReference: {fileID: 8300000, guid: 9a3fda5a70217fd4e8edcc2c0a8f6d5f, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ffe8fef2996ce24db41247606e3ce89, type: 3}
 --- !u!1001 &1627952385919294510
