@@ -26,8 +26,8 @@ public class PlayerController : MonoBehaviour
     int jumpTimes;
 
     // health
-    [Range(0, 100)] [SerializeField] int currentHP;
-    int startHP;
+    [Range(0, 100)] [SerializeField] public int currentHP;
+    public int startHP;
 
     [Header("----- Shooting -----")]
     [Range(0, 1)] [SerializeField] float shootRate;
@@ -148,6 +148,8 @@ public class PlayerController : MonoBehaviour
     {
 
         currentHP -= dmg;
+
+        GameManager.instance.UpdateUI();
         StartCoroutine(GameManager.instance.PlayDMGFlash());
 
         if (currentHP <= 0)

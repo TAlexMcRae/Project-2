@@ -33,6 +33,8 @@ public class GameManager : MonoBehaviour
     // other UI
     public GameObject playDMGScreen;
     public GameObject playHealScreen;
+    public Image hpBar;
+
     public int enemiesToKill;
     public int waveCount;
     public int deathCount;
@@ -126,6 +128,7 @@ public class GameManager : MonoBehaviour
         wText.text = waveCount.ToString("F0");
         dText.text = deathCount.ToString("F0");
         aText.text = playerScript.ammoCount.ToString("F0");
+        hpBar.fillAmount = (float)playerScript.currentHP / (float)playerScript.startHP;
     }
     
     // returns a random spawn position (game object) when called
