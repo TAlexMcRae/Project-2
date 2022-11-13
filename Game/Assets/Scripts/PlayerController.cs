@@ -123,6 +123,7 @@ public class PlayerController : MonoBehaviour
 
             shooting = true;
 
+            // actual shooting with gunshot noise
             if (ammoCount > 0)
             {
 
@@ -144,6 +145,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
+            // empty gun clicking noise
             else if (ammoCount <= 0)
             {
 

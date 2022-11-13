@@ -93,7 +93,6 @@ public class GameManager : MonoBehaviour
     public void UpdateEnemies()
     {
         enemiesToKill--;
-        UpdateUI();
 
         if (enemiesToKill <= 0)
         {
@@ -103,6 +102,8 @@ public class GameManager : MonoBehaviour
                 WinCondition();
             }
         }
+
+        UpdateUI();
     }
 
     public IEnumerator PlayDMGFlash()

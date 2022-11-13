@@ -4320,15 +4320,16 @@ MonoBehaviour:
   - waveName: Wave 4
     enemyNum: 0
     enemyType: []
-  spawnPositions:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - waveName: Wave 5
+    enemyNum: 0
+    enemyType: []
+  - waveName: Wave 6
+    enemyNum: 0
+    enemyType: []
+  - waveName: Wave 7
+    enemyNum: 0
+    enemyType: []
+  spawnPositions: []
   waveTimer: 0
   canSpawn: 1
 --- !u!1 &4676905103279621909
