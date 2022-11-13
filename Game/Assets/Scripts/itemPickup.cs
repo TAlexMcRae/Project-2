@@ -5,6 +5,13 @@ using UnityEngine;
 public class itemPickup : MonoBehaviour
 {
     [SerializeField] itemType ItemType;
+    [SerializeField] float spinRate;
+
+    private void Update()
+    {
+
+        transform.Rotate(spinRate * Time.deltaTime, 0f, 0f);
+    }
 
     private void OnTriggerEnter(Collider other)
     {

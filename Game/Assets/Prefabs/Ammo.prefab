@@ -80,6 +80,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemType: {fileID: 11400000, guid: 34195c6c35bc6f44991db2ba983a6a59, type: 2}
+  spinRate: 20
 --- !u!135 &584390869420374686
 SphereCollider:
   m_ObjectHideFlags: 0
