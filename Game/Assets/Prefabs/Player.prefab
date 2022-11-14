@@ -64,6 +64,9 @@ MonoBehaviour:
   shootDMG: 1
   ammoCount: 20
   hitEffect: {fileID: 7226583673155636401, guid: a2ab56839e1c9504ea9d141e95d0b16b, type: 3}
+  meleeRate: 0.1
+  meleeDist: 4
+  meleeDMG: 1
   audiJump:
   - {fileID: 8300000, guid: fb90021d574b85844a22d2c6bbd32d16, type: 3}
   - {fileID: 8300000, guid: 0d9f08309c7075942b63780fff92d835, type: 3}

@@ -35,20 +35,28 @@ public class PlayerController : MonoBehaviour
     [Range(0, 5)] [SerializeField] int shootDMG;
     bool shooting = false;
 
-    [Range(0, 20)] [SerializeField] public int ammoCount;
+    [Range(0, 20)][SerializeField] public int ammoCount;
     [SerializeField] GameObject hitEffect;
+
+    [Header("----- Melee -----")]
+    [Range(0, 1)][SerializeField] float meleeRate;
+    [Range(0, 5)][SerializeField] int meleeDist;
+    [Range(0, 5)][SerializeField] int meleeDMG;
+    bool meleeAttack = false;
 
     [Header("----- Audio -----")]
     [SerializeField] AudioClip[] audiJump;
     [SerializeField] AudioClip[] audiHurt;
     [SerializeField] AudioClip[] walking;
     [SerializeField] AudioClip gunShot;
+    [SerializeField] AudioClip punch;
     [SerializeField] AudioClip noAmmo;
 
     [Range(0, 1)] [SerializeField] float jumpVol;
     [Range(0, 1)] [SerializeField] float hurtVol;
     [Range(0, 1)] [SerializeField] float walkVol;
     [Range(0, 1)] [SerializeField] float shotVol;
+    [Range(0, 1)] [SerializeField] float meleeVol;
     [Range(0, 1)] [SerializeField] float ammoVol;
     #endregion
 
@@ -66,6 +74,7 @@ public class PlayerController : MonoBehaviour
         Movement();
         Sprint();
 
+        StartCoroutine(Melee());
         StartCoroutine(Shoot());
     }
 
@@ -114,13 +123,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    int powerShot;
     // shooting mechanics with raycasting
     IEnumerator Shoot()
     {
-
+        
         if (!shooting && Input.GetButtonDown("Shoot"))
         {
-
             shooting = true;
 
             // actual shooting with gunshot noise
@@ -133,11 +142,25 @@ public class PlayerController : MonoBehaviour
                 if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDist))
                 {
 
-                    if (hit.collider.GetComponent<InterDamage>() != null)
+                    if(powerShot < 5)
                     {
+                        if (hit.collider.GetComponent<InterDamage>() != null)
+                        {
 
-                        hit.collider.GetComponent<InterDamage>().inflictDamage(shootDMG);
+                            hit.collider.GetComponent<InterDamage>().inflictDamage(shootDMG);
+                            powerShot++;
+                        }
                     }
+                    else
+                    {
+                        if (hit.collider.GetComponent<InterDamage>() != null)
+                        {
+
+                            hit.collider.GetComponent<InterDamage>().inflictDamage(shootDMG*2);
+                            powerShot = 0;
+                        }
+                    }
+
 
                     Instantiate(hitEffect, hit.point, hitEffect.transform.rotation);
                     ammoCount--;
@@ -192,6 +215,31 @@ public class PlayerController : MonoBehaviour
         controller.enabled = true;
     }
     #endregion
+
+    IEnumerator Melee()
+    {
+        meleeAttack = true;
+
+        RaycastHit hit;
+        audi.PlayOneShot(punch, meleeVol);
+
+        if (!meleeAttack && Input.GetButtonDown("Punch"))
+        {
+            if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, meleeDist))
+            {
+                if (hit.collider.GetComponent<InterDamage>() != null)
+                {
+                    hit.collider.GetComponent<InterDamage>().inflictDamage(meleeDMG);
+                }
+                Instantiate(hitEffect, hit.point, hitEffect.transform.rotation);
+                Damage(1);
+                GameManager.instance.UpdateUI();
+            }
+        }
+        yield return new WaitForSeconds(meleeRate);
+
+        meleeAttack = false;
+    }
 
     public void itemPickup(itemType itemType)
     {
