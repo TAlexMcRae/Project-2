@@ -9,7 +9,7 @@ public class enemyShooterAI : MonoBehaviour, InterDamage
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Animator anim;
-    [SerializeField] GameObject pickup;
+    [SerializeField] GameObject[] pickup;
 
     [Header("----- Enemey Stats -----")]
     [SerializeField] int HP;
@@ -115,7 +115,8 @@ public class enemyShooterAI : MonoBehaviour, InterDamage
             if (chance == 1)
             {
 
-                Instantiate(pickup, new Vector3(transform.position.x, 1, transform.position.z), pickup.transform.rotation);
+                int pick = Random.Range(0, pickup.Length - 1);
+                Instantiate(pickup[pick], new Vector3(transform.position.x, 1, transform.position.z), pickup[pick].transform.rotation);
             }
             
             GameManager.instance.UpdateEnemies();

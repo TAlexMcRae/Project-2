@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
     // other UI
     public GameObject playDMGScreen;
     public GameObject playHealScreen;
+    public GameObject playBoostScreen;
     public Image hpBar;
 
     public int enemiesToKill;
@@ -96,8 +97,10 @@ public class GameManager : MonoBehaviour
 
         if (enemiesToKill <= 0)
         {
+
             waveCount++;
-            if (enemiesToKill <= 0 && waveCount == 5)
+
+            if (waveCount < 7)
             {
                 WinCondition();
             }
@@ -106,6 +109,7 @@ public class GameManager : MonoBehaviour
         UpdateUI();
     }
 
+    #region User Interface
     public IEnumerator PlayDMGFlash()
     {
 
@@ -131,7 +135,8 @@ public class GameManager : MonoBehaviour
         aText.text = playerScript.ammoCount.ToString("F0");
         hpBar.fillAmount = (float)playerScript.currentHP / (float)playerScript.startHP;
     }
-    
+    #endregion
+
     // returns a random spawn position (game object) when called
     public GameObject SpawnPoint()
     {

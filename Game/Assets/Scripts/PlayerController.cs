@@ -33,7 +33,9 @@ public class PlayerController : MonoBehaviour
     [Range(0, 1)] [SerializeField] float shootRate;
     [Range(0, 20)] [SerializeField] int shootDist;
     [Range(0, 5)] [SerializeField] int shootDMG;
+    private int startDMG;
     bool shooting = false;
+    bool boost = false;
 
     [Range(0, 20)][SerializeField] public int ammoCount;
     [SerializeField] GameObject hitEffect;
@@ -66,6 +68,7 @@ public class PlayerController : MonoBehaviour
         originSpeed = moveSpeed;
         startHP = currentHP;
         GameManager.instance.UpdateUI();
+        startDMG = shootDMG;
     }
 
     void Update()
@@ -123,11 +126,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    int powerShot;
     // shooting mechanics with raycasting
     IEnumerator Shoot()
     {
-        
+
+        int powerShot;
+
         if (!shooting && Input.GetButtonDown("Shoot"))
         {
             shooting = true;
@@ -142,8 +146,9 @@ public class PlayerController : MonoBehaviour
                 if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDist))
                 {
 
-                    if(powerShot < 5)
+                    if (powerShot < 5)
                     {
+
                         if (hit.collider.GetComponent<InterDamage>() != null)
                         {
 
@@ -151,16 +156,17 @@ public class PlayerController : MonoBehaviour
                             powerShot++;
                         }
                     }
-                    else
+
+                    else if (powerShot == 5)
                     {
+
                         if (hit.collider.GetComponent<InterDamage>() != null)
                         {
 
-                            hit.collider.GetComponent<InterDamage>().inflictDamage(shootDMG*2);
+                            hit.collider.GetComponent<InterDamage>().inflictDamage(shootDMG *= 2);
                             powerShot = 0;
                         }
                     }
-
 
                     Instantiate(hitEffect, hit.point, hitEffect.transform.rotation);
                     ammoCount--;
@@ -262,6 +268,28 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(GameManager.instance.PlayHealFlash());
         }
 
+        else if (itemType.boostPow != 0)
+        {
+
+            StartCoroutine(Boost(itemType.boostPow, itemType.boostTime));
+        }
+
         GameManager.instance.UpdateUI();
+    }
+
+    IEnumerator Boost(int power, float timer)
+    {
+
+        boost = true;
+        shootDMG *= power;
+
+        GameManager.instance.playBoostScreen.SetActive(true);
+
+        yield return new WaitForSeconds(timer);
+
+        GameManager.instance.playBoostScreen.SetActive(false);
+
+        shootDMG = startDMG;
+        boost = false;
     }
 }

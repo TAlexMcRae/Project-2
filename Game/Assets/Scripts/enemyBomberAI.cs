@@ -10,17 +10,27 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
     [Header("----- Components -----")]
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
-    [SerializeField] GameObject pickup;
+    [SerializeField] Animator anime;
+    [SerializeField] GameObject[] pickup;
 
     [Header("----- Enemy Stats -----")]
     [Range(0, 20)] [SerializeField] int currentHP;
     [SerializeField] int facingSpeed;
+    [SerializeField] int sightDist;
+    [SerializeField] int sightAngle;
+    [SerializeField] int aLerpSpeed;
+    [SerializeField] GameObject headPos;
+
+    Vector3 playerDirect;
+    bool rangeCheck;
+    float angleToPlay;
 
     [Header("----- Bomb -----")]
     [Range(0, 5)] [SerializeField] int bombDMG;
-    bool exploding;
-    Vector3 playerDirect;
-    bool rangeCheck;
+
+    private Vector3 bombCenter;
+    private float bombRadius;
+    private bool exploding;
     #endregion
 
     private void Start()
@@ -39,13 +49,7 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
         if (rangeCheck)
         {
 
-            FacePlayer();
-
-            if (!exploding)
-            {
-
-                StartCoroutine(Explode());
-            }
+            CanSeePlayer();
         }
     }
 
@@ -57,6 +61,41 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
         transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * facingSpeed);
     }
 
+    private void CanSeePlayer()
+    {
+
+        playerDirect = (GameManager.instance.player.transform.position - headPos.transform.position);
+        angleToPlay = Vector3.Angle(playerDirect, transform.forward);
+
+        RaycastHit hit;
+
+        if (Physics.Raycast(headPos.transform.position, playerDirect, out hit))
+        {
+
+            if (hit.collider.CompareTag("Player") && angleToPlay <= sightAngle)
+            {
+
+                agent.stoppingDistance = 5;
+                agent.SetDestination(GameManager.instance.player.transform.position);
+
+                if (agent.remainingDistance < agent.stoppingDistance)
+                {
+
+                    FacePlayer();
+                }
+
+                else if (!exploding)
+                {
+
+                    agent.speed = 0;
+                    agent.angularSpeed = 0;
+
+                    StartCoroutine(Explode());
+                }
+            }
+        }
+    }
+
     public void inflictDamage(int dmg)
     {
 
@@ -65,7 +104,15 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
         if (currentHP <= 0)
         {
 
-            Instantiate(pickup, transform.position, transform.rotation);
+            int chance = Random.Range(1, 3);
+
+            if (chance == 1)
+            {
+
+                int pick = Random.Range(0, pickup.Length - 1);
+                Instantiate(pickup[pick], new Vector3(transform.position.x, 1, transform.position.z), pickup[pick].transform.rotation);
+            }
+
             GameManager.instance.UpdateEnemies();
             Destroy(gameObject);
         }
@@ -84,12 +131,8 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
 
         exploding = true;
 
-        // stops the bomb enemy
-        agent.speed = 0;
-        agent.angularSpeed = 0;
-        agent.acceleration = 0;
-
         yield return new WaitForSeconds(3f);
+
         Destroy(gameObject);
         exploding = false;
     }

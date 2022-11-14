@@ -8,4 +8,7 @@ public class itemType : ScriptableObject
 {
     public int ammoNum;
     public int healNum;
+
+    public int boostPow;
+    public float boostTime;
 }
