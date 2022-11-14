@@ -33,9 +33,11 @@ public class PlayerController : MonoBehaviour
     [Range(0, 1)] [SerializeField] float shootRate;
     [Range(0, 20)] [SerializeField] int shootDist;
     [Range(0, 5)] [SerializeField] int shootDMG;
+
     private int startDMG;
     bool shooting = false;
     bool boost = false;
+    int powerShot;
 
     [Range(0, 20)][SerializeField] public int ammoCount;
     [SerializeField] GameObject hitEffect;
@@ -69,6 +71,7 @@ public class PlayerController : MonoBehaviour
         startHP = currentHP;
         GameManager.instance.UpdateUI();
         startDMG = shootDMG;
+        powerShot = 0;
     }
 
     void Update()
@@ -129,8 +132,6 @@ public class PlayerController : MonoBehaviour
     // shooting mechanics with raycasting
     IEnumerator Shoot()
     {
-
-        int powerShot;
 
         if (!shooting && Input.GetButtonDown("Shoot"))
         {
