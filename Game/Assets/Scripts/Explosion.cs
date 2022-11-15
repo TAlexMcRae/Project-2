@@ -10,24 +10,47 @@ public class Explosion : MonoBehaviour
 
     [SerializeField] public GameObject explosion;
     [SerializeField] int forceAMT;
+
+    private List<Collider> objects = new List<Collider>();
     #endregion
+
+    private void Start()
+    {
+
+        Instantiate(explosion, transform.position, explosion.transform.rotation);
+
+        for (int rnr = 0; rnr < objects.Count; rnr++)
+        {
+
+            objects[rnr].GetComponent<InterDamage>().inflictDamage(bombDMG);
+
+            if (objects[rnr].CompareTag("Player"))
+            {
+
+                GameManager.instance.playerScript.pushBack = ((objects[rnr].transform.position - transform.position).normalized) * forceAMT;
+            }
+        }
+
+        Destroy(gameObject);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        
-        if (other.GetComponent<InterDamage>() != null)
+
+        if (!objects.Contains(other) && other.GetComponent<InterDamage>() != null)
         {
 
-            Instantiate(explosion, transform.position, explosion.transform.rotation);
-            other.GetComponent<InterDamage>().inflictDamage(bombDMG);
+            objects.Add(other);
+        }
+    }
 
-            if (other.CompareTag("Player"))
-            {
+    private void OnTriggerExit(Collider other)
+    {
 
-                GameManager.instance.playerScript.pushBack = ((other.transform.position - transform.position).normalized) * forceAMT;
-            }
+        if (objects.Contains(other) && other.GetComponent<InterDamage>() != null)
+        {
 
-            Destroy(gameObject);
+            objects.Remove(other);
         }
     }
 }

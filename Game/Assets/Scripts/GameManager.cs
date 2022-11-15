@@ -76,7 +76,6 @@ public class GameManager : MonoBehaviour
         {
 
             UpdateUI();
-            TimerRun();
         }
     }
 
@@ -149,15 +148,9 @@ public class GameManager : MonoBehaviour
         if (timerText.activeSelf)
         {
 
-            timerText.GetComponent<Text>().text = (secondsLeft / playerScript.boostTime).ToString();
+            timerText.GetComponent<TextMeshProUGUI>().text = secondsLeft.ToString("F2");
+            secondsLeft -= Time.deltaTime;
         }
-    }
-
-    private IEnumerator TimerRun()
-    {
-
-        yield return new WaitForSeconds(0.01f);
-        secondsLeft -= 0.01f;
     }
     #endregion
 

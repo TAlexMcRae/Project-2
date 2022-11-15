@@ -298,6 +298,7 @@ public class PlayerController : MonoBehaviour, InterDamage
 
         GameManager.instance.playBoostScreen.SetActive(true);
         GameManager.instance.timerText.SetActive(true);
+        GameManager.instance.secondsLeft = timer;
 
         yield return new WaitForSeconds(timer);
 
