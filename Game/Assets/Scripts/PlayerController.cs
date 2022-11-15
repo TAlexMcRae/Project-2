@@ -199,13 +199,14 @@ public class PlayerController : MonoBehaviour, InterDamage
 
     IEnumerator Melee()
     {
-        meleeAttack = true;
-
-        RaycastHit hit;
-        audi.PlayOneShot(audiJump[Random.Range(0, audiJump.Length - 1)], meleeVol);
 
         if (!meleeAttack && Input.GetButtonDown("Punch"))
         {
+            meleeAttack = true;
+
+            RaycastHit hit;
+            audi.PlayOneShot(audiJump[Random.Range(0, audiJump.Length - 1)], meleeVol);
+
             if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, meleeDist))
             {
                 if (hit.collider.GetComponent<InterDamage>() != null)
