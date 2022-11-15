@@ -5,7 +5,6 @@ using UnityEngine;
 public class MapArea : MonoBehaviour
 {
     public int captureCount;
-    public bool capturedAll = false;
 
     public enum State
     {
@@ -48,6 +47,6 @@ public class MapArea : MonoBehaviour
                 break;
         }
         if (captureCount >= 1)
-            capturedAll = true;
+            GameManager.instance.capturedAll = true;
     }
 }
