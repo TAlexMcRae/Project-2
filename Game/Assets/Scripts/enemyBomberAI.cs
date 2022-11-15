@@ -10,7 +10,6 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
     [Header("----- Components -----")]
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
-    [SerializeField] Animator anime;
     [SerializeField] GameObject[] pickup;
 
     [Header("----- Enemy Stats -----")]
@@ -19,34 +18,45 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
     [SerializeField] int sightDist;
     [SerializeField] int sightAngle;
     [SerializeField] int aLerpSpeed;
+    [SerializeField] int roamDist;
     [SerializeField] GameObject headPos;
 
     Vector3 playerDirect;
+    Vector3 startPos;
     bool rangeCheck;
     float angleToPlay;
 
     [Header("----- Bomb -----")]
-    [SerializeField] Explosion boomer;
+    [SerializeField] GameObject boomer;
     private bool exploding;
     #endregion
 
     private void Start()
     {
 
+        startPos = transform.position;
         GameManager.instance.enemiesToKill++;
         GameManager.instance.UpdateUI();
+        Roaming();
     }
 
     private void Update()
     {
 
-        agent.SetDestination(GameManager.instance.player.transform.position);
-        playerDirect = (GameManager.instance.player.transform.position - transform.position);
-
-        if (rangeCheck)
+        if (agent.enabled)
         {
 
-            CanSeePlayer();
+            if (rangeCheck)
+            {
+
+                CanSeePlayer();
+            }
+
+            else if (agent.remainingDistance < 0.1f && agent.destination != GameManager.instance.player.transform.position)
+            {
+
+                Roaming();
+            }
         }
     }
 
@@ -84,13 +94,31 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
                 else if (!exploding)
                 {
 
-                    agent.speed = 0;
-                    agent.angularSpeed = 0;
-
                     StartCoroutine(Explode());
                 }
             }
         }
+    }
+
+    private void Roaming()
+    {
+
+        agent.stoppingDistance = 0;
+
+        Vector3 randDir = Random.insideUnitSphere * roamDist;
+        randDir += startPos;
+
+        NavMeshHit hit;
+        NavMesh.SamplePosition(randDir, out hit, 1, 1);
+        NavMeshPath path = new NavMeshPath();
+
+        if (hit.position != null)
+        {
+
+            agent.CalculatePath(hit.position, path);
+        }
+
+        agent.SetPath(path);
     }
 
     public void inflictDamage(int dmg)
@@ -129,9 +157,7 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
         exploding = true;
         yield return new WaitForSeconds(3f);
 
-        boomer.bombDMG *= currentHP;
-        boomer.transform.position = transform.position;
-
+        Instantiate(boomer, gameObject.transform.position, gameObject.transform.rotation);
         int chance = Random.Range(1, 3);
 
         if (chance == 1)
@@ -142,7 +168,6 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
         }
 
         Destroy(gameObject);
-        exploding = false;
     }
 
     public void OnTriggerEnter(Collider other)

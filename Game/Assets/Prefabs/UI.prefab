@@ -1306,6 +1306,7 @@ MonoBehaviour:
   enemiesToKill: 0
   waveCount: 0
   deathCount: 0
+  capturedAll: 0
 --- !u!1 &1627952385079284152
 GameObject:
   m_ObjectHideFlags: 0
@@ -4318,27 +4319,27 @@ MonoBehaviour:
     enemyType:
     - {fileID: 7390218676475888499, guid: eb2909530af0cbc47b4f69547d7c7949, type: 3}
   - waveName: Wave 2
-    enemyNum: 45
+    enemyNum: 40
     enemyType:
     - {fileID: 7390218676475888499, guid: eb2909530af0cbc47b4f69547d7c7949, type: 3}
   - waveName: Wave 3
-    enemyNum: 60
+    enemyNum: 50
     enemyType:
     - {fileID: 7390218676475888499, guid: eb2909530af0cbc47b4f69547d7c7949, type: 3}
   - waveName: Wave 4
-    enemyNum: 75
+    enemyNum: 60
     enemyType:
     - {fileID: 7390218676475888499, guid: eb2909530af0cbc47b4f69547d7c7949, type: 3}
   - waveName: Wave 5
-    enemyNum: 100
+    enemyNum: 70
     enemyType:
     - {fileID: 7390218676475888499, guid: eb2909530af0cbc47b4f69547d7c7949, type: 3}
   - waveName: Wave 6
-    enemyNum: 125
+    enemyNum: 80
     enemyType:
     - {fileID: 7390218676475888499, guid: eb2909530af0cbc47b4f69547d7c7949, type: 3}
   - waveName: Wave 7
-    enemyNum: 150
+    enemyNum: 100
     enemyType:
     - {fileID: 7390218676475888499, guid: eb2909530af0cbc47b4f69547d7c7949, type: 3}
   spawnPositions:

@@ -7,50 +7,38 @@ public class Explosion : MonoBehaviour
 
     #region Variables
     [Range(1, 5)] [SerializeField] public int bombDMG;
-
-    [SerializeField] public GameObject explosion;
     [SerializeField] int forceAMT;
-
-    private List<Collider> objects = new List<Collider>();
+    //private Collider[] objects;
+    [SerializeField] SphereCollider over;
+    private bool damaged = false;
     #endregion
 
-    private void Start()
+    void Start()
     {
 
-        Instantiate(explosion, transform.position, explosion.transform.rotation);
+        DamageOverlay();
+        Destroy(gameObject, 0.05f);
+    }
 
-        for (int rnr = 0; rnr < objects.Count; rnr++)
+    void DamageOverlay()
+    {
+
+        Collider[] objects = Physics.OverlapSphere(transform.position, 15);
+
+        for (int rnr = 0; rnr < objects.Length; rnr++)
         {
 
-            objects[rnr].GetComponent<InterDamage>().inflictDamage(bombDMG);
-
-            if (objects[rnr].CompareTag("Player"))
+            if (objects[rnr].GetComponent<InterDamage>() != null)
             {
 
-                GameManager.instance.playerScript.pushBack = ((objects[rnr].transform.position - transform.position).normalized) * forceAMT;
+                objects[rnr].GetComponent<InterDamage>().inflictDamage(bombDMG);
+
+                if (!damaged && objects[rnr].CompareTag("Player"))
+                {
+                    damaged = true;
+                    GameManager.instance.playerScript.pushBack = ((objects[rnr].transform.position - transform.position).normalized) * forceAMT;
+                }
             }
-        }
-
-        Destroy(gameObject);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-
-        if (!objects.Contains(other) && other.GetComponent<InterDamage>() != null)
-        {
-
-            objects.Add(other);
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-
-        if (objects.Contains(other) && other.GetComponent<InterDamage>() != null)
-        {
-
-            objects.Remove(other);
         }
     }
 }
