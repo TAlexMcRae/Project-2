@@ -43,6 +43,10 @@ public class GameManager : MonoBehaviour
     public int enemiesToKill;
     public int waveCount;
     public int deathCount;
+
+    //capture zone
+    public bool capturedAll = false;
+
     #endregion
 
     void Awake()
@@ -97,6 +101,7 @@ public class GameManager : MonoBehaviour
 
     public void WinCondition()
     {
+        
         winMenu.SetActive(true);
         StartPause();
     }
