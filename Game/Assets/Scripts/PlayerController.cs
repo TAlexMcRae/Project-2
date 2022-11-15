@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, InterDamage
 {
 
     #region Variables
@@ -14,10 +14,13 @@ public class PlayerController : MonoBehaviour
     // movement
     [Range(0, 10)] [SerializeField] float moveSpeed;
     [Range(0, 5)] [SerializeField] float sprintMod;
+    [SerializeField] int pushBackTime;
+
     Vector3 move;
     Vector3 playerVelo;
     float originSpeed;
     bool sprinting;
+    public Vector3 pushBack;
 
     // jumping
     [Range(0, 30)] [SerializeField] float jumpHeight;
@@ -35,9 +38,12 @@ public class PlayerController : MonoBehaviour
     [Range(0, 5)] [SerializeField] int shootDMG;
 
     private int startDMG;
+    int powerShot;
+
+    // boosting
     bool shooting = false;
     bool boost = false;
-    int powerShot;
+    public float boostTime = 10f;
 
     [Range(0, 20)][SerializeField] public int ammoCount;
     [SerializeField] GameObject hitEffect;
@@ -53,7 +59,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] AudioClip[] audiHurt;
     [SerializeField] AudioClip[] walking;
     [SerializeField] AudioClip gunShot;
-    [SerializeField] AudioClip punch;
     [SerializeField] AudioClip noAmmo;
 
     [Range(0, 1)] [SerializeField] float jumpVol;
@@ -77,6 +82,8 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
+        pushBack = Vector3.Lerp(pushBack, Vector3.zero, Time.deltaTime * pushBackTime);
+
         Movement();
         Sprint();
 
@@ -96,7 +103,7 @@ public class PlayerController : MonoBehaviour
         }
 
         move = transform.right * Input.GetAxis("Horizontal") + transform.forward * Input.GetAxis("Vertical");
-        controller.Move(move * Time.deltaTime * moveSpeed);
+        controller.Move((move + pushBack) * Time.deltaTime * moveSpeed);
 
         // jump functions
         if (Input.GetButtonDown("Jump") && jumpTimes < maxJumps)
@@ -129,6 +136,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    #region Damage Dealing
     // shooting mechanics with raycasting
     IEnumerator Shoot()
     {
@@ -166,6 +174,8 @@ public class PlayerController : MonoBehaviour
 
                             hit.collider.GetComponent<InterDamage>().inflictDamage(shootDMG *= 2);
                             powerShot = 0;
+
+                            shootDMG = startDMG;
                         }
                     }
 
@@ -187,9 +197,35 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    IEnumerator Melee()
+    {
+        meleeAttack = true;
+
+        RaycastHit hit;
+        audi.PlayOneShot(audiJump[Random.Range(0, audiJump.Length - 1)], meleeVol);
+
+        if (!meleeAttack && Input.GetButtonDown("Punch"))
+        {
+            if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, meleeDist))
+            {
+                if (hit.collider.GetComponent<InterDamage>() != null)
+                {
+                    hit.collider.GetComponent<InterDamage>().inflictDamage(meleeDMG);
+                }
+                Instantiate(hitEffect, hit.point, hitEffect.transform.rotation);
+                inflictDamage(1);
+                GameManager.instance.UpdateUI();
+            }
+        }
+        yield return new WaitForSeconds(meleeRate);
+
+        meleeAttack = false;
+    }
+    #endregion
+
     #region Damage & Respawn
     // player takes damage
-    public void Damage(int dmg)
+    public void inflictDamage(int dmg)
     {
 
         currentHP -= dmg;
@@ -223,31 +259,7 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
-    IEnumerator Melee()
-    {
-        meleeAttack = true;
-
-        RaycastHit hit;
-        audi.PlayOneShot(punch, meleeVol);
-
-        if (!meleeAttack && Input.GetButtonDown("Punch"))
-        {
-            if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, meleeDist))
-            {
-                if (hit.collider.GetComponent<InterDamage>() != null)
-                {
-                    hit.collider.GetComponent<InterDamage>().inflictDamage(meleeDMG);
-                }
-                Instantiate(hitEffect, hit.point, hitEffect.transform.rotation);
-                Damage(1);
-                GameManager.instance.UpdateUI();
-            }
-        }
-        yield return new WaitForSeconds(meleeRate);
-
-        meleeAttack = false;
-    }
-
+    #region Pickups
     public void itemPickup(itemType itemType)
     {
 
@@ -272,7 +284,7 @@ public class PlayerController : MonoBehaviour
         else if (itemType.boostPow != 0)
         {
 
-            StartCoroutine(Boost(itemType.boostPow, itemType.boostTime));
+            StartCoroutine(Boost(itemType.boostPow, boostTime));
         }
 
         GameManager.instance.UpdateUI();
@@ -285,12 +297,15 @@ public class PlayerController : MonoBehaviour
         shootDMG *= power;
 
         GameManager.instance.playBoostScreen.SetActive(true);
+        GameManager.instance.timerText.SetActive(true);
 
         yield return new WaitForSeconds(timer);
 
         GameManager.instance.playBoostScreen.SetActive(false);
+        GameManager.instance.timerText.SetActive(false);
 
         shootDMG = startDMG;
         boost = false;
     }
+    #endregion
 }

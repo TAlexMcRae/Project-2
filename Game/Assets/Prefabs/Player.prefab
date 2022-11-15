@@ -52,8 +52,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 410096670886812845}
   audi: {fileID: 328956661}
-  moveSpeed: 5
+  moveSpeed: 10
   sprintMod: 3
+  pushBackTime: 0
+  pushBack: {x: 0, y: 0, z: 0}
   jumpHeight: 10
   maxJumps: 1
   gravity: 35
@@ -89,11 +91,13 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ad05db93aa1b5cd41a428cec5d406a09, type: 3}
   - {fileID: 8300000, guid: 9a3fda5a70217fd4e8edcc2c0a8f6d5f, type: 3}
   gunShot: {fileID: 8300000, guid: dc0b7bfa11cbc7446ae8a3c0a04451ec, type: 3}
+  punch: {fileID: 0}
   noAmmo: {fileID: 8300000, guid: 0e812386f932d354eb44a11643c9fe98, type: 3}
   jumpVol: 0.5
   hurtVol: 0.5
-  walkVol: 0.5
+  walkVol: 0.3
   shotVol: 0.7
+  meleeVol: 0
   ammoVol: 0.7
 --- !u!33 &410096670886812843
 MeshFilter:

@@ -30,6 +30,10 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI dText;
     public TextMeshProUGUI aText;
 
+    // timer
+    public GameObject timerText;
+    public float secondsLeft = 00.00f;
+
     // other UI
     public GameObject playDMGScreen;
     public GameObject playHealScreen;
@@ -66,6 +70,13 @@ public class GameManager : MonoBehaviour
                 if (isPaused) { StartPause(); }
                 else { StopPause(); }
             }
+        }
+
+        if (timerText.activeSelf)
+        {
+
+            UpdateUI();
+            TimerRun();
         }
     }
 
@@ -134,6 +145,19 @@ public class GameManager : MonoBehaviour
         dText.text = deathCount.ToString("F0");
         aText.text = playerScript.ammoCount.ToString("F0");
         hpBar.fillAmount = (float)playerScript.currentHP / (float)playerScript.startHP;
+
+        if (timerText.activeSelf)
+        {
+
+            timerText.GetComponent<Text>().text = (secondsLeft / playerScript.boostTime).ToString();
+        }
+    }
+
+    private IEnumerator TimerRun()
+    {
+
+        yield return new WaitForSeconds(0.01f);
+        secondsLeft -= 0.01f;
     }
     #endregion
 

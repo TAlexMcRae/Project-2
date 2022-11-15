@@ -160,7 +160,7 @@ MonoBehaviour:
   - {fileID: 7161143894111817525, guid: 0dab4a12c5dbea240846bb4c4b6032b2, type: 3}
   HP: 3
   playerFaceSpeed: 6
-  roamDist: 5
+  roamDist: 100
   speedChase: 2
   sightDist: 5
   sightAngle: 45

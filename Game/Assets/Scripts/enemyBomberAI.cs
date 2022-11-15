@@ -26,10 +26,7 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
     float angleToPlay;
 
     [Header("----- Bomb -----")]
-    [Range(0, 5)] [SerializeField] int bombDMG;
-
-    private Vector3 bombCenter;
-    private float bombRadius;
+    [SerializeField] Explosion boomer;
     private bool exploding;
     #endregion
 
@@ -109,7 +106,7 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
             if (chance == 1)
             {
 
-                int pick = Random.Range(0, pickup.Length - 1);
+                int pick = Random.Range(0, pickup.Length);
                 Instantiate(pickup[pick], new Vector3(transform.position.x, 1, transform.position.z), pickup[pick].transform.rotation);
             }
 
@@ -130,8 +127,19 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
     {
 
         exploding = true;
-
         yield return new WaitForSeconds(3f);
+
+        boomer.bombDMG *= currentHP;
+        boomer.transform.position = transform.position;
+
+        int chance = Random.Range(1, 3);
+
+        if (chance == 1)
+        {
+
+            int pick = Random.Range(0, pickup.Length);
+            Instantiate(pickup[pick], new Vector3(transform.position.x, 1, transform.position.z), pickup[pick].transform.rotation);
+        }
 
         Destroy(gameObject);
         exploding = false;

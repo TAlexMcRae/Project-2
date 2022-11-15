@@ -80,7 +80,6 @@ public class enemyShooterAI : MonoBehaviour, InterDamage
         RaycastHit Hit;
         if (Physics.Raycast(headPos.transform.position, playerDir, out Hit))
         {
-            Debug.DrawRay(headPos.transform.position, playerDir);
 
             if (Hit.collider.CompareTag("Player") && angleToPlayer <= sightAngle)
             {
@@ -115,7 +114,7 @@ public class enemyShooterAI : MonoBehaviour, InterDamage
             if (chance == 1)
             {
 
-                int pick = Random.Range(0, pickup.Length - 1);
+                int pick = Random.Range(0, pickup.Length);
                 Instantiate(pickup[pick], new Vector3(transform.position.x, 1, transform.position.z), pickup[pick].transform.rotation);
             }
             

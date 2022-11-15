@@ -19,7 +19,7 @@ public class bullet : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            GameManager.instance.playerScript.Damage(damage);
+            GameManager.instance.playerScript.GetComponent<InterDamage>().inflictDamage(damage);
         }
         Destroy(gameObject);
     }

@@ -33,7 +33,7 @@ public class meleeAction : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            GameManager.instance.playerScript.Damage(atkDamage);
+            GameManager.instance.playerScript.GetComponent<InterDamage>().inflictDamage(atkDamage);
             meleeRange = true;
         }
     }
