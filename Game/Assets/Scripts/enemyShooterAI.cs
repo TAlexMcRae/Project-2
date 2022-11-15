@@ -119,11 +119,14 @@ public class enemyShooterAI : MonoBehaviour, InterDamage
             }
             
             GameManager.instance.UpdateEnemies();
-            Destroy(gameObject);
+            anim.SetBool("Death", true);
+            agent.enabled = false;
+            GetComponent<Collider>().enabled = false;
         }
     }
     IEnumerator flashdamage()
     {
+        anim.SetTrigger("Damage");
         model.material.color = Color.red;
         yield return new WaitForSeconds(0.3f);
         model.material.color = Color.white;
