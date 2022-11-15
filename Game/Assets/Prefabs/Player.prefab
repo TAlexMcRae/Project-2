@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 410096670886812842}
   - component: {fileID: 410096670886812844}
+  - component: {fileID: 6926212887116859487}
   - component: {fileID: 410096670886812843}
   - component: {fileID: 410096670886812840}
   - component: {fileID: 410096670886812841}
@@ -64,6 +65,7 @@ MonoBehaviour:
   shootRate: 0.1
   shootDist: 100
   shootDMG: 1
+  boostTime: 10
   ammoCount: 20
   hitEffect: {fileID: 7226583673155636401, guid: a2ab56839e1c9504ea9d141e95d0b16b, type: 3}
   meleeRate: 0.1
@@ -91,7 +93,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ad05db93aa1b5cd41a428cec5d406a09, type: 3}
   - {fileID: 8300000, guid: 9a3fda5a70217fd4e8edcc2c0a8f6d5f, type: 3}
   gunShot: {fileID: 8300000, guid: dc0b7bfa11cbc7446ae8a3c0a04451ec, type: 3}
-  punch: {fileID: 0}
   noAmmo: {fileID: 8300000, guid: 0e812386f932d354eb44a11643c9fe98, type: 3}
   jumpVol: 0.5
   hurtVol: 0.5
@@ -99,6 +100,18 @@ MonoBehaviour:
   shotVol: 0.7
   meleeVol: 0
   ammoVol: 0.7
+--- !u!114 &6926212887116859487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 410096670886812838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59d8648bfda60884f843bab30b6b28d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!33 &410096670886812843
 MeshFilter:
   m_ObjectHideFlags: 0
