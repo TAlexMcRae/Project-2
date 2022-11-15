@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Heal Pickup
   m_EditorClassIdentifier: 
   ammoNum: 0
-  healNum: 5
+  healNum: 10
+  boostPow: 0

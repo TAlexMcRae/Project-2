@@ -55,7 +55,7 @@ MonoBehaviour:
   audi: {fileID: 328956661}
   moveSpeed: 10
   sprintMod: 3
-  pushBackTime: 0
+  pushBackTime: 3
   pushBack: {x: 0, y: 0, z: 0}
   jumpHeight: 10
   maxJumps: 1
@@ -447,6 +447,10 @@ PrefabInstance:
     - target: {fileID: 3832703582600972128, guid: bceefb2a39f6db74d9bc9d006687b7f1, type: 3}
       propertyPath: m_Name
       value: Gun
+      objectReference: {fileID: 0}
+    - target: {fileID: 3832703582705633604, guid: bceefb2a39f6db74d9bc9d006687b7f1, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bceefb2a39f6db74d9bc9d006687b7f1, type: 3}

@@ -1297,7 +1297,7 @@ MonoBehaviour:
   wText: {fileID: 2054937295}
   dText: {fileID: 1741762011}
   aText: {fileID: 1040202462}
-  timerText: {fileID: 0}
+  timerText: {fileID: 4756288450422961103}
   secondsLeft: 0
   playDMGScreen: {fileID: 1627952385289261191}
   playHealScreen: {fileID: 4676905103279621909}
@@ -4318,30 +4318,37 @@ MonoBehaviour:
     enemyNum: 30
     enemyType:
     - {fileID: 7390218676475888499, guid: eb2909530af0cbc47b4f69547d7c7949, type: 3}
+    - {fileID: 7252592070864959412, guid: 26d8ddee5afb1374d8bb9d9e8088a912, type: 3}
   - waveName: Wave 2
     enemyNum: 40
     enemyType:
     - {fileID: 7390218676475888499, guid: eb2909530af0cbc47b4f69547d7c7949, type: 3}
+    - {fileID: 7252592070864959412, guid: 26d8ddee5afb1374d8bb9d9e8088a912, type: 3}
   - waveName: Wave 3
     enemyNum: 50
     enemyType:
     - {fileID: 7390218676475888499, guid: eb2909530af0cbc47b4f69547d7c7949, type: 3}
+    - {fileID: 7252592070864959412, guid: 26d8ddee5afb1374d8bb9d9e8088a912, type: 3}
   - waveName: Wave 4
     enemyNum: 60
     enemyType:
     - {fileID: 7390218676475888499, guid: eb2909530af0cbc47b4f69547d7c7949, type: 3}
+    - {fileID: 7252592070864959412, guid: 26d8ddee5afb1374d8bb9d9e8088a912, type: 3}
   - waveName: Wave 5
     enemyNum: 70
     enemyType:
     - {fileID: 7390218676475888499, guid: eb2909530af0cbc47b4f69547d7c7949, type: 3}
+    - {fileID: 7252592070864959412, guid: 26d8ddee5afb1374d8bb9d9e8088a912, type: 3}
   - waveName: Wave 6
     enemyNum: 80
     enemyType:
     - {fileID: 7390218676475888499, guid: eb2909530af0cbc47b4f69547d7c7949, type: 3}
+    - {fileID: 7252592070864959412, guid: 26d8ddee5afb1374d8bb9d9e8088a912, type: 3}
   - waveName: Wave 7
     enemyNum: 100
     enemyType:
     - {fileID: 7390218676475888499, guid: eb2909530af0cbc47b4f69547d7c7949, type: 3}
+    - {fileID: 7252592070864959412, guid: 26d8ddee5afb1374d8bb9d9e8088a912, type: 3}
   spawnPositions:
   - {fileID: 0}
   - {fileID: 0}
