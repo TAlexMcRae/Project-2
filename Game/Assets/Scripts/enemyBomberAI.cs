@@ -11,6 +11,7 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] GameObject[] pickup;
+    [SerializeField] Animator anim;
 
     [Header("----- Enemy Stats -----")]
     [Range(0, 20)] [SerializeField] int currentHP;
@@ -42,7 +43,7 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
 
     private void Update()
     {
-
+        anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), agent.velocity.normalized.magnitude, Time.deltaTime * aLerpSpeed));
         if (agent.enabled)
         {
 

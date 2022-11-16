@@ -230,6 +230,7 @@ GameObject:
   - component: {fileID: 4154638522448638491}
   - component: {fileID: 4154638522448638471}
   - component: {fileID: 4154638522448638490}
+  - component: {fileID: 5153805293965143655}
   m_Layer: 6
   m_Name: BoomerSlime
   m_TagString: Enemy
@@ -315,6 +316,7 @@ MonoBehaviour:
   - {fileID: 5051766104771009879, guid: c0775352625b8064d8dab2720ab32c26, type: 3}
   - {fileID: 7161143894111817525, guid: 0dab4a12c5dbea240846bb4c4b6032b2, type: 3}
   - {fileID: 6139874351443757799, guid: 5eb3d81561b719046bcc93c7317ebfa4, type: 3}
+  anim: {fileID: 5153805293965143655}
   currentHP: 5
   facingSpeed: 6
   sightDist: 10
@@ -345,6 +347,26 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!95 &5153805293965143655
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7252592070864959412}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 343e1ea456d6dbd4180f1441d33b48f8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7716004366124382367
 GameObject:
   m_ObjectHideFlags: 0
