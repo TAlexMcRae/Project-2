@@ -5,10 +5,9 @@ using UnityEngine;
 
 public class zoneCollider : MonoBehaviour
 {
-    public int captureCount;
     [SerializeField] Renderer cube, cube1, cube2, cube3;
-    public GameObject signObject;
     private bool isCapturing = false;
+    private bool captured = false;
 
     void Start()
     {
@@ -20,8 +19,6 @@ public class zoneCollider : MonoBehaviour
         if (other.tag == "Player")
         {
             StartCoroutine(Capture());
-
-            signObject.SetActive(true);
         }
     }
 
@@ -30,8 +27,6 @@ public class zoneCollider : MonoBehaviour
         if (other.tag == "Player")
         {
             StopCoroutine(Capture());
-            signObject.SetActive(false);
-            captureCount = +1;
         }
     }
 
@@ -44,6 +39,12 @@ public class zoneCollider : MonoBehaviour
         cube1.material.color = Color.cyan;
         cube2.material.color = Color.cyan;
         cube3.material.color = Color.cyan;
+        if(captured == false)
+        {
+            GameManager.instance.captureCount++;
+            GameManager.instance.UpdateUI();
+        }
+        captured = true;
         isCapturing = false;
     }
 }

@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     public bool isPaused;
 
     // texts
+    public TextMeshProUGUI cText;
     public TextMeshProUGUI eText;
     public TextMeshProUGUI wText;
     public TextMeshProUGUI dText;
@@ -43,6 +44,7 @@ public class GameManager : MonoBehaviour
     public int enemiesToKill;
     public int waveCount;
     public int deathCount;
+    public int captureCount;
 
     //capture zone
     public bool capturedAll = false;
@@ -124,6 +126,7 @@ public class GameManager : MonoBehaviour
         UpdateUI();
     }
 
+
     #region User Interface
     public IEnumerator PlayDMGFlash()
     {
@@ -143,7 +146,7 @@ public class GameManager : MonoBehaviour
 
     public void UpdateUI()
     {
-
+        cText.text = captureCount.ToString("F0");
         eText.text = enemiesToKill.ToString("F0");
         wText.text = waveCount.ToString("F0");
         dText.text = deathCount.ToString("F0");
