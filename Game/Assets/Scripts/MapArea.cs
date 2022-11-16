@@ -4,7 +4,15 @@ using UnityEngine;
 
 public class MapArea : MonoBehaviour
 {
+    #region variables
+
+    //To count the amount of areas captured, important for the victory bool in GameManager
     public int captureCount;
+
+    //To change the colour of the cube (visual representation of a captured area)
+    [SerializeField] Renderer cube;
+
+    #endregion
 
     public enum State
     {
@@ -37,13 +45,15 @@ public class MapArea : MonoBehaviour
         switch (state)
         {
             case State.Neutral:
+                cube.material.color = Color.white;
                 float progressSpeed = 1f;
                 progressOfCapture += progressSpeed * Time.deltaTime;
-                if (progressOfCapture >= 10)
+                if (progressOfCapture >= 7)
                     state = State.Captured;
                 break;
             case State.Captured:
-                captureCount++;
+                cube.material.color = Color.cyan;
+                captureCount =+ 1;
                 break;
         }
         if (captureCount >= 1)
