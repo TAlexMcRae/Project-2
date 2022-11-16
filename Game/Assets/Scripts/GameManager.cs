@@ -47,18 +47,19 @@ public class GameManager : MonoBehaviour
     public int captureCount;
 
     //capture zone
-    public bool capturedAll = false;
+    public bool capturedAll;
 
     #endregion
 
     void Awake()
     {
-
+        
         instance = this;
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
         deathCount = 0;
         waveCount = 1;
+        capturedAll = false;
     }
 
     void Update()

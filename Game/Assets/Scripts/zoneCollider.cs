@@ -11,7 +11,7 @@ public class zoneCollider : MonoBehaviour
 
     void Start()
     {
-        
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -46,5 +46,10 @@ public class zoneCollider : MonoBehaviour
         }
         captured = true;
         isCapturing = false;
+    }
+
+    private void VerifyIfCapturedAll()
+    {
+
     }
 }
