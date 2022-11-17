@@ -104,12 +104,14 @@ public class GameManager : MonoBehaviour
 
     public void WinCondition()
     {
-        
-        winMenu.SetActive(true);
-        StartPause();
-    }
+        if (capturedAll == true)
+        {
+            winMenu.SetActive(true);
+            StartPause();
+        }
+        }
 
-    public void UpdateEnemies()
+        public void UpdateEnemies()
     {
         enemiesToKill--;
 

@@ -8,6 +8,8 @@ public class zoneCollider : MonoBehaviour
     [SerializeField] Renderer cube, cube1, cube2, cube3;
     private bool isCapturing = false;
     private bool captured = false;
+    //THIS NUMBER IS IMPORTANT FOR THE WIN CONDITION
+    private int numberOfZones;
 
     void Start()
     {
@@ -50,6 +52,7 @@ public class zoneCollider : MonoBehaviour
 
     private void VerifyIfCapturedAll()
     {
-
+        if (GameManager.instance.captureCount == numberOfZones)
+            GameManager.instance.capturedAll = true;
     }
 }
