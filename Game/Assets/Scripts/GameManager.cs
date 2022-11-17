@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        
+
         instance = this;
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
@@ -104,14 +104,12 @@ public class GameManager : MonoBehaviour
 
     public void WinCondition()
     {
-        if (capturedAll == true)
-        {
-            winMenu.SetActive(true);
-            StartPause();
-        }
-        }
 
-        public void UpdateEnemies()
+        winMenu.SetActive(true);
+        StartPause();
+    }
+
+    public void UpdateEnemies()
     {
         enemiesToKill--;
 
@@ -120,7 +118,7 @@ public class GameManager : MonoBehaviour
 
             waveCount++;
 
-            if (waveCount < 7)
+            if (waveCount < 7 && capturedAll)
             {
                 WinCondition();
             }

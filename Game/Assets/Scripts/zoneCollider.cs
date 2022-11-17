@@ -14,6 +14,7 @@ public class zoneCollider : MonoBehaviour
     void Start()
     {
 
+        numberOfZones = 5;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -34,9 +35,10 @@ public class zoneCollider : MonoBehaviour
 
     IEnumerator Capture()
     {
+        VerifyIfCapturedAll();
         isCapturing = true;
         //Remember to set it for 1 second less
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(9);
         cube.material.color = Color.cyan;
         cube1.material.color = Color.cyan;
         cube2.material.color = Color.cyan;

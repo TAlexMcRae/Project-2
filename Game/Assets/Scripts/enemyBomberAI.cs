@@ -13,7 +13,8 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
     [SerializeField] Animator anim;
     [SerializeField] GameObject deathEffect;
     [SerializeField] GameObject[] pickup;
-    
+    [SerializeField] GameObject explosion;
+
 
     [Header("----- Enemy Stats -----")]
     [Range(0, 20)] [SerializeField] int currentHP;
@@ -162,6 +163,7 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
         yield return new WaitForSeconds(3f);
 
         Instantiate(boomer, gameObject.transform.position, gameObject.transform.rotation);
+        Instantiate(explosion, gameObject.transform.position, gameObject.transform.rotation);
         int chance = Random.Range(1, 3);
 
         if (chance == 1)
