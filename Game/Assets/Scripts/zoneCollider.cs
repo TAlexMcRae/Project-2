@@ -7,7 +7,7 @@ public class zoneCollider : MonoBehaviour
 {
     [SerializeField] Renderer cube, cube1, cube2, cube3;
     private bool isCapturing = false;
-    private bool captured = false;
+    private bool captured;
     //THIS NUMBER IS IMPORTANT FOR THE WIN CONDITION
     private int numberOfZones;
 
@@ -15,6 +15,22 @@ public class zoneCollider : MonoBehaviour
     {
 
         numberOfZones = 5;
+        captured = false;
+    }
+
+    private void Update()
+    {
+
+        if (GameManager.instance.enemiesToKill == 0 && GameManager.instance.capturedAll)
+        {
+
+            GameManager.instance.captureCount = 0;
+            GameManager.instance.capturedAll = false;
+            cube.material.color = Color.white;
+            cube1.material.color = Color.white;
+            cube2.material.color = Color.white;
+            cube3.material.color = Color.white;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -43,7 +59,7 @@ public class zoneCollider : MonoBehaviour
         cube1.material.color = Color.cyan;
         cube2.material.color = Color.cyan;
         cube3.material.color = Color.cyan;
-        if(captured == false)
+        if (captured == false)
         {
             GameManager.instance.captureCount++;
             GameManager.instance.UpdateUI();

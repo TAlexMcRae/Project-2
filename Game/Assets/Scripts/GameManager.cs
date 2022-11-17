@@ -113,12 +113,12 @@ public class GameManager : MonoBehaviour
     {
         enemiesToKill--;
 
-        if (enemiesToKill <= 0)
+        if (enemiesToKill <= 0 && capturedAll)
         {
 
             waveCount++;
 
-            if (waveCount < 7 && capturedAll)
+            if (waveCount > 7)
             {
                 WinCondition();
             }

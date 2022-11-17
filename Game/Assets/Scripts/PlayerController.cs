@@ -53,6 +53,7 @@ public class PlayerController : MonoBehaviour, InterDamage
     [Range(0, 5)][SerializeField] int meleeDist;
     [Range(0, 5)][SerializeField] int meleeDMG;
     bool meleeAttack = false;
+    private int startMelee;
 
     [Header("----- Audio -----")]
     [SerializeField] AudioClip[] audiJump;
@@ -76,6 +77,7 @@ public class PlayerController : MonoBehaviour, InterDamage
         startHP = currentHP;
         GameManager.instance.UpdateUI();
         startDMG = shootDMG;
+        startMelee = meleeDMG;
         powerShot = 0;
     }
 
@@ -247,13 +249,13 @@ public class PlayerController : MonoBehaviour, InterDamage
     public void Respawn()
     {
 
+        GameManager.instance.deathMenu.SetActive(false);
         controller.enabled = false;
         currentHP = startHP;
 
         transform.position = GameManager.instance.SpawnPoint().transform.position;
-        GameManager.instance.deathMenu.SetActive(false);
-
         GameManager.instance.deathCount++;
+        ammoCount = 20;
         GameManager.instance.UpdateUI();
 
         controller.enabled = true;
@@ -296,6 +298,7 @@ public class PlayerController : MonoBehaviour, InterDamage
 
         boost = true;
         shootDMG *= power;
+        meleeDMG *= power;
 
         GameManager.instance.playBoostScreen.SetActive(true);
         GameManager.instance.timerText.SetActive(true);
@@ -307,6 +310,7 @@ public class PlayerController : MonoBehaviour, InterDamage
         GameManager.instance.timerText.SetActive(false);
 
         shootDMG = startDMG;
+        meleeDMG = startMelee;
         boost = false;
     }
     #endregion

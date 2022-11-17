@@ -34,6 +34,7 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
     [Header("----- Bomb -----")]
     [SerializeField] GameObject boomer;
     private bool exploding;
+    private bool boom;
     #endregion
 
     private void Start()
@@ -42,6 +43,7 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
         startPos = transform.position;
         GameManager.instance.enemiesToKill++;
         GameManager.instance.UpdateUI();
+        boom = false;
         Roaming();
     }
 
@@ -63,6 +65,12 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
                 Roaming();
             }
         }
+
+        /*if (exploding && !boom)
+        {
+
+            StartCoroutine(Boom());
+        }*/
     }
 
     private void FacePlayer()
@@ -151,9 +159,17 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
     IEnumerator FlashDMG()
     {
         anim.SetTrigger("Damage");
-        model.material.color = Color.red;
         yield return new WaitForSeconds(0.3f);
+    }
+
+    IEnumerator Boom()
+    {
+
+        boom = true;
+        model.material.color = Color.red;
+        yield return new WaitForSeconds(0.5f);
         model.material.color = Color.white;
+        boom = false;
     }
 
     IEnumerator Explode()
