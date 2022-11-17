@@ -10,8 +10,10 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
     [Header("----- Components -----")]
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
-    [SerializeField] GameObject[] pickup;
     [SerializeField] Animator anim;
+    [SerializeField] GameObject deathEffect;
+    [SerializeField] GameObject[] pickup;
+    
 
     [Header("----- Enemy Stats -----")]
     [Range(0, 20)] [SerializeField] int currentHP;
@@ -21,6 +23,7 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
     [SerializeField] int aLerpSpeed;
     [SerializeField] int roamDist;
     [SerializeField] GameObject headPos;
+    
 
     Vector3 playerDirect;
     Vector3 startPos;
@@ -138,15 +141,15 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
                 int pick = Random.Range(0, pickup.Length);
                 Instantiate(pickup[pick], new Vector3(transform.position.x, 1, transform.position.z), pickup[pick].transform.rotation);
             }
-
             GameManager.instance.UpdateEnemies();
+            Instantiate(deathEffect, transform.position, transform.rotation);
             Destroy(gameObject);
         }
     }
 
     IEnumerator FlashDMG()
     {
-
+        anim.SetTrigger("Damage");
         model.material.color = Color.red;
         yield return new WaitForSeconds(0.3f);
         model.material.color = Color.white;

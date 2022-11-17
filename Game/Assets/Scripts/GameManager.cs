@@ -149,12 +149,12 @@ public class GameManager : MonoBehaviour
 
     public void UpdateUI()
     {
-        cText.text = captureCount.ToString("F0");
         eText.text = enemiesToKill.ToString("F0");
         wText.text = waveCount.ToString("F0");
         dText.text = deathCount.ToString("F0");
         aText.text = playerScript.ammoCount.ToString("F0");
         hpBar.fillAmount = (float)playerScript.currentHP / (float)playerScript.startHP;
+        cText.text = captureCount.ToString("F0");
 
         if (timerText.activeSelf)
         {

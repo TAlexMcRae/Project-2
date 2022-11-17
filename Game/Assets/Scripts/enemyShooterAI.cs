@@ -9,6 +9,7 @@ public class enemyShooterAI : MonoBehaviour, InterDamage
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Animator anim;
+    [SerializeField] GameObject deathEffect;
     [SerializeField] GameObject[] pickup;
 
     [Header("----- Enemey Stats -----")]
@@ -20,6 +21,7 @@ public class enemyShooterAI : MonoBehaviour, InterDamage
     [SerializeField] int sightAngle;
     [SerializeField] int animLerpSpeed;
     [SerializeField] GameObject headPos;
+    
 
     [Header("----- Gun Stats -----")]
     [SerializeField] GameObject bullet;
@@ -119,9 +121,9 @@ public class enemyShooterAI : MonoBehaviour, InterDamage
             }
             
             GameManager.instance.UpdateEnemies();
-            anim.SetBool("Death", true);
-            agent.enabled = false;
-            GetComponent<Collider>().enabled = false;
+            Instantiate(deathEffect, transform.position, transform.rotation);
+            Destroy(gameObject);
+            Destroy(deathEffect, 0.1f);
         }
     }
     IEnumerator flashdamage()

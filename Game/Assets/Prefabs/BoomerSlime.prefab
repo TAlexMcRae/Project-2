@@ -312,11 +312,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 8780173097419446423}
   agent: {fileID: 4154638522448638490}
+  anim: {fileID: 5153805293965143655}
+  deathEffect: {fileID: 100006, guid: 2ffc588afbc8e364dad6109fe9ad7a54, type: 3}
   pickup:
   - {fileID: 5051766104771009879, guid: c0775352625b8064d8dab2720ab32c26, type: 3}
   - {fileID: 7161143894111817525, guid: 0dab4a12c5dbea240846bb4c4b6032b2, type: 3}
   - {fileID: 6139874351443757799, guid: 5eb3d81561b719046bcc93c7317ebfa4, type: 3}
-  anim: {fileID: 5153805293965143655}
   currentHP: 5
   facingSpeed: 6
   sightDist: 10

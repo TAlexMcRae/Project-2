@@ -154,6 +154,7 @@ MonoBehaviour:
   model: {fileID: 3322561060149741940}
   agent: {fileID: 9150805991414001444}
   anim: {fileID: 7626070021035104316}
+  deathEffect: {fileID: 100006, guid: 2ffc588afbc8e364dad6109fe9ad7a54, type: 3}
   pickup:
   - {fileID: 6139874351443757799, guid: 5eb3d81561b719046bcc93c7317ebfa4, type: 3}
   - {fileID: 5051766104771009879, guid: c0775352625b8064d8dab2720ab32c26, type: 3}
