@@ -20,10 +20,13 @@ public class waveManager : MonoBehaviour
     [SerializeField] public int waveTimer;
 
     public bool canSpawn = true;
+
+    public static waveManager instance;
     // Start is called before the first frame update
     void Start()
     {
-        
+
+        instance = this;
     }
 
     // Update is called once per frame

@@ -8,8 +8,6 @@ public class Explosion : MonoBehaviour
     #region Variables
     [Range(1, 5)] [SerializeField] public int bombDMG;
     [SerializeField] int forceAMT;
-    //private Collider[] objects;
-    [SerializeField] SphereCollider over;
     private bool damaged = false;
     #endregion
 

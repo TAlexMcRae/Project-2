@@ -14,7 +14,7 @@ public class zoneCollider : MonoBehaviour
     void Start()
     {
 
-        numberOfZones = 5;
+        numberOfZones = GameManager.instance.captureZones.Length;
         captured = false;
     }
 
@@ -51,7 +51,6 @@ public class zoneCollider : MonoBehaviour
 
     IEnumerator Capture()
     {
-        VerifyIfCapturedAll();
         isCapturing = true;
         //Remember to set it for 1 second less
         yield return new WaitForSeconds(9);
@@ -66,6 +65,7 @@ public class zoneCollider : MonoBehaviour
         }
         captured = true;
         isCapturing = false;
+        VerifyIfCapturedAll();
     }
 
     private void VerifyIfCapturedAll()

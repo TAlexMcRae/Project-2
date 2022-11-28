@@ -71,7 +71,12 @@ public class enemyShooterAI : MonoBehaviour, InterDamage
         NavMeshHit hit;
         NavMesh.SamplePosition(randomDir, out hit, 1, 1);
         NavMeshPath path = new NavMeshPath();
-        agent.CalculatePath(hit.position, path);
+
+        if (hit.hit)
+        {
+
+            agent.CalculatePath(hit.position, path);
+        }
         agent.SetPath(path);
     }
 
@@ -123,7 +128,6 @@ public class enemyShooterAI : MonoBehaviour, InterDamage
             GameManager.instance.UpdateEnemies();
             Instantiate(deathEffect, transform.position, transform.rotation);
             Destroy(gameObject);
-            Destroy(deathEffect, 0.1f);
         }
     }
     IEnumerator flashdamage()

@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
 
     //capture zone
     public bool capturedAll;
-
+    public GameObject[] captureZones;
     #endregion
 
     void Awake()
@@ -118,7 +118,7 @@ public class GameManager : MonoBehaviour
 
             waveCount++;
 
-            if (waveCount > 7)
+            if (waveCount > waveManager.instance.waves.Length)
             {
                 WinCondition();
             }

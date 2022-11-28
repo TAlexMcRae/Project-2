@@ -13,7 +13,7 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
     [SerializeField] Animator anim;
     [SerializeField] GameObject deathEffect;
     [SerializeField] GameObject[] pickup;
-    [SerializeField] GameObject explosion;
+    [SerializeField] GameObject explosionEffect;
 
 
     [Header("----- Enemy Stats -----")]
@@ -66,11 +66,11 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
             }
         }
 
-        /*if (exploding && !boom)
+        if (exploding && !boom)
         {
 
             StartCoroutine(Boom());
-        }*/
+        }
     }
 
     private void FacePlayer()
@@ -125,7 +125,7 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
         NavMesh.SamplePosition(randDir, out hit, 1, 1);
         NavMeshPath path = new NavMeshPath();
 
-        if (hit.position != null)
+        if (hit.hit)
         {
 
             agent.CalculatePath(hit.position, path);
@@ -169,6 +169,7 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
         model.material.color = Color.red;
         yield return new WaitForSeconds(0.5f);
         model.material.color = Color.white;
+        yield return new WaitForSeconds(0.5f);
         boom = false;
     }
 
@@ -179,7 +180,7 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
         yield return new WaitForSeconds(3f);
 
         Instantiate(boomer, gameObject.transform.position, gameObject.transform.rotation);
-        Instantiate(explosion, gameObject.transform.position, gameObject.transform.rotation);
+        Instantiate(explosionEffect, gameObject.transform.position, gameObject.transform.rotation);
         int chance = Random.Range(1, 3);
 
         if (chance == 1)

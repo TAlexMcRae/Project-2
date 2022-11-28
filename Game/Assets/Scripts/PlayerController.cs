@@ -174,10 +174,8 @@ public class PlayerController : MonoBehaviour, InterDamage
                         if (hit.collider.GetComponent<InterDamage>() != null)
                         {
 
-                            hit.collider.GetComponent<InterDamage>().inflictDamage(shootDMG *= 2);
+                            hit.collider.GetComponent<InterDamage>().inflictDamage(shootDMG * 2);
                             powerShot = 0;
-
-                            shootDMG = startDMG;
                         }
                     }
 
