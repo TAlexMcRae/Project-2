@@ -48,7 +48,7 @@ public class enemyShooterAI : MonoBehaviour, InterDamage
     // Update is called once per frame
     void Update()
     {
-        anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), agent.velocity.normalized.magnitude, Time.deltaTime * animLerpSpeed));
+        anim.SetFloat("Speed", agent.velocity.normalized.magnitude);
         if (agent.enabled)
         {
             if (playerInRange)
