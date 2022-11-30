@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI wText;
     public TextMeshProUGUI dText;
     public TextMeshProUGUI aText;
+    public TextMeshProUGUI wTotalText;
 
     // timer
     public GameObject timerText;
@@ -55,11 +56,15 @@ public class GameManager : MonoBehaviour
     {
 
         instance = this;
+
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
         deathCount = 0;
+
         waveCount = 1;
+
         capturedAll = false;
+        captureCount = captureZones.Length;
     }
 
     void Update()
@@ -149,6 +154,13 @@ public class GameManager : MonoBehaviour
     {
         eText.text = enemiesToKill.ToString("F0");
         wText.text = waveCount.ToString("F0");
+
+        if (waveManager.instance != null)
+        {
+
+            wTotalText.text = waveManager.instance.waves.Length.ToString("F0");
+        }
+
         dText.text = deathCount.ToString("F0");
         aText.text = playerScript.ammoCount.ToString("F0");
         hpBar.fillAmount = (float)playerScript.currentHP / (float)playerScript.startHP;

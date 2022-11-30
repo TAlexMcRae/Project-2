@@ -6,36 +6,23 @@ using UnityEngine;
 public class zoneCollider : MonoBehaviour
 {
     [SerializeField] Renderer cube, cube1, cube2, cube3;
-    private bool isCapturing = false;
-    private bool captured;
-    //THIS NUMBER IS IMPORTANT FOR THE WIN CONDITION
-    private int numberOfZones;
+
+    private bool isCapturing;
+    public bool captured;
+
+    private Color freeColor = Color.white;
+    private Color capColor = Color.cyan;
 
     void Start()
     {
 
-        numberOfZones = GameManager.instance.captureZones.Length;
+        isCapturing = false;
         captured = false;
-    }
-
-    private void Update()
-    {
-
-        if (GameManager.instance.enemiesToKill == 0 && GameManager.instance.capturedAll)
-        {
-
-            GameManager.instance.captureCount = 0;
-            GameManager.instance.capturedAll = false;
-            cube.material.color = Color.white;
-            cube1.material.color = Color.white;
-            cube2.material.color = Color.white;
-            cube3.material.color = Color.white;
-        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.CompareTag("Player") && !captured)
         {
             StartCoroutine(Capture());
         }
@@ -43,7 +30,7 @@ public class zoneCollider : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.CompareTag("Player") && !captured)
         {
             StopCoroutine(Capture());
         }
@@ -51,26 +38,45 @@ public class zoneCollider : MonoBehaviour
 
     IEnumerator Capture()
     {
+
         isCapturing = true;
-        //Remember to set it for 1 second less
+
+        // set to 1 seconds under
         yield return new WaitForSeconds(9);
-        cube.material.color = Color.cyan;
-        cube1.material.color = Color.cyan;
-        cube2.material.color = Color.cyan;
-        cube3.material.color = Color.cyan;
-        if (captured == false)
-        {
-            GameManager.instance.captureCount++;
-            GameManager.instance.UpdateUI();
-        }
+        ColorChange();
+
         captured = true;
         isCapturing = false;
-        VerifyIfCapturedAll();
+
+        GameManager.instance.captureCount--;
+        GameManager.instance.UpdateUI();
+
+        if (GameManager.instance.captureCount <= 0)
+        {
+
+            GameManager.instance.capturedAll = true;
+        }
     }
 
-    private void VerifyIfCapturedAll()
+    public void ColorChange()
     {
-        if (GameManager.instance.captureCount == numberOfZones)
-            GameManager.instance.capturedAll = true;
+
+        if (cube.material.color == freeColor)
+        {
+
+            cube.material.color = capColor;
+            cube1.material.color = capColor;
+            cube2.material.color = capColor;
+            cube3.material.color = capColor;
+        }
+
+        else if (cube.material.color == capColor)
+        {
+
+            cube.material.color = freeColor;
+            cube1.material.color = freeColor;
+            cube2.material.color = freeColor;
+            cube3.material.color = freeColor;
+        }
     }
 }

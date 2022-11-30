@@ -12,48 +12,75 @@ public class Wave
 
 public class waveManager : MonoBehaviour
 {
-    public Wave[] waves;
-    public Transform[] spawnPositions;
 
-    private Wave currentWave;
-    private int currentWaveNum;
-    [SerializeField] public int waveTimer;
-
-    public bool canSpawn = true;
-
+    #region Variables
     public static waveManager instance;
-    // Start is called before the first frame update
+
+    public Wave[] waves;
+    public Transform[] spawnPoints;
+
+    private Wave currWave;
+    private int currWaveNum;
+
+    public bool canSpawn;
+    #endregion
+
     void Start()
     {
 
         instance = this;
+        canSpawn = true;
+        currWaveNum = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        currentWave = waves[currentWaveNum];
+
+        currWave = waves[currWaveNum];
         waveSpawner();
-        GameObject[] enemyTotal = GameObject.FindGameObjectsWithTag("Enemy");
-        if (enemyTotal.Length == 0 && !canSpawn && currentWaveNum + 1 != waves.Length)
+
+        if (GameManager.instance.enemiesToKill <= 0 && GameManager.instance.capturedAll)
         {
-            currentWaveNum++;
-            canSpawn = true;
+
+            if (!canSpawn && currWaveNum <= waves.Length - 1)
+            {
+
+                currWaveNum++;
+                canSpawn = true;
+
+                for (int rnr = 0; rnr < GameManager.instance.captureZones.Length; rnr++)
+                {
+
+                    GameObject temp = GameManager.instance.captureZones[rnr];
+
+                    temp.GetComponent<zoneCollider>().captured = false;
+                    temp.GetComponent<zoneCollider>().ColorChange();
+                }
+
+                GameManager.instance.captureCount = GameManager.instance.captureZones.Length;
+                GameManager.instance.capturedAll = false;
+                GameManager.instance.UpdateUI();
+            }
         }
     }
     public void waveSpawner()
     {
+
         if (canSpawn)
         {
-            GameObject enemy = currentWave.enemyType[Random.Range(0, currentWave.enemyType.Length)];
-            Transform randomSpawnPos = spawnPositions[Random.Range(0, spawnPositions.Length)];
-            Instantiate(enemy, randomSpawnPos.position, Quaternion.identity);
-            currentWave.enemyNum--;
-            if (currentWave.enemyNum == 0)
+
+            GameObject enemy = currWave.enemyType[Random.Range(0, currWave.enemyType.Length)];
+            Transform spawnPos = spawnPoints[Random.Range(0, spawnPoints.Length)];
+
+            Instantiate(enemy, spawnPos.position, Quaternion.identity);
+            currWave.enemyNum--;
+
+            if (currWave.enemyNum <= 0)
             {
+
                 canSpawn = false;
             }
         }
     }
-    
 }
