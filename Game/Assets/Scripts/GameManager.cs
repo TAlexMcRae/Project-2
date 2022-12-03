@@ -109,7 +109,6 @@ public class GameManager : MonoBehaviour
 
     public void WinCondition()
     {
-
         winMenu.SetActive(true);
         StartPause();
     }

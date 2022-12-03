@@ -31,13 +31,14 @@ public class enemyShooterAI : MonoBehaviour, InterDamage
     bool isShooting;
     bool playerInRange;
     Vector3 playerDir;
-    int speedOrig;
+    float speedOrig;
     float angleToPlayer;
     Vector3 startingPos;
     float stoppingDistanceOrg;
     // Start is called before the first frame update
     void Start()
     {
+        speedOrig = agent.speed;
         startingPos = transform.position;
         stoppingDistanceOrg = agent.stoppingDistance;
         GameManager.instance.enemiesToKill++;
@@ -147,6 +148,7 @@ public class enemyShooterAI : MonoBehaviour, InterDamage
         Instantiate(bullet, shootpos.position, transform.rotation);
 
         yield return new WaitForSeconds(shootRate);
+        agent.speed = speedOrig;
         isShooting = false;
     }
     public void OnTriggerEnter(Collider other)

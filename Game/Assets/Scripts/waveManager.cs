@@ -21,8 +21,7 @@ public class waveManager : MonoBehaviour
 
     private Wave currWave;
     private int currWaveNum;
-
-    public bool canSpawn;
+    private bool canSpawn;
     #endregion
 
     void Start()
@@ -36,7 +35,6 @@ public class waveManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         currWave = waves[currWaveNum];
         waveSpawner();
 
@@ -78,7 +76,6 @@ public class waveManager : MonoBehaviour
 
             if (currWave.enemyNum <= 0)
             {
-
                 canSpawn = false;
             }
         }
