@@ -13,11 +13,14 @@ public class zoneCollider : MonoBehaviour
     private Color freeColor = Color.white;
     private Color capColor = Color.cyan;
 
+    public float captureTime;
+
     void Start()
     {
 
         isCapturing = false;
         captured = false;
+        captureTime = 10f;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -33,6 +36,8 @@ public class zoneCollider : MonoBehaviour
         if (other.CompareTag("Player") && !captured)
         {
             StopCoroutine(Capture());
+            GameManager.instance.capturing.SetActive(false);
+            GameManager.instance.timerText.SetActive(false);
         }
     }
 
@@ -41,9 +46,16 @@ public class zoneCollider : MonoBehaviour
 
         isCapturing = true;
 
+        GameManager.instance.capturing.SetActive(true);
+        GameManager.instance.timerText.SetActive(true);
+        GameManager.instance.secondsLeft = captureTime;
+
         // set to 1 seconds under
         yield return new WaitForSeconds(9);
         ColorChange();
+
+        GameManager.instance.capturing.SetActive(false);
+        GameManager.instance.timerText.SetActive(false);
 
         captured = true;
         isCapturing = false;

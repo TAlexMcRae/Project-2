@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour, InterDamage
     // health
     [Range(0, 100)] [SerializeField] public int currentHP;
     public int startHP;
+    public int playerLives;
 
     [Header("----- Shooting -----")]
     [Range(0, 1)] [SerializeField] float shootRate;
@@ -79,6 +80,14 @@ public class PlayerController : MonoBehaviour, InterDamage
         startDMG = shootDMG;
         startMelee = meleeDMG;
         powerShot = 0;
+
+        if (GameManager.instance.mediumMode == true || GameManager.instance.hardMode == true)
+        {
+
+            playerLives = 5;
+        }
+
+        else { playerLives = 3; }
     }
 
     void Update()
@@ -178,11 +187,11 @@ public class PlayerController : MonoBehaviour, InterDamage
                             powerShot = 0;
                         }
                     }
-
-                    Instantiate(hitEffect, hit.point, hitEffect.transform.rotation);
-                    ammoCount--;
-                    GameManager.instance.UpdateUI();
                 }
+
+                Instantiate(hitEffect, hit.point, hitEffect.transform.rotation);
+                ammoCount--;
+                GameManager.instance.UpdateUI();
             }
 
             // empty gun clicking noise
@@ -238,8 +247,21 @@ public class PlayerController : MonoBehaviour, InterDamage
         if (currentHP <= 0)
         {
 
-            GameManager.instance.deathMenu.SetActive(true);
-            GameManager.instance.StartPause();
+            playerLives--;
+
+            if (playerLives > 0)
+            {
+
+                GameManager.instance.deathMenu.SetActive(true);
+                GameManager.instance.StartPause();
+            }
+
+            else if (playerLives < 0)
+            {
+
+                GameManager.instance.gameOverMenu.SetActive(true);
+                GameManager.instance.StartPause();
+            }
         }
     }
 
@@ -252,8 +274,8 @@ public class PlayerController : MonoBehaviour, InterDamage
         currentHP = startHP;
 
         transform.position = GameManager.instance.SpawnPoint().transform.position;
-        GameManager.instance.deathCount++;
-        ammoCount = 20;
+
+        if (ammoCount < 20) { ammoCount = 20; }
         GameManager.instance.UpdateUI();
 
         controller.enabled = true;

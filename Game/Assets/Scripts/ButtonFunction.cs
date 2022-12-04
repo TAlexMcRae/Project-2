@@ -26,11 +26,69 @@ public class ButtonFunction : MonoBehaviour
 
         GameManager.instance.StopPause();
         GameManager.instance.playerScript.Respawn();
+
+        switch (GameManager.instance.playerScript.playerLives)
+        {
+
+            case 1:
+                GameManager.instance.twoLife.SetActive(false);
+                break;
+
+            case 2:
+                GameManager.instance.threeLife.SetActive(false);
+                break;
+
+            case 3:
+                GameManager.instance.fourLife.SetActive(false);
+                break;
+
+            case 4:
+                GameManager.instance.fiveLife.SetActive(false);
+                break;
+
+            default:
+                break;
+        }
     }
 
     public void GameQuit()
     {
 
         Application.Quit();
+    }
+
+    public void GameMenu()
+    {
+
+        SceneManager.LoadScene("Menu");
+    }
+
+    public void GamePlay()
+    {
+
+        SceneManager.LoadScene("Mode");
+    }
+
+    public void EasyMode()
+    {
+
+        GameManager.instance.StopPause();
+        SceneManager.LoadScene("Level 1");
+    }
+
+    public void MedMode()
+    {
+
+        GameManager.instance.StopPause();
+        SceneManager.LoadScene("Level 1");
+        GameManager.instance.mediumMode = true;
+    }
+
+    public void HardMode()
+    {
+
+        GameManager.instance.StopPause();
+        SceneManager.LoadScene("Level 1");
+        GameManager.instance.hardMode = true;
     }
 }

@@ -14,6 +14,12 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     public PlayerController playerScript;
 
+    public GameObject oneLife;
+    public GameObject twoLife;
+    public GameObject threeLife;
+    public GameObject fourLife;
+    public GameObject fiveLife;
+
     // spawn positions
     public GameObject[] spawnPos;
 
@@ -22,13 +28,13 @@ public class GameManager : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject deathMenu;
     public GameObject winMenu;
+    public GameObject gameOverMenu;
     public bool isPaused;
 
     // texts
     public TextMeshProUGUI cText;
     public TextMeshProUGUI eText;
     public TextMeshProUGUI wText;
-    public TextMeshProUGUI dText;
     public TextMeshProUGUI aText;
     public TextMeshProUGUI wTotalText;
 
@@ -44,12 +50,15 @@ public class GameManager : MonoBehaviour
 
     public int enemiesToKill;
     public int waveCount;
-    public int deathCount;
     public int captureCount;
+
+    public bool mediumMode;
+    public bool hardMode;
 
     //capture zone
     public bool capturedAll;
     public GameObject[] captureZones;
+    public GameObject capturing;
     #endregion
 
     void Awake()
@@ -59,7 +68,6 @@ public class GameManager : MonoBehaviour
 
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
-        deathCount = 0;
 
         waveCount = 1;
 
@@ -160,7 +168,6 @@ public class GameManager : MonoBehaviour
             wTotalText.text = waveManager.instance.waves.Length.ToString("F0");
         }
 
-        dText.text = deathCount.ToString("F0");
         aText.text = playerScript.ammoCount.ToString("F0");
         hpBar.fillAmount = (float)playerScript.currentHP / (float)playerScript.startHP;
         cText.text = captureCount.ToString("F0");
@@ -170,6 +177,41 @@ public class GameManager : MonoBehaviour
 
             timerText.GetComponent<TextMeshProUGUI>().text = secondsLeft.ToString("F2");
             secondsLeft -= Time.deltaTime;
+        }
+
+
+        if (playerScript.playerLives != 0)
+        {
+
+            if (playerScript.playerLives >= 1)
+            {
+
+                oneLife.SetActive(true);
+            }
+
+            if (playerScript.playerLives >= 2)
+            {
+
+                twoLife.SetActive(true);
+            }
+
+            if (playerScript.playerLives >= 3)
+            {
+
+                threeLife.SetActive(true);
+            }
+
+            if (playerScript.playerLives >= 4)
+            {
+
+                fourLife.SetActive(true);
+            }
+
+            if (playerScript.playerLives == 5)
+            {
+
+                fiveLife.SetActive(true);
+            }
         }
     }
     #endregion

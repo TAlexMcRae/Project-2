@@ -60,8 +60,9 @@ MonoBehaviour:
   jumpHeight: 10
   maxJumps: 1
   gravity: 35
-  currentHP: 10
+  currentHP: 50
   startHP: 0
+  playerLives: 0
   shootRate: 1
   shootDist: 5
   shootDMG: 1
