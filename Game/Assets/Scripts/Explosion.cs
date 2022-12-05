@@ -9,18 +9,20 @@ public class Explosion : MonoBehaviour
     [Range(1, 5)] [SerializeField] public int bombDMG;
     [SerializeField] int forceAMT;
     private bool damaged = false;
+    private float explosionRadius;
     #endregion
 
     void Start()
     {
-
+        //Too big for the grenade
+        explosionRadius = 15;
         DamageOverlay();
     }
 
     void DamageOverlay()
     {
 
-        Collider[] objects = Physics.OverlapSphere(transform.position, 15);
+        Collider[] objects = Physics.OverlapSphere(transform.position, explosionRadius);
 
         for (int rnr = 0; rnr < objects.Length; rnr++)
         {

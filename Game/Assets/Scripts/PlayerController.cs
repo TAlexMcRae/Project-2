@@ -38,6 +38,15 @@ public class PlayerController : MonoBehaviour, InterDamage
     [SerializeField] int shootDist;
     [Range(0, 5)] [SerializeField] int shootDMG;
 
+    [Header("Throwing")]
+    public float throwForce;
+    public float throwUpwardForce;
+    bool throwReady;
+    public GameObject grenade;
+    public int grenadeCounter;
+    public float throwCooldown;
+    public Transform attackPoint;
+
     private int startDMG;
     int powerShot;
 
@@ -79,7 +88,7 @@ public class PlayerController : MonoBehaviour, InterDamage
         GameManager.instance.UpdateUI();
         startDMG = shootDMG;
         startMelee = meleeDMG;
-        powerShot = 0;
+        throwReady = true;
 
         if (GameManager.instance.mediumMode == true || GameManager.instance.hardMode == true)
         {
@@ -100,6 +109,11 @@ public class PlayerController : MonoBehaviour, InterDamage
 
         StartCoroutine(Melee());
         StartCoroutine(Shoot());
+
+        if (Input.GetButtonDown("Grenade") && throwReady && grenadeCounter > 0)
+        {
+            Throw();
+        }
     }
 
     void Movement()
@@ -145,6 +159,33 @@ public class PlayerController : MonoBehaviour, InterDamage
             moveSpeed /= sprintMod;
             sprinting = false;
         }
+    }
+
+    void Throw()
+    {
+        throwReady = false;
+        GameObject projectile = Instantiate(grenade, attackPoint.position, Camera.main.transform.rotation);
+        Rigidbody projectileRB = projectile.GetComponent<Rigidbody>();
+
+        Vector3 forceDirection = Camera.main.transform.forward;
+
+        RaycastHit hit;
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 500f))
+        {
+            forceDirection = (hit.point - attackPoint.position).normalized;
+        }
+        Vector3 forceToAdd = forceDirection * throwForce + transform.up * throwUpwardForce;
+
+        projectileRB.AddForce(forceToAdd, ForceMode.Impulse);
+
+        grenadeCounter--;
+
+        Invoke(nameof(ResetThrow), throwCooldown);
+    }
+
+    private void ResetThrow()
+    {
+        throwReady = true;
     }
 
     #region Damage Dealing
