@@ -161,10 +161,11 @@ public class PlayerController : MonoBehaviour, InterDamage
             {
 
                 RaycastHit hit;
-                audi.PlayOneShot(gunShot, shotVol);
 
                 if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDist))
                 {
+
+                    audi.PlayOneShot(gunShot, shotVol);
 
                     if (powerShot < 5)
                     {
@@ -187,11 +188,11 @@ public class PlayerController : MonoBehaviour, InterDamage
                             powerShot = 0;
                         }
                     }
-                }
 
-                Instantiate(hitEffect, hit.point, hitEffect.transform.rotation);
-                ammoCount--;
-                GameManager.instance.UpdateUI();
+                    Instantiate(hitEffect, hit.point, hitEffect.transform.rotation);
+                    ammoCount--;
+                    GameManager.instance.UpdateUI();
+                }
             }
 
             // empty gun clicking noise

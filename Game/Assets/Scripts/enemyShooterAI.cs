@@ -9,7 +9,7 @@ public class enemyShooterAI : MonoBehaviour, InterDamage
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Animator anim;
-    [SerializeField] GameObject deathEffect;
+    public GameObject deathEffect;
     [SerializeField] GameObject[] pickup;
 
     [Header("----- Enemey Stats -----")]
@@ -127,7 +127,8 @@ public class enemyShooterAI : MonoBehaviour, InterDamage
             }
             
             GameManager.instance.UpdateEnemies();
-            Instantiate(deathEffect, transform.position, transform.rotation);
+            Instantiate(deathEffect, transform.position, deathEffect.transform.rotation);
+
             Destroy(gameObject);
         }
     }

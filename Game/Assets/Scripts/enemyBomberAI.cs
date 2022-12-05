@@ -11,7 +11,7 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Animator anim;
-    [SerializeField] GameObject deathEffect;
+    public GameObject deathEffect;
     [SerializeField] GameObject[] pickup;
     [SerializeField] GameObject explosionEffect;
 
@@ -32,7 +32,7 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
     float angleToPlay;
 
     [Header("----- Bomb -----")]
-    [SerializeField] GameObject boomer;
+    public GameObject boomer;
     private bool exploding;
     private bool boom;
     #endregion
@@ -151,7 +151,8 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
                 Instantiate(pickup[pick], new Vector3(transform.position.x, 1, transform.position.z), pickup[pick].transform.rotation);
             }
             GameManager.instance.UpdateEnemies();
-            Instantiate(deathEffect, transform.position, transform.rotation);
+            Instantiate(deathEffect, transform.position, deathEffect.transform.rotation);
+
             Destroy(gameObject);
         }
     }

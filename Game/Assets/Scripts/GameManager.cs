@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -22,6 +23,9 @@ public class GameManager : MonoBehaviour
 
     // spawn positions
     public GameObject[] spawnPos;
+
+    // level advance reminder
+    public GameObject advancement;
 
     [Header("----- UI -----")]
     // menus
@@ -123,6 +127,7 @@ public class GameManager : MonoBehaviour
 
     public void UpdateEnemies()
     {
+
         enemiesToKill--;
 
         if (enemiesToKill <= 0 && capturedAll)
@@ -132,7 +137,25 @@ public class GameManager : MonoBehaviour
 
             if (waveCount > waveManager.instance.waves.Length)
             {
-                WinCondition();
+
+                if (SceneManager.GetActiveScene().buildIndex < 4)
+                {
+
+                    advancement.SetActive(true);
+
+                    if (Input.GetKeyDown("F"))
+                    {
+
+                        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                        advancement.SetActive(false);
+                    }
+                }
+
+                else
+                {
+
+                    WinCondition();
+                }
             }
         }
 
