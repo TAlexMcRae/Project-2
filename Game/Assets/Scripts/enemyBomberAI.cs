@@ -52,13 +52,25 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
         anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), agent.velocity.normalized.magnitude, Time.deltaTime * aLerpSpeed));
         if (agent.enabled)
         {
-
-            if (rangeCheck)
+            //Will find the player when all the zones are captured
+            if (GameManager.instance.capturedAll)
             {
-
-                CanSeePlayer();
+                agent.SetDestination(GameManager.instance.player.transform.position);
+                if (rangeCheck)
+                {
+                    CanSeePlayer();
+                }
             }
 
+            else if (!GameManager.instance.capturedAll)
+            {
+
+                if (rangeCheck)
+                {
+
+                    CanSeePlayer();
+                }
+            }
             else if (agent.remainingDistance < 0.1f && agent.destination != GameManager.instance.player.transform.position)
             {
 

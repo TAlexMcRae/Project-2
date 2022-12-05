@@ -52,12 +52,25 @@ public class enemyShooterAI : MonoBehaviour, InterDamage
         anim.SetFloat("Speed", agent.velocity.normalized.magnitude);
         if (agent.enabled)
         {
-            if (playerInRange)
+            //Will find the player when all the zones are captured
+            if (GameManager.instance.capturedAll)
             {
-                canSeePlayer();
+                agent.SetDestination(GameManager.instance.player.transform.position);
+                if (playerInRange)
+                {
+                    canSeePlayer();
+                }
             }
-            else if (agent.remainingDistance < 0.1f && agent.destination != GameManager.instance.player.transform.position)
-                roam();
+
+            else if (!GameManager.instance.capturedAll)
+            {
+                if (playerInRange)
+                {
+                    canSeePlayer();
+                }
+                else if (agent.remainingDistance < 0.1f && agent.destination != GameManager.instance.player.transform.position)
+                    roam();
+            }
         }
 
     }
