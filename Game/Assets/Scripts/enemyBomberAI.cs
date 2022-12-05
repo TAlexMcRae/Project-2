@@ -49,7 +49,7 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
 
     private void Update()
     {
-        anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), agent.velocity.normalized.magnitude, Time.deltaTime * aLerpSpeed));
+        anim.SetFloat("Speed", agent.velocity.normalized.magnitude);
         if (agent.enabled)
         {
             //Will find the player when all the zones are captured
@@ -162,10 +162,12 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
                 int pick = Random.Range(0, pickup.Length);
                 Instantiate(pickup[pick], new Vector3(transform.position.x, 1, transform.position.z), pickup[pick].transform.rotation);
             }
+
             GameManager.instance.UpdateEnemies();
-            Instantiate(deathEffect, transform.position, deathEffect.transform.rotation);
+            GameObject temp = Instantiate(deathEffect, transform.position, deathEffect.transform.rotation);
 
             Destroy(gameObject);
+            Destroy(temp, 0.5f);
         }
     }
 
@@ -180,9 +182,9 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
 
         boom = true;
         model.material.color = Color.red;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.25f);
         model.material.color = Color.white;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.25f);
         boom = false;
     }
 
@@ -192,8 +194,8 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
         exploding = true;
         yield return new WaitForSeconds(3f);
 
-        Instantiate(boomer, gameObject.transform.position, gameObject.transform.rotation);
-        Instantiate(explosionEffect, gameObject.transform.position, gameObject.transform.rotation);
+        GameObject temp1 = Instantiate(boomer, gameObject.transform.position, gameObject.transform.rotation);
+        GameObject temp2 = Instantiate(explosionEffect, gameObject.transform.position, gameObject.transform.rotation);
         int chance = Random.Range(1, 3);
 
         if (chance == 1)
@@ -204,6 +206,8 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
         }
 
         Destroy(gameObject);
+        Destroy(temp1, 0.5f);
+        Destroy(temp2, 0.5f);
     }
 
     public void OnTriggerEnter(Collider other)

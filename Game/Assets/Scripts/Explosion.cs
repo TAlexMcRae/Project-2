@@ -15,7 +15,6 @@ public class Explosion : MonoBehaviour
     {
 
         DamageOverlay();
-        Destroy(gameObject, 0.5f);
     }
 
     void DamageOverlay()

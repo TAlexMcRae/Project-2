@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour, InterDamage
 
     [Header("----- Shooting -----")]
     [Range(0, 1)] [SerializeField] float shootRate;
-    [Range(0, 20)] [SerializeField] int shootDist;
+    [SerializeField] int shootDist;
     [Range(0, 5)] [SerializeField] int shootDMG;
 
     private int startDMG;
@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour, InterDamage
     // boosting
     bool shooting = false;
     bool boost = false;
-    public float boostTime = 10f;
+    public float boostTime = 10.1f;
 
     [Range(0, 20)][SerializeField] public int ammoCount;
     [SerializeField] GameObject hitEffect;
@@ -188,11 +188,11 @@ public class PlayerController : MonoBehaviour, InterDamage
                             powerShot = 0;
                         }
                     }
-
-                    Instantiate(hitEffect, hit.point, hitEffect.transform.rotation);
-                    ammoCount--;
-                    GameManager.instance.UpdateUI();
                 }
+
+                Instantiate(hitEffect, hit.point, hitEffect.transform.rotation);
+                ammoCount--;
+                GameManager.instance.UpdateUI();
             }
 
             // empty gun clicking noise
@@ -325,7 +325,7 @@ public class PlayerController : MonoBehaviour, InterDamage
         GameManager.instance.timerText.SetActive(true);
         GameManager.instance.secondsLeft = timer;
 
-        yield return new WaitForSeconds(timer);
+        yield return new WaitForSeconds(10f);
 
         GameManager.instance.playBoostScreen.SetActive(false);
         GameManager.instance.timerText.SetActive(false);

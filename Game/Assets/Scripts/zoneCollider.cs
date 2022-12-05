@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class zoneCollider : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class zoneCollider : MonoBehaviour
 
         isCapturing = false;
         captured = false;
-        captureTime = 10f;
+        captureTime = 5.1f;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -51,7 +52,7 @@ public class zoneCollider : MonoBehaviour
         GameManager.instance.secondsLeft = captureTime;
 
         // set to 1 seconds under
-        yield return new WaitForSeconds(9);
+        yield return new WaitForSeconds(5f);
         ColorChange();
 
         GameManager.instance.capturing.SetActive(false);
@@ -67,6 +68,12 @@ public class zoneCollider : MonoBehaviour
         {
 
             GameManager.instance.capturedAll = true;
+
+            if (GameManager.instance.enemiesToKill <= 0 && SceneManager.GetActiveScene().buildIndex < 4)
+            {
+
+                GameManager.instance.AdvancePrompt();
+            }
         }
     }
 

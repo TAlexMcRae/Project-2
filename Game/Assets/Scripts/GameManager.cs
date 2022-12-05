@@ -101,6 +101,13 @@ public class GameManager : MonoBehaviour
 
             UpdateUI();
         }
+
+        if (advancement.activeSelf && Input.GetButtonDown("Advance"))
+        {
+
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            advancement.SetActive(false);
+        }
     }
 
     public void StartPause()
@@ -141,14 +148,7 @@ public class GameManager : MonoBehaviour
                 if (SceneManager.GetActiveScene().buildIndex < 4)
                 {
 
-                    advancement.SetActive(true);
-
-                    if (Input.GetKeyDown("F"))
-                    {
-
-                        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-                        advancement.SetActive(false);
-                    }
+                    AdvancePrompt();
                 }
 
                 else
@@ -244,5 +244,12 @@ public class GameManager : MonoBehaviour
     {
 
         return spawnPos[Random.Range(0, spawnPos.Length - 1)];
+    }
+
+    // advance prompt
+    public void AdvancePrompt()
+    {
+
+        advancement.SetActive(true);
     }
 }

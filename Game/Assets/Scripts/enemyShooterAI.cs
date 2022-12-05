@@ -138,19 +138,18 @@ public class enemyShooterAI : MonoBehaviour, InterDamage
                 int pick = Random.Range(0, pickup.Length);
                 Instantiate(pickup[pick], new Vector3(transform.position.x, 1, transform.position.z), pickup[pick].transform.rotation);
             }
-            
+
             GameManager.instance.UpdateEnemies();
-            Instantiate(deathEffect, transform.position, deathEffect.transform.rotation);
+            GameObject temp = Instantiate(deathEffect, transform.position, deathEffect.transform.rotation);
 
             Destroy(gameObject);
+            Destroy(temp, 0.5f);
         }
     }
     IEnumerator flashdamage()
     {
         anim.SetTrigger("Damage");
-        model.material.color = Color.red;
         yield return new WaitForSeconds(0.3f);
-        model.material.color = Color.white;
     }
     #endregion
     #region Shooting

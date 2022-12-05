@@ -12280,7 +12280,7 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1265253524263462979, guid: bc12a77ca3c4a7d4f93bfea7f4015ddf, type: 3}
+    - target: {fileID: 1742837994, guid: bc12a77ca3c4a7d4f93bfea7f4015ddf, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -12421,6 +12421,10 @@ PrefabInstance:
       value: UI
       objectReference: {fileID: 0}
     - target: {fileID: 7736331298530074174, guid: bc12a77ca3c4a7d4f93bfea7f4015ddf, type: 3}
+      propertyPath: waves.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7736331298530074174, guid: bc12a77ca3c4a7d4f93bfea7f4015ddf, type: 3}
       propertyPath: spawnPoints.Array.data[0]
       value: 
       objectReference: {fileID: 1907008585}
@@ -12454,15 +12458,23 @@ PrefabInstance:
       objectReference: {fileID: 1723014996}
     - target: {fileID: 7736331298530074174, guid: bc12a77ca3c4a7d4f93bfea7f4015ddf, type: 3}
       propertyPath: waves.Array.data[0].enemyNum
-      value: 40
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7736331298530074174, guid: bc12a77ca3c4a7d4f93bfea7f4015ddf, type: 3}
       propertyPath: waves.Array.data[1].enemyNum
-      value: 50
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7736331298530074174, guid: bc12a77ca3c4a7d4f93bfea7f4015ddf, type: 3}
+      propertyPath: waves.Array.data[1].waveName
+      value: Wave 2
       objectReference: {fileID: 0}
     - target: {fileID: 7736331298530074174, guid: bc12a77ca3c4a7d4f93bfea7f4015ddf, type: 3}
       propertyPath: waves.Array.data[2].enemyNum
-      value: 60
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7736331298530074174, guid: bc12a77ca3c4a7d4f93bfea7f4015ddf, type: 3}
+      propertyPath: waves.Array.data[2].waveName
+      value: Final Wave
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc12a77ca3c4a7d4f93bfea7f4015ddf, type: 3}
@@ -15001,7 +15013,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 410096670886812844, guid: 0ffe8fef2996ce24db41247606e3ce89, type: 3}
       propertyPath: shootDist
-      value: 10
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 410096670886812844, guid: 0ffe8fef2996ce24db41247606e3ce89, type: 3}
       propertyPath: shootRate
