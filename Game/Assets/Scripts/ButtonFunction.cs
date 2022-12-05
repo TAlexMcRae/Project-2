@@ -72,23 +72,38 @@ public class ButtonFunction : MonoBehaviour
     public void EasyMode()
     {
 
-        GameManager.instance.StopPause();
         SceneManager.LoadScene("Level 1");
+
+        if (GameManager.instance != null)
+        {
+
+            GameManager.instance.StopPause();
+        }
     }
 
     public void MedMode()
     {
 
-        GameManager.instance.StopPause();
         SceneManager.LoadScene("Level 1");
-        GameManager.instance.mediumMode = true;
+
+        if (GameManager.instance != null)
+        {
+
+            GameManager.instance.mediumMode = true;
+            GameManager.instance.StopPause();
+        }
     }
 
     public void HardMode()
     {
 
-        GameManager.instance.StopPause();
         SceneManager.LoadScene("Level 1");
-        GameManager.instance.hardMode = true;
+
+        if (GameManager.instance != null)
+        {
+
+            GameManager.instance.hardMode = true;
+            GameManager.instance.StopPause();
+        }
     }
 }
