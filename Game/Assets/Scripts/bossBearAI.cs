@@ -10,8 +10,8 @@ public class bossBearAI : MonoBehaviour
     [SerializeField] int playerFaceSpeed;
     [SerializeField] float speedChase;
     [SerializeField] float attackSpeed;
-    [SerializeField] int meleeDamage;
-    [SerializeField] int shockwaveDamage;
+    [SerializeField] public int meleeDamage;
+    [SerializeField] public int shockwaveDamage;
     
     
 
