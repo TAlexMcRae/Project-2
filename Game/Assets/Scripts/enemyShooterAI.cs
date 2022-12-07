@@ -16,10 +16,8 @@ public class enemyShooterAI : MonoBehaviour, InterDamage
     [SerializeField] int HP;
     [SerializeField] int playerFaceSpeed;
     [SerializeField] int roamDist;
-    [SerializeField] int speedChase;
     [SerializeField] int sightDist;
     [SerializeField] int sightAngle;
-    [SerializeField] int animLerpSpeed;
     [SerializeField] GameObject headPos;
     
 
@@ -154,6 +152,7 @@ public class enemyShooterAI : MonoBehaviour, InterDamage
     IEnumerator shoot()
     {
         isShooting = true;
+        agent.speed = 0;
 
         anim.SetTrigger("Attack");
         Instantiate(bullet, shootpos.position, transform.rotation);

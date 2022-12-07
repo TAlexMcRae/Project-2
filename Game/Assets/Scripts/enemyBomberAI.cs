@@ -21,7 +21,6 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
     [SerializeField] int facingSpeed;
     [SerializeField] int sightDist;
     [SerializeField] int sightAngle;
-    [SerializeField] int aLerpSpeed;
     [SerializeField] int roamDist;
     [SerializeField] GameObject headPos;
     
@@ -70,11 +69,12 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
 
                     CanSeePlayer();
                 }
-            }
-            else if (agent.remainingDistance < 0.1f && agent.destination != GameManager.instance.player.transform.position)
-            {
 
-                Roaming();
+                else if (agent.remainingDistance < 0.1f && agent.destination != GameManager.instance.player.transform.position)
+                {
+
+                    Roaming();
+                }
             }
         }
 
@@ -85,6 +85,7 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
         }
     }
 
+    #region Movement
     private void FacePlayer()
     {
 
@@ -145,7 +146,9 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
 
         agent.SetPath(path);
     }
+    #endregion
 
+    #region Health & Damage
     public void inflictDamage(int dmg)
     {
 
@@ -176,6 +179,7 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
         anim.SetTrigger("Damage");
         yield return new WaitForSeconds(0.3f);
     }
+    #endregion
 
     IEnumerator Boom()
     {

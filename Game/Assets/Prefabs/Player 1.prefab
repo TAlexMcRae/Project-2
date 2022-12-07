@@ -339,8 +339,8 @@ MonoBehaviour:
   currentHP: 50
   startHP: 0
   playerLives: 0
-  shootRate: 1
-  shootDist: 5
+  shootRate: 0.1
+  shootDist: 100
   shootDMG: 1
   throwForce: 80
   throwUpwardForce: 0

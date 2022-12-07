@@ -12594,11 +12594,11 @@ PrefabInstance:
 <<<<<<< Updated upstream
     - target: {fileID: 7736331298530074174, guid: bc12a77ca3c4a7d4f93bfea7f4015ddf, type: 3}
       propertyPath: waves.Array.data[0].enemyNum
-      value: 1
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 7736331298530074174, guid: bc12a77ca3c4a7d4f93bfea7f4015ddf, type: 3}
       propertyPath: waves.Array.data[1].enemyNum
-      value: 1
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7736331298530074174, guid: bc12a77ca3c4a7d4f93bfea7f4015ddf, type: 3}
       propertyPath: waves.Array.data[1].waveName
@@ -12606,7 +12606,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7736331298530074174, guid: bc12a77ca3c4a7d4f93bfea7f4015ddf, type: 3}
       propertyPath: waves.Array.data[2].enemyNum
-      value: 1
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 7736331298530074174, guid: bc12a77ca3c4a7d4f93bfea7f4015ddf, type: 3}
       propertyPath: waves.Array.data[2].waveName
