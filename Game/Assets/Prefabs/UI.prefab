@@ -6242,7 +6242,6 @@ GameObject:
   - component: {fileID: 1627952385458474301}
   - component: {fileID: 1627952385458474299}
   - component: {fileID: 1627952385458474298}
-  - component: {fileID: 8317702492471693718}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -6300,24 +6299,6 @@ MonoBehaviour:
   m_InputActionsPerSecond: 10
   m_RepeatDelay: 0.5
   m_ForceModuleActive: 0
---- !u!114 &8317702492471693718
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1627952385458474300}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e106f6a2739921418bdd9f83cb65af8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MusicSource: {fileID: 0}
-  SFXSource: {fileID: 357961838}
-  Mixer: {fileID: 24100000, guid: 369313261446039459fdbc0219870184, type: 2}
-  MasterVolumeSlider: {fileID: 1989333158}
-  MusicVolumeSlider: {fileID: 1755837504}
-  SFXVolumeSlider: {fileID: 1242506714}
 --- !u!1 &1627952385465081475
 GameObject:
   m_ObjectHideFlags: 0

@@ -88,7 +88,6 @@ public class enemyShooterAI : MonoBehaviour, InterDamage
 
         if (hit.hit)
         {
-
             agent.CalculatePath(hit.position, path);
         }
         agent.SetPath(path);
@@ -134,7 +133,6 @@ public class enemyShooterAI : MonoBehaviour, InterDamage
 
             if (chance == 1)
             {
-
                 int pick = Random.Range(0, pickup.Length);
                 Instantiate(pickup[pick], new Vector3(transform.position.x, 1, transform.position.z), pickup[pick].transform.rotation);
             }
@@ -168,6 +166,7 @@ public class enemyShooterAI : MonoBehaviour, InterDamage
     {
         if (other.CompareTag("Player"))
         {
+            anim.SetTrigger("CombatIdle");
             playerInRange = true;
         }
     }

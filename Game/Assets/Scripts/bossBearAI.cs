@@ -8,22 +8,27 @@ public class bossBearAI : MonoBehaviour
     [Header("----- Boss Stats -----")]
     [SerializeField] int HP;
     [SerializeField] int playerFaceSpeed;
-    [SerializeField] int speedChase;
-    [SerializeField] int animLerpSpeed;
-    [SerializeField] GameObject headPos;
+    [SerializeField] float speedChase;
+    [SerializeField] float attackSpeed;
     [SerializeField] int meleeDamage;
     [SerializeField] int shockwaveDamage;
+    
+    
 
     [Header("----- Components -----")]
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Animator anim;
-    [SerializeField] GameObject deathEffect;
+    [SerializeField] Object shockwave;
+    [SerializeField] Object paw;
+    [SerializeField] int animLerpSpeed;
 
     Vector3 playerDir;
     int speedOrig;
     bool playerInRange;
+    bool canAttack = true;
     float stoppingDistanceOrg;
+    private int attackChance;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +38,11 @@ public class bossBearAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        hunt();
+        anim.SetFloat("Speed", agent.velocity.normalized.magnitude);
+        if (!playerInRange)
+        {
+            hunt();
+        }
     }
     void hunt()
     {
@@ -45,17 +54,41 @@ public class bossBearAI : MonoBehaviour
         Quaternion rotation = Quaternion.LookRotation(playerDir);
         transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * playerFaceSpeed);
     }
-    void meleeAttack()
+    void attacking()
     {
-        if (playerInRange)
+        if (playerInRange && attackChance == 1 && canAttack)
         {
-
+            canAttack = false;
+            anim.SetTrigger("Attack1");
+            StartCoroutine(attackDelay());
         }
+        if (playerInRange && attackChance == 2 && canAttack)
+        {
+            canAttack = false;
+            anim.SetTrigger("Attack5");
+            StartCoroutine(attackDelay());
+        }
+        
     }
-    void jumpShockwave()
+    IEnumerator attackDelay()
     {
-
-        //GameManager.instance.playerScript.pushBack = ((objects[rnr].transform.position - transform.position).normalized) * forceAMT;
+        yield return new WaitForSeconds(attackSpeed);
+        canAttack = true;
+    }
+    IEnumerator damageAnim()
+    {
+        yield return new WaitForSeconds(1);
+    }
+    public void inflictDamage(int dmg)
+    {
+        HP -= dmg;
+        anim.SetTrigger("Get Hit Front");
+        if (HP <= 0)
+        {
+            GameManager.instance.UpdateEnemies();
+            anim.SetBool("Death", true);
+            agent.enabled = false;
+        }
     }
     #region Range Check
     public void OnTriggerEnter(Collider other)
@@ -64,6 +97,11 @@ public class bossBearAI : MonoBehaviour
         {
             playerInRange = true;
         }
+    }
+    public void OnTriggerStay(Collider other)
+    {
+        attackChance = Random.Range(1, 3);
+        attacking();
     }
     public void OnTriggerExit(Collider other)
     {
