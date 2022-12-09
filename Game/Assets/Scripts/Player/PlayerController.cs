@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour, InterDamage
     // boosting
     bool shooting = false;
     bool boost = false;
-    public float boostTime = 10.1f;
+    public float boostTime = 10.2f;
 
     private GunRecoil recoilScript;
 
@@ -142,6 +142,7 @@ public class PlayerController : MonoBehaviour, InterDamage
 
     }
 
+    #region Movement
     void Movement()
     {
 
@@ -187,7 +188,9 @@ public class PlayerController : MonoBehaviour, InterDamage
             sprinting = false;
         }
     }
+    #endregion
 
+    #region Grenade Throwing
     void Throw()
     {
         throwReady = false;
@@ -214,6 +217,7 @@ public class PlayerController : MonoBehaviour, InterDamage
     {
         throwReady = true;
     }
+    #endregion
 
     #region Damage Dealing
     // shooting mechanics with raycasting
@@ -318,6 +322,14 @@ public class PlayerController : MonoBehaviour, InterDamage
         if (currentHP <= 0 && !dead)
         {
 
+            if (boost)
+            {
+
+                StopCoroutine(Boost(0, 0f));
+                GameManager.instance.playBoostScreen.SetActive(false);
+                GameManager.instance.boostTimer.SetActive(false);
+            }
+
             dead = true;
             playerLives--;
 
@@ -363,6 +375,8 @@ public class PlayerController : MonoBehaviour, InterDamage
         {
             audi.PlayOneShot(ammoPickUpSFX);
             ammoCount += itemType.ammoNum;
+
+            grenadeCounter += Random.Range(0, 2);
         }
 
         else if (itemType.healNum != 0)
@@ -379,7 +393,7 @@ public class PlayerController : MonoBehaviour, InterDamage
             StartCoroutine(GameManager.instance.PlayHealFlash());
         }
 
-        else if (itemType.boostPow != 0)
+        else if (itemType.boostPow != 0 && !boost)
         {
             audi.PlayOneShot(dmgPickUpSFX);
             StartCoroutine(Boost(itemType.boostPow, boostTime));
@@ -396,13 +410,13 @@ public class PlayerController : MonoBehaviour, InterDamage
         meleeDMG *= power;
 
         GameManager.instance.playBoostScreen.SetActive(true);
-        GameManager.instance.timerText.SetActive(true);
-        GameManager.instance.secondsLeft = timer;
+        GameManager.instance.boostTimer.SetActive(true);
+        GameManager.instance.boostSeconds = timer;
 
         yield return new WaitForSeconds(10f);
 
         GameManager.instance.playBoostScreen.SetActive(false);
-        GameManager.instance.timerText.SetActive(false);
+        GameManager.instance.boostTimer.SetActive(false);
 
         shootDMG = startDMG;
         meleeDMG = startMelee;

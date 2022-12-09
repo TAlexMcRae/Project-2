@@ -44,6 +44,8 @@ public class GameManager : MonoBehaviour
     // timer
     public GameObject timerText;
     public float secondsLeft = 00.00f;
+    public GameObject boostTimer;
+    public float boostSeconds = 00.00f;
 
     // other UI
     public GameObject playDMGScreen;
@@ -96,7 +98,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if (timerText.activeSelf)
+        if (timerText.activeSelf || boostTimer.activeSelf)
         {
 
             UpdateUI();
@@ -145,7 +147,7 @@ public class GameManager : MonoBehaviour
             if (waveCount > waveManager.instance.waves.Length)
             {
 
-                if (SceneManager.GetActiveScene().buildIndex < 4)
+                if (SceneManager.GetActiveScene().buildIndex < SceneManager.sceneCountInBuildSettings)
                 {
 
                     AdvancePrompt();
@@ -202,6 +204,12 @@ public class GameManager : MonoBehaviour
             secondsLeft -= Time.deltaTime;
         }
 
+        if (boostTimer.activeSelf)
+        {
+
+            boostTimer.GetComponent<TextMeshProUGUI>().text = boostSeconds.ToString("F2");
+            boostSeconds -= Time.deltaTime;
+        }
 
         if (playerScript.playerLives != 0)
         {

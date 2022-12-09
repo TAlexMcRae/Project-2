@@ -28,7 +28,7 @@ public class zoneCollider : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && !captured)
+        if (other.CompareTag("Player") && !captured && temp == null)
         {
             temp = StartCoroutine(Capture());
         }
@@ -41,6 +41,7 @@ public class zoneCollider : MonoBehaviour
             StopCoroutine(temp);
             GameManager.instance.capturing.SetActive(false);
             GameManager.instance.timerText.SetActive(false);
+            temp = null;
         }
     }
 
@@ -71,7 +72,7 @@ public class zoneCollider : MonoBehaviour
 
             GameManager.instance.capturedAll = true;
 
-            if (GameManager.instance.enemiesToKill <= 0 && SceneManager.GetActiveScene().buildIndex < 4)
+            if (GameManager.instance.enemiesToKill <= 0 && SceneManager.GetActiveScene().buildIndex < SceneManager.sceneCountInBuildSettings)
             {
 
                 if (GameManager.instance.waveCount > waveManager.instance.waves.Length)

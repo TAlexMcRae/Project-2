@@ -11,6 +11,9 @@ public class Grenade : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         GameObject boomParticles = Instantiate(explosionEffect, gameObject.transform.position, gameObject.transform.rotation);
+        GameObject boomDamage = Instantiate(explosionDamage, gameObject.transform.position, gameObject.transform.rotation);
+
         Destroy(boomParticles, 0.4f);
+        Destroy(boomDamage, 0.5f);
     }
 }

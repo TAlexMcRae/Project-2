@@ -130,6 +130,8 @@ public class spiderAI : MonoBehaviour, InterDamage
             Destroy(gameObject);
             Destroy(temp, 0.5f);
         }
+
+        agent.SetDestination(GameManager.instance.player.transform.position);
     }
 
     IEnumerator FlashDMG()

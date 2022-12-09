@@ -62,6 +62,8 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
             if (GameManager.instance.capturedAll)
             {
                 agent.SetDestination(GameManager.instance.player.transform.position);
+                agent.speed = 10;
+
                 if (rangeCheck)
                 {
                     CanSeePlayer();
@@ -179,6 +181,8 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
             Destroy(gameObject);
             Destroy(temp, 0.5f);
         }
+
+        agent.SetDestination(GameManager.instance.player.transform.position);
     }
 
     IEnumerator FlashDMG()

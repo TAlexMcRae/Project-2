@@ -60,6 +60,8 @@ public class enemyShooterAI : MonoBehaviour, InterDamage
             if (GameManager.instance.capturedAll)
             {
                 agent.SetDestination(GameManager.instance.player.transform.position);
+                agent.speed = 10;
+                
                 if (playerInRange)
                 {
                     canSeePlayer();
@@ -76,7 +78,6 @@ public class enemyShooterAI : MonoBehaviour, InterDamage
                     roam();
             }
         }
-
     }
     #region Movement + Sight
     void roam()
@@ -147,6 +148,8 @@ public class enemyShooterAI : MonoBehaviour, InterDamage
             Destroy(gameObject);
             Destroy(temp, 0.5f);
         }
+
+        agent.SetDestination(GameManager.instance.player.transform.position);
     }
     IEnumerator flashdamage()
     {

@@ -35,6 +35,17 @@ public class bossBearAI : MonoBehaviour
     void Start()
     {
         
+        if (PlayerPref.mediumMode)
+        {
+
+            HP *= 2;
+        }
+
+        else if (PlayerPref.hardMode)
+        {
+
+            HP *= 2;
+        }
     }
 
     // Update is called once per frame
@@ -104,6 +115,8 @@ public class bossBearAI : MonoBehaviour
             anim.SetBool("Death", true);
             agent.enabled = false;
         }
+
+        agent.SetDestination(GameManager.instance.player.transform.position);
     }
     #endregion
     #region Range Check
