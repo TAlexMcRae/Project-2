@@ -296,8 +296,8 @@ MonoBehaviour:
   ammoCount: 20
   hitEffect: {fileID: 7226583673155636401, guid: a2ab56839e1c9504ea9d141e95d0b16b, type: 3}
   boostTime: 10
-  throwForce: 80
-  throwUpwardForce: 0
+  throwForce: 30
+  throwUpwardForce: 2
   grenade: {fileID: 4159897370086854236, guid: b8f3b074d1c00b447b50ea000cc22666, type: 3}
   grenadeCounter: 10
   throwCooldown: 0.5
