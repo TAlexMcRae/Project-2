@@ -78,6 +78,9 @@ public class PlayerController : MonoBehaviour, InterDamage
     [Range(0, 1)] [SerializeField] float shotVol;
     [Range(0, 1)] [SerializeField] float meleeVol;
     [Range(0, 1)] [SerializeField] float ammoVol;
+
+    [Header("----- Animation -----")]
+    [SerializeField] Animator animator;
     #endregion
 
     void Start()
@@ -99,11 +102,12 @@ public class PlayerController : MonoBehaviour, InterDamage
         }
 
         else { playerLives = 3; }
+
+        animator = GetComponentInChildren<Animator>();
     }
 
     void Update()
     {
-
         pushBack = Vector3.Lerp(pushBack, Vector3.zero, Time.deltaTime * pushBackTime);
 
         Movement();
@@ -116,6 +120,19 @@ public class PlayerController : MonoBehaviour, InterDamage
         {
             Throw();
         }
+
+        //Walking animation
+        //bool isWalking = animator.GetBool("isWalking");
+        bool forwardPressed = Input.GetAxis("Vertical") != 0;
+        if (/*isWalking &&*/ forwardPressed)
+        {
+            animator.SetBool("isWalking", true);
+        }
+        else //if (/*isWalking &&*/ !forwardPressed)
+        {
+            animator.SetBool("isWalking", false);
+        }
+
     }
 
     void Movement()
@@ -143,6 +160,7 @@ public class PlayerController : MonoBehaviour, InterDamage
 
         playerVelo.y -= gravity * Time.deltaTime;
         controller.Move(playerVelo * Time.deltaTime);
+
     }
 
     void Sprint()
