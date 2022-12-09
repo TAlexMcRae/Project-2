@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour, InterDamage
@@ -37,15 +36,8 @@ public class PlayerController : MonoBehaviour, InterDamage
     [Range(0, 1)] [SerializeField] float shootRate;
     [SerializeField] int shootDist;
     [Range(0, 5)] [SerializeField] int shootDMG;
-
-    [Header("Throwing")]
-    public float throwForce;
-    public float throwUpwardForce;
-    bool throwReady;
-    public GameObject grenade;
-    public int grenadeCounter;
-    public float throwCooldown;
-    public Transform attackPoint;
+    [Range(0, 20)] [SerializeField] public int ammoCount;
+    [SerializeField] GameObject hitEffect;
 
     private int startDMG;
     int powerShot;
@@ -55,8 +47,16 @@ public class PlayerController : MonoBehaviour, InterDamage
     bool boost = false;
     public float boostTime = 10.1f;
 
-    [Range(0, 20)][SerializeField] public int ammoCount;
-    [SerializeField] GameObject hitEffect;
+    private GunRecoil recoilScript;
+
+    [Header("Throwing")]
+    public float throwForce;
+    public float throwUpwardForce;
+    bool throwReady;
+    public GameObject grenade;
+    public int grenadeCounter;
+    public float throwCooldown;
+    public Transform attackPoint;
 
     [Header("----- Melee -----")]
     [Range(0, 1)][SerializeField] float meleeRate;
@@ -89,6 +89,8 @@ public class PlayerController : MonoBehaviour, InterDamage
         startDMG = shootDMG;
         startMelee = meleeDMG;
         throwReady = true;
+
+        recoilScript = transform.Find("CamRotate/CamRecoil").GetComponent<GunRecoil>();
 
         if (GameManager.instance.mediumMode == true || GameManager.instance.hardMode == true)
         {
@@ -232,6 +234,8 @@ public class PlayerController : MonoBehaviour, InterDamage
                 }
 
                 Instantiate(hitEffect, hit.point, hitEffect.transform.rotation);
+                recoilScript.RecoilFire();
+
                 ammoCount--;
                 GameManager.instance.UpdateUI();
             }

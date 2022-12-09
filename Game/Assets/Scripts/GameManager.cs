@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -9,7 +8,29 @@ public class GameManager : MonoBehaviour
 {
 
     #region Variables
-    public static GameManager instance;
+    private static GameManager _instance;
+    public static GameManager instance
+    {
+
+        get
+        {
+
+            if (_instance == null)
+            {
+
+                _instance = (GameManager)FindObjectOfType(typeof(GameManager));
+
+                if (_instance == null)
+                {
+
+                    GameObject go = new GameObject("GameManager");
+                    go.AddComponent<GameManager>();
+                }
+            }
+
+            return _instance;
+        }
+    }
 
     [Header("----- Player -----")]
     public GameObject player;
@@ -68,7 +89,7 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
 
-        instance = this;
+        _instance = this;
 
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();

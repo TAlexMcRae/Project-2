@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -165,7 +164,6 @@ public class enemyShooterAI : MonoBehaviour, InterDamage
     {
         if (other.CompareTag("Player"))
         {
-            anim.SetTrigger("CombatIdle");
             playerInRange = true;
         }
     }
