@@ -27,6 +27,16 @@ public class waveManager : MonoBehaviour
     void Start()
     {
 
+        if (PlayerPref.hardMode)
+        {
+
+            for (int rnr = 0; rnr < waves.Length; rnr++)
+            {
+
+                waves[rnr].enemyNum *= 2;
+            }
+        }
+
         instance = this;
         canSpawn = true;
         currWaveNum = 0;

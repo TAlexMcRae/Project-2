@@ -40,6 +40,13 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
     {
 
         startPos = transform.position;
+
+        if (PlayerPref.mediumMode || PlayerPref.hardMode)
+        {
+
+            currentHP *= 2;
+        }
+
         GameManager.instance.enemiesToKill++;
         GameManager.instance.UpdateUI();
         boom = false;

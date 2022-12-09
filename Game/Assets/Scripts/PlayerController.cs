@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour, InterDamage
     [Range(0, 100)] [SerializeField] public int currentHP;
     public int startHP;
     public int playerLives;
+    private bool dead;
 
     [Header("----- Shooting -----")]
     [Range(0, 1)] [SerializeField] float shootRate;
@@ -89,13 +90,16 @@ public class PlayerController : MonoBehaviour, InterDamage
         originSpeed = moveSpeed;
         startHP = currentHP;
         GameManager.instance.UpdateUI();
+        
+        
         startDMG = shootDMG;
         startMelee = meleeDMG;
         throwReady = true;
+        dead = false;
 
         recoilScript = transform.Find("CamRotate/CamRecoil").GetComponent<GunRecoil>();
 
-        if (GameManager.instance.mediumMode == true || GameManager.instance.hardMode == true)
+        if (PlayerPref.mediumMode == true || PlayerPref.hardMode == true)
         {
 
             playerLives = 5;
@@ -308,9 +312,10 @@ public class PlayerController : MonoBehaviour, InterDamage
         GameManager.instance.UpdateUI();
         StartCoroutine(GameManager.instance.PlayDMGFlash());
 
-        if (currentHP <= 0)
+        if (currentHP <= 0 && !dead)
         {
 
+            dead = true;
             playerLives--;
 
             if (playerLives > 0)
@@ -338,6 +343,7 @@ public class PlayerController : MonoBehaviour, InterDamage
         currentHP = startHP;
 
         transform.position = GameManager.instance.SpawnPoint().transform.position;
+        dead = false;
 
         if (ammoCount < 20) { ammoCount = 20; }
         GameManager.instance.UpdateUI();

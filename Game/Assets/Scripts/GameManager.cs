@@ -8,29 +8,7 @@ public class GameManager : MonoBehaviour
 {
 
     #region Variables
-    private static GameManager _instance;
-    public static GameManager instance
-    {
-
-        get
-        {
-
-            if (_instance == null)
-            {
-
-                _instance = (GameManager)FindObjectOfType(typeof(GameManager));
-
-                if (_instance == null)
-                {
-
-                    GameObject go = new GameObject("GameManager");
-                    go.AddComponent<GameManager>();
-                }
-            }
-
-            return _instance;
-        }
-    }
+    public static GameManager instance;
 
     [Header("----- Player -----")]
     public GameObject player;
@@ -77,9 +55,6 @@ public class GameManager : MonoBehaviour
     public int waveCount;
     public int captureCount;
 
-    public bool mediumMode;
-    public bool hardMode;
-
     //capture zone
     public bool capturedAll;
     public GameObject[] captureZones;
@@ -89,13 +64,17 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
 
-        _instance = this;
-
+        instance = this;
         player = GameObject.FindGameObjectWithTag("Player");
-        playerScript = player.GetComponent<PlayerController>();
+
+        if (player != null)
+        {
+
+            playerScript = player.GetComponent<PlayerController>();
+        }
+
 
         waveCount = 1;
-
         capturedAll = false;
         captureCount = captureZones.Length;
     }

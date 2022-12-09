@@ -7,13 +7,28 @@ public class Explosion : MonoBehaviour
 
     #region Variables
     [Range(1, 5)] [SerializeField] public int bombDMG;
-    [SerializeField] int forceAMT;
+    [SerializeField] public int forceAMT;
     private bool damaged = false;
     private float explosionRadius;
     #endregion
 
     void Start()
     {
+
+        if (PlayerPref.mediumMode)
+        {
+
+            bombDMG *= 2;
+            forceAMT *= 2;
+        }
+
+        else if (PlayerPref.hardMode)
+        {
+
+            bombDMG *= 4;
+            forceAMT *= 2;
+        }
+
         //Too big for the grenade
         explosionRadius = 15;
         DamageOverlay();

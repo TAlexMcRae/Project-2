@@ -6,12 +6,27 @@ public class bullet : MonoBehaviour
 {
     [SerializeField] Rigidbody rb;
 
-    [SerializeField] int damage;
+    [SerializeField] public int damage;
     [SerializeField] int timer;
-    [SerializeField] int speed;
+    [SerializeField] public int speed;
 
     private void Start()
     {
+
+        if (PlayerPref.mediumMode)
+        {
+
+            damage *= 2;
+            speed *= 2;
+        }
+
+        else if (PlayerPref.hardMode)
+        {
+
+            damage *= 4;
+            speed *= 4;
+        }
+
         rb.velocity = transform.forward * speed;
         Destroy(gameObject, timer);
     }

@@ -10,7 +10,6 @@ public class spiderAI : MonoBehaviour, InterDamage
     [Header("----- Components -----")]
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
-    [SerializeField] Animator anim;
     public GameObject deathEffect;
     [SerializeField] GameObject[] pickup;
 
@@ -35,14 +34,26 @@ public class spiderAI : MonoBehaviour, InterDamage
     private void Start()
     {
 
+        if (PlayerPref.mediumMode)
+        {
+
+            currentHP *= 2;
+            hitDamage *= 2;
+        }
+
+        else if (PlayerPref.hardMode)
+        {
+
+            currentHP *= 2;
+            hitDamage *= 4;
+        }
+
         GameManager.instance.enemiesToKill++;
         GameManager.instance.UpdateUI();
     }
 
     private void Update()
     {
-
-        anim.SetFloat("Speed", agent.velocity.normalized.magnitude);
 
         if (agent.enabled)
         {
@@ -124,7 +135,6 @@ public class spiderAI : MonoBehaviour, InterDamage
     IEnumerator FlashDMG()
     {
 
-        anim.SetTrigger("Damage");
         yield return new WaitForSeconds(0.3f);
     }
     #endregion
@@ -154,7 +164,6 @@ public class spiderAI : MonoBehaviour, InterDamage
     {
 
         attacking = true;
-        anim.SetTrigger("Attack");
         GameManager.instance.playerScript.GetComponent<InterDamage>().inflictDamage(hitDamage);
 
         yield return new WaitForSeconds(hitSpeed);

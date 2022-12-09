@@ -38,6 +38,13 @@ public class enemyShooterAI : MonoBehaviour, InterDamage
         speedOrig = agent.speed;
         startingPos = transform.position;
         stoppingDistanceOrg = agent.stoppingDistance;
+
+        if (PlayerPref.mediumMode || PlayerPref.hardMode)
+        {
+
+            HP *= 2;
+        }
+
         GameManager.instance.enemiesToKill++;
         GameManager.instance.UpdateUI();
         roam();

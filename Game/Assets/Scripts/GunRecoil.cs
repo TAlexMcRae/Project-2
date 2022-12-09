@@ -20,11 +20,6 @@ public class GunRecoil : MonoBehaviour
     [SerializeField] private float retrnSpd;
     #endregion
 
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
 
