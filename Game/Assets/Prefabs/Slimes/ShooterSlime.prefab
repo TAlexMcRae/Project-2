@@ -158,7 +158,7 @@ GameObject:
   - component: {fileID: 3322561060149741940}
   - component: {fileID: 3236037942939125309}
   - component: {fileID: 7626070021035104316}
-  - component: {fileID: 3479433763449281487}
+  - component: {fileID: 613970511}
   m_Layer: 6
   m_Name: ShooterSlime
   m_TagString: Enemy
@@ -213,10 +213,8 @@ MonoBehaviour:
   HP: 3
   playerFaceSpeed: 6
   roamDist: 100
-  speedChase: 2
   sightDist: 5
   sightAngle: 45
-  animLerpSpeed: 0
   headPos: {fileID: 7390218677234385004}
   bullet: {fileID: 5721157100876336816, guid: 408f1c4153c65df4a9d9b5c82ab23ddb, type: 3}
   shootpos: {fileID: 7126011385170282072}
@@ -319,7 +317,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!54 &3479433763449281487
+--- !u!54 &613970511
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7161143894111596373}
   - component: {fileID: 7161143894108764777}
   - component: {fileID: 7161143894109824967}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: box_cap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 7161143894111591837}
   - component: {fileID: -6523325268356341607}
   - component: {fileID: -3025132778452098081}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Booster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,7 +154,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7161143894111626533}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Bone_cap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -188,7 +188,7 @@ GameObject:
   - component: {fileID: 7161143894111639437}
   - component: {fileID: 7161143894108704075}
   - component: {fileID: 7161143894109826387}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: box_body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
