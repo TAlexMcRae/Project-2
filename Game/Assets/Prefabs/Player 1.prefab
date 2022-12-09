@@ -362,7 +362,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 2718174716765756834}
   audi: {fileID: 2308113771745868794}
-  moveSpeed: 10
+  moveSpeed: 9
   sprintMod: 3
   pushBackTime: 3
   pushBack: {x: 0, y: 0, z: 0}
