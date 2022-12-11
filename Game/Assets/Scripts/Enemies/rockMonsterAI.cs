@@ -1,45 +1,47 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class enemyBomberAI : MonoBehaviour, InterDamage
+public class rockMonsterAI : MonoBehaviour, InterDamage
 {
 
     #region Variables
-    [Header("----- Components -----")]
+    [Header("---- Components ----")]
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Animator anim;
     public GameObject deathEffect;
     [SerializeField] GameObject[] pickup;
-    [SerializeField] GameObject explosionEffect;
 
-
-    [Header("----- Enemy Stats -----")]
-    [Range(0, 20)] [SerializeField] int currentHP;
+    [Header("---- Enemy ----")]
+    [SerializeField] int currentHP;
     [SerializeField] int facingSpeed;
+    [SerializeField] int roamDist;
     [SerializeField] int sightDist;
     [SerializeField] int sightAngle;
-    [SerializeField] int roamDist;
     [SerializeField] GameObject headPos;
-    
 
-    Vector3 playerDirect;
-    Vector3 startPos;
-    bool rangeCheck;
-    float angleToPlay;
+    private Vector3 playDirect;
+    private Vector3 startPos;
+    private bool rangeCheck;
+    private float speedOrig;
+    private float angle2Play;
+    private float stopOrig;
 
-    [Header("----- Bomb -----")]
-    public GameObject boomer;
-    private bool exploding;
-    private bool boom;
+    [Header("---- Shooting ----")]
+    [SerializeField] GameObject bullet;
+    [SerializeField] Transform shootPos;
+    [SerializeField] float shootRate;
+
+    private bool shooting;
     #endregion
 
     private void Start()
     {
 
+        speedOrig = agent.speed;
         startPos = transform.position;
+        stopOrig = agent.stoppingDistance;
 
         if (PlayerPref.mediumMode || PlayerPref.hardMode)
         {
@@ -49,23 +51,25 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
 
         GameManager.instance.enemiesToKill++;
         GameManager.instance.UpdateUI();
-        boom = false;
         Roaming();
     }
 
     private void Update()
     {
-        anim.SetFloat("Speed", agent.velocity.normalized.magnitude);
+
         if (agent.enabled)
         {
-            //Will find the player when all the zones are captured
+
+            // if all zonees have been captured this wave, chase player
             if (GameManager.instance.capturedAll)
             {
+
                 agent.SetDestination(GameManager.instance.player.transform.position);
                 agent.speed = 5;
 
                 if (rangeCheck)
                 {
+
                     CanSeePlayer();
                 }
             }
@@ -86,55 +90,9 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
                 }
             }
         }
-
-        if (exploding && !boom)
-        {
-
-            StartCoroutine(Boom());
-        }
     }
 
     #region Movement
-    private void FacePlayer()
-    {
-
-        playerDirect.y = 0;
-        Quaternion rotation = Quaternion.LookRotation(playerDirect);
-        transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * facingSpeed);
-    }
-
-    private void CanSeePlayer()
-    {
-
-        playerDirect = (GameManager.instance.player.transform.position - headPos.transform.position);
-        angleToPlay = Vector3.Angle(playerDirect, transform.forward);
-
-        RaycastHit hit;
-
-        if (Physics.Raycast(headPos.transform.position, playerDirect, out hit))
-        {
-
-            if (hit.collider.CompareTag("Player") && angleToPlay <= sightAngle)
-            {
-
-                agent.stoppingDistance = 5;
-                agent.SetDestination(GameManager.instance.player.transform.position);
-
-                if (agent.remainingDistance < agent.stoppingDistance)
-                {
-
-                    FacePlayer();
-                }
-
-                else if (!exploding)
-                {
-
-                    StartCoroutine(Explode());
-                }
-            }
-        }
-    }
-
     private void Roaming()
     {
 
@@ -155,6 +113,45 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
 
         agent.SetPath(path);
     }
+
+    private void CanSeePlayer()
+    {
+
+        playDirect = (GameManager.instance.player.transform.position - headPos.transform.position);
+        angle2Play = Vector3.Angle(playDirect, transform.forward);
+        RaycastHit hit;
+
+        if (Physics.Raycast(headPos.transform.position, playDirect, out hit))
+        {
+
+            if (hit.collider.CompareTag("Player") && angle2Play <= sightAngle)
+            {
+
+                agent.stoppingDistance = 5;
+                agent.SetDestination(GameManager.instance.player.transform.position);
+
+                if (agent.remainingDistance < agent.stoppingDistance)
+                {
+
+                    FacePlayer();
+                }
+
+                else if (!shooting)
+                {
+
+                    StartCoroutine(Shoot());
+                }
+            }
+        }
+    }
+
+    private void FacePlayer()
+    {
+
+        playDirect.y = 0;
+        Quaternion rotation = Quaternion.LookRotation(playDirect);
+        transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * facingSpeed);
+    }
     #endregion
 
     #region Health & Damage
@@ -163,6 +160,7 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
 
         currentHP -= dmg;
         StartCoroutine(FlashDMG());
+
         if (currentHP <= 0)
         {
 
@@ -185,44 +183,25 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
         else { agent.SetDestination(GameManager.instance.player.transform.position); }
     }
 
-    IEnumerator FlashDMG()
-    {
-        anim.SetTrigger("Damage");
-        yield return new WaitForSeconds(0.3f);
-    }
-    #endregion
-
-    IEnumerator Boom()
+    private IEnumerator FlashDMG()
     {
 
-        boom = true;
-        model.material.color = Color.red;
-        yield return new WaitForSeconds(0.25f);
+        model.material.color = Color.black;
+        yield return new WaitForSeconds(0.5f);
         model.material.color = Color.white;
-        yield return new WaitForSeconds(0.25f);
-        boom = false;
+        yield return new WaitForSeconds(0.5f);
     }
 
-    IEnumerator Explode()
+    private IEnumerator Shoot()
     {
 
-        exploding = true;
-        yield return new WaitForSeconds(3f);
+        shooting = true;
+        agent.speed = 0;
+        Instantiate(bullet, shootPos.position, transform.rotation);
 
-        GameObject temp1 = Instantiate(boomer, gameObject.transform.position, gameObject.transform.rotation);
-        GameObject temp2 = Instantiate(explosionEffect, gameObject.transform.position, gameObject.transform.rotation);
-        int chance = Random.Range(1, 3);
-
-        if (chance == 1)
-        {
-
-            int pick = Random.Range(0, pickup.Length);
-            Instantiate(pickup[pick], new Vector3(transform.position.x, 1, transform.position.z), pickup[pick].transform.rotation);
-        }
-
-        Destroy(gameObject);
-        Destroy(temp1, 0.5f);
-        Destroy(temp2, 0.5f);
+        yield return new WaitForSeconds(shootRate);
+        agent.speed = speedOrig;
+        shooting = false;
     }
 
     public void OnTriggerEnter(Collider other)
@@ -240,4 +219,5 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
             rangeCheck = false;
         }
     }
+    #endregion
 }

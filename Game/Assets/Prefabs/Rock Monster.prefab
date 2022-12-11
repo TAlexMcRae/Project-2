@@ -325,10 +325,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3434507587101496047}
   - component: {fileID: 3438727596945795213}
-  - component: {fileID: 3438727596945795212}
   - component: {fileID: 6669591269399937730}
   - component: {fileID: 3247585280441130703}
   - component: {fileID: 8963903272477042195}
+  - component: {fileID: 7620665940904649207}
   m_Layer: 0
   m_Name: Rock Monster
   m_TagString: Untagged
@@ -375,35 +375,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &3438727596945795212
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3440405053387722661}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40998f171d5d9054db30c9eddab2c614, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  model: {fileID: 3337946514763083129}
-  agent: {fileID: 3438727596945795213}
-  anim: {fileID: 6669591269399937730}
-  deathEffect: {fileID: 100006, guid: 0ffc584583b8c1541b3c2100725f6ab5, type: 3}
-  pickup:
-  - {fileID: 5051766104771009879, guid: c0775352625b8064d8dab2720ab32c26, type: 3}
-  - {fileID: 7161143894111817525, guid: 0dab4a12c5dbea240846bb4c4b6032b2, type: 3}
-  - {fileID: 6139874351443757799, guid: 5eb3d81561b719046bcc93c7317ebfa4, type: 3}
-  HP: 5
-  playerFaceSpeed: 6
-  roamDist: 100
-  sightDist: 20
-  sightAngle: 45
-  headPos: {fileID: 3439655020310521829}
-  bullet: {fileID: 5721157100876336816, guid: 408f1c4153c65df4a9d9b5c82ab23ddb, type: 3}
-  shootpos: {fileID: 3438001876554543535}
-  shootRate: 1
 --- !u!95 &6669591269399937730
 Animator:
   serializedVersion: 4
@@ -450,6 +421,35 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 10
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &7620665940904649207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3440405053387722661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f259cf4241a916148ab274ce1d961da5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model: {fileID: 3337946514763083129}
+  agent: {fileID: 3438727596945795213}
+  anim: {fileID: 6669591269399937730}
+  deathEffect: {fileID: 100004, guid: 79ea71ffadab038428d7002939ad9077, type: 3}
+  pickup:
+  - {fileID: 5051766104771009879, guid: c0775352625b8064d8dab2720ab32c26, type: 3}
+  - {fileID: 7161143894111817525, guid: 0dab4a12c5dbea240846bb4c4b6032b2, type: 3}
+  - {fileID: 6139874351443757799, guid: 5eb3d81561b719046bcc93c7317ebfa4, type: 3}
+  currentHP: 5
+  facingSpeed: 6
+  roamDist: 100
+  sightDist: 20
+  sightAngle: 45
+  headPos: {fileID: 3439655020310521829}
+  bullet: {fileID: 5721157100876336816, guid: 408f1c4153c65df4a9d9b5c82ab23ddb, type: 3}
+  shootPos: {fileID: 7315552631255186394}
+  shootRate: 0.1
 --- !u!1 &3440445528668804629
 GameObject:
   m_ObjectHideFlags: 0

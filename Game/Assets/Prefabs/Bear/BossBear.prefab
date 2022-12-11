@@ -2027,7 +2027,7 @@ MonoBehaviour:
   paw: {fileID: 392013784}
   animLerpSpeed: 0
   playerdmg: {fileID: 0}
-  audi: {fileID: 0}
+  audi: {fileID: -4485860657807157524}
 --- !u!95 &3734775969355451150
 Animator:
   serializedVersion: 4

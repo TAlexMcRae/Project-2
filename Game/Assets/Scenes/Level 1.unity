@@ -12599,9 +12599,17 @@ PrefabInstance:
       value: Boss Wave
       objectReference: {fileID: 0}
     - target: {fileID: 7736331298530074174, guid: bc12a77ca3c4a7d4f93bfea7f4015ddf, type: 3}
+      propertyPath: waves.Array.data[2].enemyType.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7736331298530074174, guid: bc12a77ca3c4a7d4f93bfea7f4015ddf, type: 3}
       propertyPath: waves.Array.data[3].enemyType.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7736331298530074174, guid: bc12a77ca3c4a7d4f93bfea7f4015ddf, type: 3}
+      propertyPath: waves.Array.data[2].enemyType.Array.data[2]
+      value: 
+      objectReference: {fileID: 4905434873156207070, guid: e3f62fd9a26761b4693e580567788336, type: 3}
     - target: {fileID: 7736331298530074174, guid: bc12a77ca3c4a7d4f93bfea7f4015ddf, type: 3}
       propertyPath: waves.Array.data[3].enemyType.Array.data[0]
       value: 

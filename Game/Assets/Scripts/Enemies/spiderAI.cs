@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,6 +9,7 @@ public class spiderAI : MonoBehaviour, InterDamage
     [Header("----- Components -----")]
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
+    [SerializeField] Animator anim;
     public GameObject deathEffect;
     [SerializeField] GameObject[] pickup;
 
@@ -131,7 +131,7 @@ public class spiderAI : MonoBehaviour, InterDamage
             Destroy(temp, 0.5f);
         }
 
-        agent.SetDestination(GameManager.instance.player.transform.position);
+        else { agent.SetDestination(GameManager.instance.player.transform.position); }
     }
 
     IEnumerator FlashDMG()

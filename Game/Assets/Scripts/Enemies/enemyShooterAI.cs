@@ -60,7 +60,7 @@ public class enemyShooterAI : MonoBehaviour, InterDamage
             if (GameManager.instance.capturedAll)
             {
                 agent.SetDestination(GameManager.instance.player.transform.position);
-                agent.speed = 10;
+                agent.speed = 5;
                 
                 if (playerInRange)
                 {
@@ -149,7 +149,7 @@ public class enemyShooterAI : MonoBehaviour, InterDamage
             Destroy(temp, 0.5f);
         }
 
-        agent.SetDestination(GameManager.instance.player.transform.position);
+        else { agent.SetDestination(GameManager.instance.player.transform.position); }
     }
     IEnumerator flashdamage()
     {

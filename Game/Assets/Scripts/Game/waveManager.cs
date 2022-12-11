@@ -62,6 +62,7 @@ public class waveManager : MonoBehaviour
 
                     GameObject temp = GameManager.instance.captureZones[rnr];
 
+                    temp.GetComponent<zoneCollider>().temp = null;
                     temp.GetComponent<zoneCollider>().captured = false;
                     temp.GetComponent<zoneCollider>().ColorChange();
                 }

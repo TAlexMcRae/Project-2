@@ -94,4 +94,10 @@ public class ButtonFunction : MonoBehaviour
 
         SceneManager.LoadScene("Controls");
     }
+
+    public void Credits()
+    {
+
+        SceneManager.LoadScene("Credits");
+    }
 }

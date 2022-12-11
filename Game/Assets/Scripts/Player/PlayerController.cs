@@ -97,6 +97,7 @@ public class PlayerController : MonoBehaviour, InterDamage
         
         startDMG = shootDMG;
         startMelee = meleeDMG;
+        sprinting = false;
         throwReady = true;
         dead = false;
 

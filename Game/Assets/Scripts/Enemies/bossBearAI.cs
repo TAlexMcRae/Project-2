@@ -22,7 +22,6 @@ public class bossBearAI : MonoBehaviour
     [SerializeField] Object shockwave;
     [SerializeField] Object paw;
     [SerializeField] int animLerpSpeed;
-    [SerializeField] PlayerController playerdmg;
     [SerializeField] AudioSource audi;
 
     Vector3 playerDir;
@@ -97,11 +96,11 @@ public class bossBearAI : MonoBehaviour
     }
     public void attackDamage()
     {
-        playerdmg.inflictDamage(meleeDamage);
+        GameManager.instance.playerScript.GetComponent<InterDamage>().inflictDamage(meleeDamage);
     }
     public void swDamage()
     {
-        playerdmg.inflictDamage(shockwaveDamage);
+        GameManager.instance.playerScript.GetComponent<InterDamage>().inflictDamage(shockwaveDamage);
     }
     #endregion
     #region Damage Handling
@@ -116,7 +115,7 @@ public class bossBearAI : MonoBehaviour
             agent.enabled = false;
         }
 
-        agent.SetDestination(GameManager.instance.player.transform.position);
+        else { agent.SetDestination(GameManager.instance.player.transform.position); }
     }
     #endregion
     #region Range Check

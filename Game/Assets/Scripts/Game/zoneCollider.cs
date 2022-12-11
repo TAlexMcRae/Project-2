@@ -8,23 +8,14 @@ public class zoneCollider : MonoBehaviour
 {
     [SerializeField] Renderer cube, cube1, cube2, cube3;
 
-    private bool isCapturing;
-    public bool captured;
+    private bool isCapturing = false;
+    public bool captured = false;
 
     private Color freeColor = Color.white;
     private Color capColor = Color.cyan;
 
-    public float captureTime;
-
-    private Coroutine temp;
-
-    void Start()
-    {
-
-        isCapturing = false;
-        captured = false;
-        captureTime = 5.1f;
-    }
+    public float captureTime = 5.1f;
+    public Coroutine temp;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -71,14 +62,21 @@ public class zoneCollider : MonoBehaviour
         {
 
             GameManager.instance.capturedAll = true;
+            GameManager.instance.waveCount++;
 
-            if (GameManager.instance.enemiesToKill <= 0 && SceneManager.GetActiveScene().buildIndex < SceneManager.sceneCountInBuildSettings)
+            if (GameManager.instance.enemiesToKill <= 0 && GameManager.instance.waveCount > waveManager.instance.waves.Length)
             {
 
-                if (GameManager.instance.waveCount > waveManager.instance.waves.Length)
+                if (SceneManager.GetActiveScene().buildIndex < SceneManager.sceneCountInBuildSettings)
                 {
 
                     GameManager.instance.AdvancePrompt();
+                }
+
+                else
+                {
+
+                    GameManager.instance.WinCondition();
                 }
             }
         }
