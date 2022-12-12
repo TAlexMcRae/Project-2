@@ -164,6 +164,7 @@ public class spiderAI : MonoBehaviour, InterDamage
 
     private IEnumerator Attack()
     {
+
         attacking = true;
         anim.SetTrigger("Attack");
         GameManager.instance.playerScript.GetComponent<InterDamage>().inflictDamage(hitDamage);
