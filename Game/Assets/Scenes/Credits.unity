@@ -176,7 +176,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -1161,7 +1161,13 @@ MonoBehaviour:
     materials pack v.1\"\t\t\t\t\tby VK GameDev\n\thttps://assetstore.unity.com/packages/2d/textures-materials/floors/floor-materials-pack-\t\tv-1-140435\n\n\"Too
     Many Crosshairs\"\t\t\t\t\tby Clean Shirt Labs\n\thttps://assetstore.unity.com/packages/2d/gui/icons/too-many-crosshairs-126069\n\n\"48
     Particle Effect Pack\"\t\t\t\t\tby GAPH\n\thttps://assetstore.unity.com/packages/vfx/particles/spells/48-particle-effect-pack-13998\n\n\"Hit
-    Impact Effects FREE\"\t\t\t\t\tby Travis Game Assets\n\thttps://assetstore.unity.com/packages/vfx/particles/hit-impact-effects-free-218385"
+    Impact Effects FREE\"\t\t\t\t\tby Travis Game Assets\n\thttps://assetstore.unity.com/packages/vfx/particles/hit-impact-effects-free-218385\n\n\nMusic:\n\n\"Asphalt
+    Maze\"\t\t\t\t\t\t\tby Richard Rodwell & David Morgan\n\thttps://westarmusic.sourceaudio.com/track/6853559\n\n\"Grungy
+    Mike\"\t\t\t\t\t\t\tby American Music Co\n\thttps://westarmusic.sourceaudio.com/track/21838843\n\n\"The
+    Underground\"\t\t\t\t\t\tby American Music Co\n\thttps://westarmusic.sourceaudio.com/track/21832046\n\n\"Cold
+    Blooded Rockstar\"\t\t\t\t\tby Terry Munday\n\thttps://westarmusic.sourceaudio.com/track/20796049\n\n\"RPG
+    Essentials Sound Effects - FREE!\"\t\tby leohpaz\n\thttps://assetstore.unity.com/packages/audio/sound-fx/rpg-essentials-sound-effects-free-\t\t227708\n\n\"FREE
+    Casual Game SFX Pack\"\t\t\t\tby Dustyroom\n\thttps://assetstore.unity.com/packages/audio/sound-fx/free-casual-game-sfx-pack-54116"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

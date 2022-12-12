@@ -57,18 +57,23 @@ public class waveManager : MonoBehaviour
                 currWaveNum++;
                 canSpawn = true;
 
-                for (int rnr = 0; rnr < GameManager.instance.captureZones.Length; rnr++)
+                if (currWaveNum < waves.Length - 1)
                 {
 
-                    GameObject temp = GameManager.instance.captureZones[rnr];
+                    for (int rnr = 0; rnr < GameManager.instance.captureZones.Length; rnr++)
+                    {
 
-                    temp.GetComponent<zoneCollider>().temp = null;
-                    temp.GetComponent<zoneCollider>().captured = false;
-                    temp.GetComponent<zoneCollider>().ColorChange();
+                        GameObject temp = GameManager.instance.captureZones[rnr];
+
+                        temp.GetComponent<zoneCollider>().temp = null;
+                        temp.GetComponent<zoneCollider>().captured = false;
+                        temp.GetComponent<zoneCollider>().ColorChange();
+                    }
+
+                    GameManager.instance.captureCount = GameManager.instance.captureZones.Length;
+                    GameManager.instance.capturedAll = false;
+
                 }
-
-                GameManager.instance.captureCount = GameManager.instance.captureZones.Length;
-                GameManager.instance.capturedAll = false;
                 GameManager.instance.UpdateUI();
             }
         }

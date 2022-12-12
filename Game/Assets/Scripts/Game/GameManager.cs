@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI eText;
     public TextMeshProUGUI wText;
     public TextMeshProUGUI aText;
+    public TextMeshProUGUI gText;
     public TextMeshProUGUI wTotalText;
 
     // timer
@@ -79,6 +80,8 @@ public class GameManager : MonoBehaviour
         waveCount = 1;
         capturedAll = false;
         captureCount = captureZones.Length;
+
+        UpdateUI();
     }
 
     void Update()
@@ -194,6 +197,7 @@ public class GameManager : MonoBehaviour
         }
 
         aText.text = playerScript.ammoCount.ToString("F0");
+        gText.text = playerScript.grenadeCounter.ToString("F0");
         hpBar.fillAmount = (float)playerScript.currentHP / (float)playerScript.startHP;
         cText.text = captureCount.ToString("F0");
 
