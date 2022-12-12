@@ -14,6 +14,9 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
     public GameObject deathEffect;
     [SerializeField] GameObject[] pickup;
     [SerializeField] GameObject explosionEffect;
+    [SerializeField] AudioClip deathSFX;
+    [SerializeField] AudioClip explosionSFX;
+    [SerializeField] AudioSource audi;
 
 
     [Header("----- Enemy Stats -----")]
@@ -174,7 +177,7 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
                 int pick = Random.Range(0, pickup.Length);
                 Instantiate(pickup[pick], new Vector3(transform.position.x, 1, transform.position.z), pickup[pick].transform.rotation);
             }
-
+            audi.PlayOneShot(deathSFX);
             GameManager.instance.UpdateEnemies();
             GameObject temp = Instantiate(deathEffect, transform.position, deathEffect.transform.rotation);
 
@@ -208,7 +211,7 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
 
         exploding = true;
         yield return new WaitForSeconds(3f);
-
+        audi.PlayOneShot(explosionSFX);
         GameObject temp1 = Instantiate(boomer, gameObject.transform.position, gameObject.transform.rotation);
         GameObject temp2 = Instantiate(explosionEffect, gameObject.transform.position, gameObject.transform.rotation);
         int chance = Random.Range(1, 3);

@@ -7,6 +7,10 @@ using UnityEngine.SceneManagement;
 public class zoneCollider : MonoBehaviour
 {
     [SerializeField] Renderer cube, cube1, cube2, cube3;
+    [SerializeField] AudioSource audi;
+    [SerializeField] AudioClip capturedZone;
+    [SerializeField] AudioClip capturingZone;
+    [SerializeField] AudioClip allZonesCaptured;
 
     private bool isCapturing = false;
     public bool captured = false;
@@ -40,7 +44,7 @@ public class zoneCollider : MonoBehaviour
     {
 
         isCapturing = true;
-
+        audi.PlayOneShot(capturingZone);
         GameManager.instance.capturing.SetActive(true);
         GameManager.instance.timerText.SetActive(true);
         GameManager.instance.secondsLeft = captureTime;
@@ -54,7 +58,7 @@ public class zoneCollider : MonoBehaviour
 
         captured = true;
         isCapturing = false;
-
+        audi.PlayOneShot(capturedZone);
         GameManager.instance.captureCount--;
         GameManager.instance.UpdateUI();
 
@@ -63,6 +67,7 @@ public class zoneCollider : MonoBehaviour
 
             GameManager.instance.capturedAll = true;
             GameManager.instance.waveCount++;
+            audi.PlayOneShot(allZonesCaptured);
 
             if (GameManager.instance.enemiesToKill <= 0 && GameManager.instance.waveCount > waveManager.instance.waves.Length)
             {

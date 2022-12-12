@@ -327,9 +327,13 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9a3fda5a70217fd4e8edcc2c0a8f6d5f, type: 3}
   gunShot: {fileID: 8300000, guid: dc0b7bfa11cbc7446ae8a3c0a04451ec, type: 3}
   noAmmo: {fileID: 8300000, guid: 0e812386f932d354eb44a11643c9fe98, type: 3}
-  ammoPickUpSFX: {fileID: 0}
-  HPPickUpSFX: {fileID: 0}
-  dmgPickUpSFX: {fileID: 0}
+  ammoPickUpSFX: {fileID: 8300000, guid: aea77ce6b63d2ed42b69ab1df42ef8ee, type: 3}
+  HPPickUpSFX: {fileID: 8300000, guid: 0bcd38d29a9983a4f9ee3c1282283a52, type: 3}
+  dmgPickUpSFX: {fileID: 8300000, guid: e7e487bbb35f79b428a488a6a99f8502, type: 3}
+  meleeSFX:
+  - {fileID: 8300000, guid: 0fc34e880b56b11429f4060d90b235e8, type: 3}
+  - {fileID: 8300000, guid: d7f1a3109a6089a459278a92b4009253, type: 3}
+  deathSFX: {fileID: 8300000, guid: 75f4b736f67bd8b4fb7a910c345ccca8, type: 3}
   jumpVol: 0.5
   hurtVol: 0.5
   walkVol: 0.3
@@ -378,7 +382,7 @@ AudioSource:
   m_GameObject: {fileID: 2718174716765756841}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 8433996546854629061, guid: 369313261446039459fdbc0219870184, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1

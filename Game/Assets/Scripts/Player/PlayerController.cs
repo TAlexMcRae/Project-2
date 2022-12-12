@@ -75,6 +75,8 @@ public class PlayerController : MonoBehaviour, InterDamage
     [SerializeField] AudioClip ammoPickUpSFX;
     [SerializeField] AudioClip HPPickUpSFX;
     [SerializeField] AudioClip dmgPickUpSFX;
+    [SerializeField] AudioClip[] meleeSFX;
+    [SerializeField] AudioClip deathSFX;
 
     [Range(0, 1)] [SerializeField] float jumpVol;
     [Range(0, 1)] [SerializeField] float hurtVol;
@@ -290,7 +292,7 @@ public class PlayerController : MonoBehaviour, InterDamage
             meleeAttack = true;
 
             RaycastHit hit;
-            audi.PlayOneShot(audiJump[Random.Range(0, audiJump.Length - 1)], meleeVol);
+            audi.PlayOneShot(meleeSFX[Random.Range(0, audiJump.Length - 1)], meleeVol);
 
             if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, meleeDist))
             {
@@ -336,14 +338,14 @@ public class PlayerController : MonoBehaviour, InterDamage
 
             if (playerLives > 0)
             {
-
+                audi.PlayOneShot(deathSFX);
                 GameManager.instance.deathMenu.SetActive(true);
                 GameManager.instance.StartPause();
             }
 
             else if (playerLives < 0)
             {
-
+                audi.PlayOneShot(deathSFX);
                 GameManager.instance.gameOverMenu.SetActive(true);
                 GameManager.instance.StartPause();
             }

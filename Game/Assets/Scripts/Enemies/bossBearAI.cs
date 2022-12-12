@@ -20,9 +20,12 @@ public class bossBearAI : MonoBehaviour
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Animator anim;
     [SerializeField] Object shockwave;
-    [SerializeField] Object paw;
+    [SerializeField] Transform paw;
     [SerializeField] int animLerpSpeed;
     [SerializeField] AudioSource audi;
+    [SerializeField] AudioSource bossBGM;
+    [SerializeField] AudioClip claws;
+    [SerializeField] PlayerController playerDmg;
 
     Vector3 playerDir;
     int speedOrig;
@@ -33,7 +36,7 @@ public class bossBearAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Instantiate(bossBGM);
         if (PlayerPref.mediumMode)
         {
 
@@ -75,12 +78,15 @@ public class bossBearAI : MonoBehaviour
         {
             canAttack = false;
             anim.SetTrigger("Attack1");
+            audi.PlayOneShot(claws);
             StartCoroutine(attackDelay());
         }
         if (playerInRange && attackChance == 2 && canAttack)
         {
             canAttack = false;
             anim.SetTrigger("Attack5");
+            audi.PlayOneShot(claws);
+            Instantiate(shockwave, paw.position, transform.rotation);
             StartCoroutine(attackDelay());
         }
     }

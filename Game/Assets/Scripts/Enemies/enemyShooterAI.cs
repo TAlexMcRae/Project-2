@@ -10,6 +10,9 @@ public class enemyShooterAI : MonoBehaviour, InterDamage
     [SerializeField] Animator anim;
     public GameObject deathEffect;
     [SerializeField] GameObject[] pickup;
+    [SerializeField] AudioSource audi;
+    [SerializeField] AudioClip shootSFX;
+    [SerializeField] AudioClip deathSFX;
 
     [Header("----- Enemey Stats -----")]
     [SerializeField] int HP;
@@ -141,7 +144,7 @@ public class enemyShooterAI : MonoBehaviour, InterDamage
                 int pick = Random.Range(0, pickup.Length);
                 Instantiate(pickup[pick], new Vector3(transform.position.x, 1, transform.position.z), pickup[pick].transform.rotation);
             }
-
+            audi.PlayOneShot(deathSFX);
             GameManager.instance.UpdateEnemies();
             GameObject temp = Instantiate(deathEffect, transform.position, deathEffect.transform.rotation);
 
@@ -162,7 +165,7 @@ public class enemyShooterAI : MonoBehaviour, InterDamage
     {
         isShooting = true;
         agent.speed = 0;
-
+        audi.PlayOneShot(shootSFX);
         anim.SetTrigger("Attack");
         Instantiate(bullet, shootpos.position, transform.rotation);
 

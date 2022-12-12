@@ -71,7 +71,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1000,8 +1000,8 @@ RectTransform:
   m_Father: {fileID: 1873236156}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1498,8 +1498,8 @@ RectTransform:
   m_Father: {fileID: 931701772}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1702,7 +1702,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: audioTracks, Assembly-CSharp
-        m_MethodName: previewSFX
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1938,7 +1938,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2580,7 +2580,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2713,7 +2713,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1627952385385675176}
         m_TargetAssemblyTypeName: audioTracks, Assembly-CSharp
         m_MethodName: SFXVolumeChange
         m_Mode: 1
@@ -3851,7 +3851,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1627952385385675176}
         m_TargetAssemblyTypeName: audioTracks, Assembly-CSharp
         m_MethodName: MusicVolumeChange
         m_Mode: 1
@@ -4475,7 +4475,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1627952385385675176}
         m_TargetAssemblyTypeName: audioTracks, Assembly-CSharp
         m_MethodName: MasterVolumeChange
         m_Mode: 1
@@ -4520,8 +4520,8 @@ RectTransform:
   m_Father: {fileID: 895837058}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -8070,6 +8070,7 @@ GameObject:
   - component: {fileID: 1627952386348638888}
   - component: {fileID: 1627952386348638891}
   - component: {fileID: 1627952386348638890}
+  - component: {fileID: 1627952385385675176}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -8183,6 +8184,24 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &1627952385385675176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1627952386348638893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e106f6a2739921418bdd9f83cb65af8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MusicSource: {fileID: 357961838}
+  SFXSource: {fileID: 357961838}
+  Mixer: {fileID: 24100000, guid: 369313261446039459fdbc0219870184, type: 2}
+  MasterVolumeSlider: {fileID: 1989333158}
+  MusicVolumeSlider: {fileID: 1755837504}
+  SFXVolumeSlider: {fileID: 1242506714}
 --- !u!1 &2921766582429688495
 GameObject:
   m_ObjectHideFlags: 0
@@ -8234,20 +8253,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waves:
   - waveName: Wave 1
-    enemyNum: 40
+    enemyNum: 1
     enemyType:
     - {fileID: 7390218676475888499, guid: eb2909530af0cbc47b4f69547d7c7949, type: 3}
     - {fileID: 7252592070864959412, guid: 26d8ddee5afb1374d8bb9d9e8088a912, type: 3}
   - waveName: Wave 2
-    enemyNum: 50
+    enemyNum: 1
     enemyType:
     - {fileID: 7390218676475888499, guid: eb2909530af0cbc47b4f69547d7c7949, type: 3}
     - {fileID: 7252592070864959412, guid: 26d8ddee5afb1374d8bb9d9e8088a912, type: 3}
   - waveName: Final Wave
-    enemyNum: 60
+    enemyNum: 1
     enemyType:
-    - {fileID: 7390218676475888499, guid: eb2909530af0cbc47b4f69547d7c7949, type: 3}
-    - {fileID: 7252592070864959412, guid: 26d8ddee5afb1374d8bb9d9e8088a912, type: 3}
+    - {fileID: 8765444853706617422, guid: a58e52872ab7bc44d9ebdb21841ba7d8, type: 3}
   spawnPoints:
   - {fileID: 0}
   - {fileID: 0}
