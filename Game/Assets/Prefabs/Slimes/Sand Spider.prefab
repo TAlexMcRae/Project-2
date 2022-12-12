@@ -2235,6 +2235,7 @@ GameObject:
   - component: {fileID: 2082831618547128737}
   - component: {fileID: 2082831618547128738}
   - component: {fileID: 2082831618547128736}
+  - component: {fileID: -1067905677745997832}
   m_Layer: 0
   m_Name: Sand Spider
   m_TagString: Untagged
@@ -2280,6 +2281,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 1379603411794081061}
   agent: {fileID: 2082831618547128736}
+  anim: {fileID: 0}
   deathEffect: {fileID: 100006, guid: 2ffc588afbc8e364dad6109fe9ad7a54, type: 3}
   pickup:
   - {fileID: 5051766104771009879, guid: c0775352625b8064d8dab2720ab32c26, type: 3}
@@ -2340,6 +2342,26 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!95 &-1067905677745997832
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4905434873156207070}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 25f63106c14990541b6a39d46d3d55ce, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4972510842638898320
 GameObject:
   m_ObjectHideFlags: 0
@@ -2680,7 +2702,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6034823467640802591}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -0.687}
+  m_LocalPosition: {x: 0, y: 1, z: 0.637}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

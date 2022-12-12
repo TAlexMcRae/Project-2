@@ -34,6 +34,8 @@ public class spiderAI : MonoBehaviour, InterDamage
     private void Start()
     {
 
+        anim = GetComponent<Animator>();
+
         if (PlayerPref.mediumMode)
         {
 
@@ -54,16 +56,15 @@ public class spiderAI : MonoBehaviour, InterDamage
 
     private void Update()
     {
-
         if (agent.enabled)
         {
 
             agent.SetDestination(GameManager.instance.player.transform.position);
             CanSeePlayer();
+            anim.SetTrigger("Walk");
 
             if (rangeCheck && !attacking)
             {
-
                 StartCoroutine(Attack());
             }
         }
@@ -83,7 +84,7 @@ public class spiderAI : MonoBehaviour, InterDamage
 
             if (hit.collider.CompareTag("Player") && angle2Player <= sightAngle)
             {
-
+                
                 agent.stoppingDistance = 5;
                 agent.SetDestination(GameManager.instance.player.transform.position);
 
@@ -136,7 +137,6 @@ public class spiderAI : MonoBehaviour, InterDamage
 
     IEnumerator FlashDMG()
     {
-
         yield return new WaitForSeconds(0.3f);
     }
     #endregion
@@ -164,8 +164,8 @@ public class spiderAI : MonoBehaviour, InterDamage
 
     private IEnumerator Attack()
     {
-
         attacking = true;
+        anim.SetTrigger("Attack");
         GameManager.instance.playerScript.GetComponent<InterDamage>().inflictDamage(hitDamage);
 
         yield return new WaitForSeconds(hitSpeed);
