@@ -41,16 +41,20 @@ public class Explosion : MonoBehaviour
 
         for (int rnr = 0; rnr < objects.Length; rnr++)
         {
-
-            if (objects[rnr].GetComponent<InterDamage>() != null)
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hitinfo, 15f))
             {
+
+                if (objects[rnr].GetComponent<InterDamage>() != null)
+                {
 
                 objects[rnr].GetComponent<InterDamage>().inflictDamage(bombDMG);
 
                 if (!damaged && objects[rnr].CompareTag("Player"))
-                {
+                    {
+                    
                     damaged = true;
                     GameManager.instance.playerScript.pushBack = ((objects[rnr].transform.position - transform.position).normalized) * forceAMT;
+                    }
                 }
             }
         }
