@@ -12,6 +12,7 @@ public class spiderAI : MonoBehaviour, InterDamage
     [SerializeField] Animator anim;
     public GameObject deathEffect;
     [SerializeField] GameObject[] pickup;
+    [SerializeField] AudioSource audi;
 
     [Header("----- Stats -----")]
     [Range(0, 20)] [SerializeField] int currentHP;
@@ -19,13 +20,16 @@ public class spiderAI : MonoBehaviour, InterDamage
     [SerializeField] int sightDist;
     [SerializeField] int sightAngle;
     [SerializeField] GameObject headPos;
+    [SerializeField] AudioClip deathSFX;
 
     Vector3 playerDirect;
     float angle2Player;
+    Color origCol;
 
     [Header("----- Melee Stats -----")]
     [SerializeField] int hitDamage;
     [SerializeField] float hitSpeed;
+    [SerializeField] AudioClip hitSFX;
 
     bool rangeCheck;
     bool attacking;
@@ -34,7 +38,7 @@ public class spiderAI : MonoBehaviour, InterDamage
     private void Start()
     {
 
-        anim = GetComponent<Animator>();
+        origCol = model.material.color;
 
         if (PlayerPref.mediumMode)
         {
@@ -56,12 +60,14 @@ public class spiderAI : MonoBehaviour, InterDamage
 
     private void Update()
     {
+
+        anim.SetFloat("Speed", agent.velocity.normalized.magnitude);
+
         if (agent.enabled)
         {
 
             agent.SetDestination(GameManager.instance.player.transform.position);
             CanSeePlayer();
-            anim.SetTrigger("Walk");
 
             if (rangeCheck && !attacking)
             {
@@ -137,6 +143,10 @@ public class spiderAI : MonoBehaviour, InterDamage
 
     IEnumerator FlashDMG()
     {
+        anim.SetTrigger("Damaged");
+        model.material.color = Color.black;
+        yield return new WaitForSeconds(0.3f);
+        model.material.color = origCol;
         yield return new WaitForSeconds(0.3f);
     }
     #endregion

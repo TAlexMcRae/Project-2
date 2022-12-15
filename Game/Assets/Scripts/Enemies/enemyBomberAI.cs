@@ -32,6 +32,7 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
     Vector3 startPos;
     bool rangeCheck;
     float angleToPlay;
+    Color origCol;
 
     [Header("----- Bomb -----")]
     public GameObject boomer;
@@ -43,6 +44,7 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
     {
 
         startPos = transform.position;
+        origCol = model.material.color;
 
         if (PlayerPref.mediumMode || PlayerPref.hardMode)
         {
@@ -65,7 +67,7 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
             if (GameManager.instance.capturedAll)
             {
                 agent.SetDestination(GameManager.instance.player.transform.position);
-                agent.speed = 5;
+                agent.speed = 7;
 
                 if (rangeCheck)
                 {
@@ -191,6 +193,9 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
     IEnumerator FlashDMG()
     {
         anim.SetTrigger("Damage");
+        model.material.color = Color.black;
+        yield return new WaitForSeconds(0.3f);
+        model.material.color = origCol;
         yield return new WaitForSeconds(0.3f);
     }
     #endregion
@@ -201,7 +206,7 @@ public class enemyBomberAI : MonoBehaviour, InterDamage
         boom = true;
         model.material.color = Color.red;
         yield return new WaitForSeconds(0.25f);
-        model.material.color = Color.white;
+        model.material.color = origCol;
         yield return new WaitForSeconds(0.25f);
         boom = false;
     }

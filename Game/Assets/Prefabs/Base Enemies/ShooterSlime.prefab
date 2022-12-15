@@ -203,7 +203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40998f171d5d9054db30c9eddab2c614, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  model: {fileID: 3322561060149741940}
+  model: {fileID: 7390218677124830101}
   agent: {fileID: 9150805991414001444}
   anim: {fileID: 7626070021035104316}
   deathEffect: {fileID: 100006, guid: 2ffc588afbc8e364dad6109fe9ad7a54, type: 3}
@@ -215,7 +215,7 @@ MonoBehaviour:
   shootSFX: {fileID: 8300000, guid: c83fbd7ca24833b4098b387fe8c49007, type: 3}
   deathSFX: {fileID: 8300000, guid: 14ea8e09962ad2f4d8a420b1a39535a3, type: 3}
   HP: 3
-  playerFaceSpeed: 6
+  playerFaceSpeed: 20
   roamDist: 100
   sightDist: 5
   sightAngle: 45

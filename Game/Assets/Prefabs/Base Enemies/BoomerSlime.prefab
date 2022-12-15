@@ -326,7 +326,7 @@ MonoBehaviour:
   explosionSFX: {fileID: 8300000, guid: a652877b012108e41871f867ada9f176, type: 3}
   audi: {fileID: 3697205819402717311}
   currentHP: 5
-  facingSpeed: 6
+  facingSpeed: 20
   sightDist: 10
   sightAngle: 45
   roamDist: 100

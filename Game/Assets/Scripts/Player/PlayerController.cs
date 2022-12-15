@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour, InterDamage
     [Range(0, 100)] [SerializeField] public int currentHP;
     public int startHP;
     public int playerLives;
-    private bool dead;
+    public bool dead;
 
     [Header("----- Shooting -----")]
     [Range(0, 1)] [SerializeField] float shootRate;
@@ -123,8 +123,12 @@ public class PlayerController : MonoBehaviour, InterDamage
         Movement();
         Sprint();
 
-        StartCoroutine(Melee());
-        StartCoroutine(Shoot());
+        if (!GameManager.instance.isPaused)
+        {
+
+            StartCoroutine(Melee());
+            StartCoroutine(Shoot());
+        }
 
         if (Input.GetButtonDown("Grenade") && throwReady && grenadeCounter > 0)
         {
@@ -343,7 +347,7 @@ public class PlayerController : MonoBehaviour, InterDamage
                 GameManager.instance.StartPause();
             }
 
-            else if (playerLives < 0)
+            else if (playerLives <= 0)
             {
                 audi.PlayOneShot(deathSFX);
                 GameManager.instance.gameOverMenu.SetActive(true);
@@ -364,6 +368,7 @@ public class PlayerController : MonoBehaviour, InterDamage
         dead = false;
 
         if (ammoCount < 20) { ammoCount = 20; }
+        if (grenadeCounter < 1) { grenadeCounter = 1; }
         GameManager.instance.UpdateUI();
 
         controller.enabled = true;

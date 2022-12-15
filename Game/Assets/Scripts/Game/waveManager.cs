@@ -20,7 +20,7 @@ public class waveManager : MonoBehaviour
     public Transform[] spawnPoints;
 
     private Wave currWave;
-    private int currWaveNum;
+    public int currWaveNum;
     private bool canSpawn;
     #endregion
 
@@ -57,23 +57,18 @@ public class waveManager : MonoBehaviour
                 currWaveNum++;
                 canSpawn = true;
 
-                if (currWaveNum < waves.Length - 1)
+                for (int rnr = 0; rnr < GameManager.instance.captureZones.Length; rnr++)
                 {
 
-                    for (int rnr = 0; rnr < GameManager.instance.captureZones.Length; rnr++)
-                    {
+                    GameObject temp = GameManager.instance.captureZones[rnr];
 
-                        GameObject temp = GameManager.instance.captureZones[rnr];
-
-                        temp.GetComponent<zoneCollider>().temp = null;
-                        temp.GetComponent<zoneCollider>().captured = false;
-                        temp.GetComponent<zoneCollider>().ColorChange();
-                    }
-
-                    GameManager.instance.captureCount = GameManager.instance.captureZones.Length;
-                    GameManager.instance.capturedAll = false;
-
+                    temp.GetComponent<zoneCollider>().temp = null;
+                    temp.GetComponent<zoneCollider>().captured = false;
+                    temp.GetComponent<zoneCollider>().ColorChange();
                 }
+
+                GameManager.instance.captureCount = GameManager.instance.captureZones.Length;
+                GameManager.instance.capturedAll = false;
                 GameManager.instance.UpdateUI();
             }
         }

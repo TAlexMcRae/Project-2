@@ -12,6 +12,7 @@ public class rockMonsterAI : MonoBehaviour, InterDamage
     [SerializeField] Animator anim;
     public GameObject deathEffect;
     [SerializeField] GameObject[] pickup;
+    [SerializeField] AudioSource audi;
 
     [Header("---- Enemy ----")]
     [SerializeField] int currentHP;
@@ -27,13 +28,19 @@ public class rockMonsterAI : MonoBehaviour, InterDamage
     private float speedOrig;
     private float angle2Play;
     private float stopOrig;
+    private Color origCol;
 
     [Header("---- Shooting ----")]
     [SerializeField] GameObject bullet;
     [SerializeField] Transform shootPos;
     [SerializeField] float shootRate;
+    [SerializeField] AudioClip shootSFX;
 
     private bool shooting;
+
+    [Header("---- Bomb ----")]
+    [SerializeField] GameObject boomer;
+    [SerializeField] AudioClip boomSFX;
     #endregion
 
     private void Start()
@@ -42,6 +49,7 @@ public class rockMonsterAI : MonoBehaviour, InterDamage
         speedOrig = agent.speed;
         startPos = transform.position;
         stopOrig = agent.stoppingDistance;
+        origCol = model.material.color;
 
         if (PlayerPref.mediumMode || PlayerPref.hardMode)
         {
@@ -57,6 +65,8 @@ public class rockMonsterAI : MonoBehaviour, InterDamage
     private void Update()
     {
 
+        anim.SetFloat("Speed", agent.velocity.normalized.magnitude);
+
         if (agent.enabled)
         {
 
@@ -65,7 +75,7 @@ public class rockMonsterAI : MonoBehaviour, InterDamage
             {
 
                 agent.SetDestination(GameManager.instance.player.transform.position);
-                agent.speed = 5;
+                agent.speed = 7;
 
                 if (rangeCheck)
                 {
@@ -174,10 +184,13 @@ public class rockMonsterAI : MonoBehaviour, InterDamage
             }
 
             GameManager.instance.UpdateEnemies();
-            GameObject temp = Instantiate(deathEffect, transform.position, deathEffect.transform.rotation);
+            GameObject temp1 = Instantiate(deathEffect, transform.position, deathEffect.transform.rotation);
+            GameObject temp2 = Instantiate(boomer, transform.position, deathEffect.transform.rotation);
+            audi.PlayOneShot(boomSFX);
 
             Destroy(gameObject);
-            Destroy(temp, 0.5f);
+            Destroy(temp1, 0.5f);
+            Destroy(temp2, 0.5f);
         }
 
         else { agent.SetDestination(GameManager.instance.player.transform.position); }
@@ -186,10 +199,11 @@ public class rockMonsterAI : MonoBehaviour, InterDamage
     private IEnumerator FlashDMG()
     {
 
+        anim.SetTrigger("Damaged");
         model.material.color = Color.black;
-        yield return new WaitForSeconds(0.5f);
-        model.material.color = Color.white;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
+        model.material.color = origCol;
+        yield return new WaitForSeconds(0.3f);
     }
 
     private IEnumerator Shoot()
@@ -197,6 +211,9 @@ public class rockMonsterAI : MonoBehaviour, InterDamage
 
         shooting = true;
         agent.speed = 0;
+        
+        anim.SetTrigger("Attack");
+        audi.PlayOneShot(shootSFX);
         Instantiate(bullet, shootPos.position, transform.rotation);
 
         yield return new WaitForSeconds(shootRate);
@@ -217,6 +234,7 @@ public class rockMonsterAI : MonoBehaviour, InterDamage
         if (other.CompareTag("Player"))
         {
             rangeCheck = false;
+            Roaming();
         }
     }
     #endregion

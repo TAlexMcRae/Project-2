@@ -44,9 +44,9 @@ public class GameManager : MonoBehaviour
 
     // timer
     public GameObject timerText;
-    public float secondsLeft = 00.00f;
+    public float secondsLeft;
     public GameObject boostTimer;
-    public float boostSeconds = 00.00f;
+    public float boostSeconds;
 
     // other UI
     public GameObject playDMGScreen;
@@ -101,6 +101,40 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        if (enemiesToKill <= 0 && capturedAll)
+        {
+
+            waveCount = waveManager.instance.currWaveNum;
+
+            if (waveCount > waveManager.instance.waves.Length)
+            {
+
+                if (SceneManager.GetActiveScene().buildIndex < SceneManager.sceneCountInBuildSettings)
+                {
+
+                    AdvancePrompt();
+                }
+
+                else
+                {
+
+                    WinCondition();
+                }
+            }
+        }
+
+        if (boostSeconds <= 0f)
+        {
+
+            boostTimer.SetActive(false);
+        }
+
+        if (secondsLeft <= 0f)
+        {
+
+            timerText.SetActive(false);
+        }
+
         if (timerText.activeSelf || boostTimer.activeSelf)
         {
 
@@ -141,29 +175,6 @@ public class GameManager : MonoBehaviour
     {
 
         enemiesToKill--;
-
-        if (enemiesToKill <= 0 && capturedAll)
-        {
-
-            waveCount++;
-
-            if (waveCount > waveManager.instance.waves.Length)
-            {
-
-                if (SceneManager.GetActiveScene().buildIndex < SceneManager.sceneCountInBuildSettings)
-                {
-
-                    AdvancePrompt();
-                }
-
-                else
-                {
-
-                    WinCondition();
-                }
-            }
-        }
-
         UpdateUI();
     }
 

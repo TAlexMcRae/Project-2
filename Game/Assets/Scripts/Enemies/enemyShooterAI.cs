@@ -21,7 +21,8 @@ public class enemyShooterAI : MonoBehaviour, InterDamage
     [SerializeField] int sightDist;
     [SerializeField] int sightAngle;
     [SerializeField] GameObject headPos;
-    
+
+    Color origCol;
 
     [Header("----- Gun Stats -----")]
     [SerializeField] GameObject bullet;
@@ -41,6 +42,7 @@ public class enemyShooterAI : MonoBehaviour, InterDamage
         speedOrig = agent.speed;
         startingPos = transform.position;
         stoppingDistanceOrg = agent.stoppingDistance;
+        origCol = model.material.color;
 
         if (PlayerPref.mediumMode || PlayerPref.hardMode)
         {
@@ -63,7 +65,7 @@ public class enemyShooterAI : MonoBehaviour, InterDamage
             if (GameManager.instance.capturedAll)
             {
                 agent.SetDestination(GameManager.instance.player.transform.position);
-                agent.speed = 5;
+                agent.speed = 7;
                 
                 if (playerInRange)
                 {
@@ -157,6 +159,9 @@ public class enemyShooterAI : MonoBehaviour, InterDamage
     IEnumerator flashdamage()
     {
         anim.SetTrigger("Damage");
+        model.material.color = Color.black;
+        yield return new WaitForSeconds(0.3f);
+        model.material.color = origCol;
         yield return new WaitForSeconds(0.3f);
     }
     #endregion
@@ -185,6 +190,7 @@ public class enemyShooterAI : MonoBehaviour, InterDamage
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
+            roam();
         }
     }
     #endregion

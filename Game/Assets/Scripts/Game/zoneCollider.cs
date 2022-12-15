@@ -1,8 +1,5 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class zoneCollider : MonoBehaviour
 {
@@ -18,7 +15,6 @@ public class zoneCollider : MonoBehaviour
     private Color freeColor = Color.white;
     private Color capColor = Color.cyan;
 
-    public float captureTime = 5.1f;
     public Coroutine temp;
 
     private void OnTriggerEnter(Collider other)
@@ -47,7 +43,7 @@ public class zoneCollider : MonoBehaviour
         audi.PlayOneShot(capturingZone);
         GameManager.instance.capturing.SetActive(true);
         GameManager.instance.timerText.SetActive(true);
-        GameManager.instance.secondsLeft = captureTime;
+        GameManager.instance.secondsLeft = 5.1f;
 
         // set to 1 seconds under
         yield return new WaitForSeconds(5f);
@@ -66,24 +62,7 @@ public class zoneCollider : MonoBehaviour
         {
 
             GameManager.instance.capturedAll = true;
-            GameManager.instance.waveCount++;
             audi.PlayOneShot(allZonesCaptured);
-
-            if (GameManager.instance.enemiesToKill <= 0 && GameManager.instance.waveCount > waveManager.instance.waves.Length)
-            {
-
-                if (SceneManager.GetActiveScene().buildIndex < SceneManager.sceneCountInBuildSettings)
-                {
-
-                    GameManager.instance.AdvancePrompt();
-                }
-
-                else
-                {
-
-                    GameManager.instance.WinCondition();
-                }
-            }
         }
     }
 
