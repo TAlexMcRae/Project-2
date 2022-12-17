@@ -8,6 +8,7 @@ TagManager:
   - Enemy Bullet
   - Spawn Pos
   - Grenade
+  - Bear
   layers:
   - Default
   - TransparentFX

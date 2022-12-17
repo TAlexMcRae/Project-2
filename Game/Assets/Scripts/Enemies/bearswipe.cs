@@ -8,6 +8,11 @@ public class bearswipe : MonoBehaviour
     //int damage = bossBearAI.meleeDamage;
     private void OnTriggerEnter(Collider other)
     {   
+        if (other.tag == "Player")
         bossBearAI.attackDamage();
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        
     }
 }

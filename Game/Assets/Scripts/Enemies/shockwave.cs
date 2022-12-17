@@ -63,8 +63,4 @@ public class shockwave : MonoBehaviour
             rb.AddForce(direction * knockBack, ForceMode.Impulse);
         }
     }
-    private void OnTriggerEnter(Collider collision)
-    {
-        bossBearAI.swDamage();
-    }
 }

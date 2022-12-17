@@ -11,7 +11,6 @@ public class bossBearAI : MonoBehaviour
     [SerializeField] float speedChase;
     [SerializeField] float attackSpeed;
     [SerializeField] public int meleeDamage;
-    [SerializeField] public int shockwaveDamage;
     
     
 
@@ -19,20 +18,22 @@ public class bossBearAI : MonoBehaviour
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Animator anim;
-    [SerializeField] Object shockwave;
     [SerializeField] Transform paw;
     [SerializeField] int animLerpSpeed;
     [SerializeField] AudioSource audi;
     [SerializeField] AudioSource bossBGM;
     [SerializeField] AudioClip claws;
     [SerializeField] PlayerController playerDmg;
+    [SerializeField] SphereCollider sphereCollider;
+    [SerializeField] GameObject player;
 
     Vector3 playerDir;
     int speedOrig;
-    bool playerInRange;
-    bool canAttack = true;
+    private bool playerInRange = false;
+    [SerializeField] bool canAttack = true;
     float stoppingDistanceOrg;
     private int attackChance;
+    [SerializeField] float attackTimer = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -54,10 +55,21 @@ public class bossBearAI : MonoBehaviour
     void Update()
     {
         anim.SetFloat("Speed", agent.velocity.normalized.magnitude);
-        if (!playerInRange)
+        //playerInRange = false;
+        anim.SetBool("Attack1", false);
+        anim.SetBool("Attack5", false);
+        if (Vector3.Distance(player.transform.position, transform.position) <= sphereCollider.radius * transform.localScale.x)
         {
+            //playerInRange = true;
+            attackChance = Random.Range(1, 3);
+            attacking();
+        }
+        else
+        {
+            canAttack = false;
             hunt();
         }
+        attackDelay();
     }
     #region Movement
     void hunt()
@@ -74,26 +86,27 @@ public class bossBearAI : MonoBehaviour
     #region Attacking
     void attacking()
     {
-        if (playerInRange && attackChance == 1 && canAttack)
+        if (/*playerInRange &&*/ attackChance == 1 && canAttack)
         {
             canAttack = false;
-            anim.SetTrigger("Attack1");
+            anim.SetBool("Attack1", true);
             audi.PlayOneShot(claws);
-            StartCoroutine(attackDelay());
+            attackTimer = 0;
         }
-        if (playerInRange && attackChance == 2 && canAttack)
+        if (/*playerInRange &&*/ attackChance == 2 && canAttack)
         {
             canAttack = false;
-            anim.SetTrigger("Attack5");
+            anim.SetBool("Attack5", true);
             audi.PlayOneShot(claws);
-            Instantiate(shockwave, paw.position, transform.rotation);
-            StartCoroutine(attackDelay());
+            attackTimer = 0;
         }
     }
     
-    IEnumerator attackDelay()
+    void attackDelay()
     {
-        yield return new WaitForSeconds(attackSpeed);
+        //yield return new WaitForSeconds(attackSpeed);
+        attackTimer += Time.deltaTime;
+        if (attackTimer >= attackSpeed)
         canAttack = true;
     }
     IEnumerator damageAnim()
@@ -104,10 +117,10 @@ public class bossBearAI : MonoBehaviour
     {
         GameManager.instance.playerScript.GetComponent<InterDamage>().inflictDamage(meleeDamage);
     }
-    public void swDamage()
+    /*public void swDamage()
     {
         GameManager.instance.playerScript.GetComponent<InterDamage>().inflictDamage(shockwaveDamage);
-    }
+    }*/
     #endregion
     #region Damage Handling
     public void inflictDamage(int dmg)
@@ -120,29 +133,31 @@ public class bossBearAI : MonoBehaviour
             anim.SetBool("Death", true);
             agent.enabled = false;
         }
-
-        else { agent.SetDestination(GameManager.instance.player.transform.position); }
     }
     #endregion
     #region Range Check
-    public void OnTriggerEnter(Collider other)
+    /*public void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            playerInRange = true;
+            attackTimer = 5;
+            //playerInRange = true;
         }
     }
     public void OnTriggerStay(Collider other)
     {
-        attackChance = Random.Range(1, 3);
-        attacking();
+        if (other.CompareTag("Player"))
+        {
+            attackChance = Random.Range(1, 3);
+            attacking();
+        }
     }
     public void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && other.)
         {
             playerInRange = false;
         }
-    }
+    }*/
     #endregion
 }
